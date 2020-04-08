@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+
+  <link rel="icon" href="img/icon.ico">
+  <title>Joceline Birthday Countdown</title>
+
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Merriweather|Merriweather+Sans|Princess+Sofia&display=swap" rel="stylesheet">
+
+
+  <!-- Theme CSS - Includes Bootstrap -->
+  <link href="css/creative.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/animate.min.css">
+
+</head>
+
+<body id="page-top">
+  
+  
+  <!-- Masthead -->
+  <header id="masthead-alumni" class="masthead">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center justify-content-center text-center">
+        <div class="col-lg-10 align-self-end">
+          <h1 class="text-alumni-primary" style="font-family: 'Princess Sofia', cursive">CountDown to Joceline's Birthday</h1>
+        </div>
+        
+        <div class="col-lg-8 align-self-baseline">
+          <!--COUNT DOWN EVERYBODY-->
+          <div id="timer">
+            <div id="days"></div>
+            <div id="hours"></div>
+            <div id="minutes"></div>
+            <div id="seconds"></div>
+          </div>
+          <p class="text-alumni-primary">Then i have the perfect reason to text her again!</p>
+
+        </div>
+      </div>
+    </div>
+  </header>
+
+  
+  <!-- Bootstrap core JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
+  <script>
+    function makeTimer() {
+      var endTime = new Date("21 January 2021 00:00:00 GMT+07:00");	
+    		
+      endTime = (Date.parse(endTime) / 1000);
+  
+      var now = new Date();
+      now = (Date.parse(now) / 1000);
+  
+      var timeLeft = endTime - now;
+  
+      var days = Math.floor(timeLeft / 86400); 
+      var hours = Math.floor((timeLeft - (days * 86400)) / 3600);
+      var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600 )) / 60);
+      var seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
+  
+      if (hours < "10") { hours = "0" + hours; }
+      if (minutes < "10") { minutes = "0" + minutes; }
+      if (seconds < "10") { seconds = "0" + seconds; }
+  
+      $("#days").html(days + "<span>Days</span>");
+      $("#hours").html(hours + "<span>Hours</span>");
+      $("#minutes").html(minutes + "<span>Minutes</span>");
+      $("#seconds").html(seconds + "<span>Seconds</span>");		
+  
+}
+setInterval(function() { makeTimer() }, 1000);
+
+  </script>
+
+
+</body>
+
+</html>
