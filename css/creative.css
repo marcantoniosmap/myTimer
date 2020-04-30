@@ -9915,7 +9915,7 @@ header.masthead h1 {
 }
 
 #masthead-main {
-  background: linear-gradient(to bottom, rgba(51, 51, 51, 0.8) 0%, rgba(51, 51, 51, 0.8) 100%), url("../img/masthead/home.jpg");
+  background: white;
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
