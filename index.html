@@ -31,22 +31,21 @@
     <div class="container h-100">
       <div class="row h-100 align-items-center justify-content-center text-center">
         <div class="col-lg-10 align-self-end">
-          <h1 class="text-alumni">ITUNGAN CAPSAH BANTING</h1>
+          <img src="img/card.jpg" height="200"alt="">
+          <h1 class="pb-2text-alumni">KALKULASI CAPSAH BANTING</h1>
+          <p></p>
         </div>
         
         <div class="col-lg-8 align-self-baseline">
           <label for="harga-per-kart">Harga per kartu</label>  
-          <select name="harga-per-kartu" id="hpk">
-              <option selected value=10000>10.000</option>
-              <option value=20000 >20.000</option>
-              <option value=30000>30.000</option>
-              <option value=40000>40.000</option>
-              <option value=50000>50.000</option>
-            </select>
-            <input type="text" placeholder="sisa kartu" id="sisa-kartu">
-            <button id="cek">Cek</button>
+          <input type="text" id ="hpk" value=10000>
           <br>
-         <div><span>Yang harus dibayar </span><span id="hasil"></span></div>
+          <label for="sisa kartu">Sisa Kartu</label>  
+            <input type="text" placeholder="sisa kartu" id="sisa-kartu">
+            <br>
+            <button id="cek">Cek bayar</button>
+          <br>
+         <div><span>Yang harus dibayar </span><span class="font-weight-bold"id="hasil"></span></div>
           
 
         </div>
@@ -59,9 +58,27 @@
   <!-- Bootstrap core JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
   <script>
+    function formatMoney(number, decPlaces, decSep, thouSep) {
+    decPlaces = isNaN(decPlaces = Math.abs(decPlaces)) ? 2 : decPlaces,
+    decSep = typeof decSep === "undefined" ? "." : decSep;
+    thouSep = typeof thouSep === "undefined" ? "," : thouSep;
+    var sign = number < 0 ? "-" : "";
+    var i = String(parseInt(number = Math.abs(Number(number) || 0).toFixed(decPlaces)));
+    var j = (j = i.length) > 3 ? j % 3 : 0;
+
+    return sign +
+      (j ? i.substr(0, j) + thouSep : "") +
+      i.substr(j).replace(/(\decSep{3})(?=\decSep)/g, "$1" + thouSep) +
+      (decPlaces ? decSep + Math.abs(number - i).toFixed(decPlaces).slice(2) : "");
+    }
+
+
+
+
+
   $( "#cek" ).click(function() {
     var sisa= $("#sisa-kartu").val();
-    var hpk = $("#hpk option:selected ").val()
+    var hpk = $("#hpk").val()
     var sisaInt = parseInt(sisa,10);
     var hasil = 0
     if (sisaInt<5){
@@ -73,11 +90,16 @@
     if (sisaInt>7 && sisaInt <13){
       hasil=hpk*sisaInt*3
     }
-    if (sisaInt>12){
+    if (sisaInt>12 && sisaInt<14){
       hasil=hpk*sisaInt*4
     }
+    if (sisaInt>13 || sisaInt<1){
+      hasil="error"
+    }
+
     
-    $("#hasil").html(hasil);
+    
+    $("#hasil").html("Rp."+formatMoney(hasil,2,',','.'));
   });
   </script>
   <script>
