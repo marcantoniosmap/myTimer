@@ -70,19 +70,20 @@
       const p2=$("#p2-name").val();
       const p3=$("#p3-name").val();
       const p4=$("#p4-name").val();
+      const url="https://marcantoniosmap.github.io/myTimer/play.html";
       if (p1==""|| p2==""){
         alert("You have to fill in the first and second player");
       }
       else if (p3==""&&p4==""){
-      const loc="file:///C:/Users/ASUS/Documents/HerBirthday/play.html?num=2&player1="+p1+"&player2="+p2;
+      const loc=url+"?num=2&player1="+p1+"&player2="+p2;
       location.replace(loc);
       }
       else if (!p3==""&&p4==""){
-        const loc="file:///C:/Users/ASUS/Documents/HerBirthday/play.html?num=3&player1="+p1+"&player2="+p2+"&player3="+p3;
+        const loc=url+"?num=3&player1="+p1+"&player2="+p2+"&player3="+p3;
         location.replace(loc);
       }
       else{
-        const loc="file:///C:/Users/ASUS/Documents/HerBirthday/play.html?num=4&player1="+p1+"&player2="+p2+"&player3="+p3+"&player4="+p4;
+        constloc=url+"?num=4&player1="+p1+"&player2="+p2+"&player3="+p3+"&player4="+p4;
         location.replace(loc);
       }
     });
