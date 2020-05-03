@@ -15,7 +15,7 @@
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Merriweather|Merriweather+Sans|Princess+Sofia&display=swap" rel="stylesheet">
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 
   <!-- Theme CSS - Includes Bootstrap -->
   <link href="css/creative.css" rel="stylesheet">
@@ -26,96 +26,76 @@
 <body id="page-top">
   
   
-  <!-- Masthead -->
-  <header id="masthead-main" class="masthead">
+  <div style="height: 100vh;">
     <div class="container h-100">
-      <div class="row h-100 align-items-center justify-content-center text-center">
-        <div class="col-lg-10 align-self-end">
-          <img src="img/card.jpg" height="200"alt="">
-          <h1 class="pb-2text-alumni">KALKULASI CAPSAH BANTING</h1>
-          <p></p>
-        </div>
-        
-        <div class="col-lg-8 align-self-baseline">
-          <label for="harga-per-kart">Harga per kartu</label>  
-          <input type="text" id ="hpk" value=10000>
-          <br>
-          <label for="sisa kartu">Sisa Kartu</label>  
-            <input type="text" placeholder="sisa kartu" id="sisa-kartu">
-            <br>
-            <button id="cek">Cek bayar</button>
-          <br>
-         <div><span>Yang harus dibayar </span><span class="font-weight-bold"id="hasil"></span></div>
-          
-
+      <h1 class="text-center p-lg-2 p-5">Capsah Game Calculator</h1>
+      <div class="my-4">
+        <div class="row d-flex justify-content-center">
+            <label class="col-lg-5 my-auto">Player 1 name: </label>
+            <input type="text" id="p1-name" class="col-lg-5 form-control" placeholder="">
         </div>
       </div>
+      <div class="my-4">
+        <div class="row d-flex justify-content-center">
+            <label class="col-lg-5 my-auto">Player 2 name: </label>
+            <input type="text" id="p2-name" class="col-lg-5 form-control" placeholder="">
+        </div>
+      </div>
+      <div class="my-4">
+        <div class="row d-flex justify-content-center">
+            <label class="col-lg-5 my-auto">Player 3 name: </label>
+            <input type="text" id="p3-name" class="col-lg-5 form-control" placeholder="">
+        </div>
+      </div>
+      <div class="my-4">
+        <div class="row d-flex justify-content-center">
+            <label class="col-lg-5 my-auto">Player 4 name: </label>
+            <input type="text" id="p4-name" class="col-lg-5 form-control" placeholder="">
+        </div>
+      </div>
+      <div class="d-flex justify-content-center pt-2">
+        <button id="mulai" class="btn btn-primary btn-lg m-2">Mulai</button>
+        <button id="reset" class="btn btn-secondary btn-lg m-2">Reset</button>
     </div>
-  </header>
+    </div>
+  </div>
   
 
   
   <!-- Bootstrap core JavaScript -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
   <script>
+    $("#mulai").click(function(){
+      const p1=$("#p1-name").val();
+      const p2=$("#p2-name").val();
+      const p3=$("#p3-name").val();
+      const p4=$("#p4-name").val();
+      if (p1==""|| p2==""){
+        alert("You have to fill in the first and second player");
+      }
+      else if (p3==""&&p4==""){
+      const loc="file:///C:/Users/ASUS/Documents/HerBirthday/play.html?num=2&player1="+p1+"&player2="+p2;
+      location.replace(loc);
+      }
+      else if (!p3==""&&p4==""){
+        const loc="file:///C:/Users/ASUS/Documents/HerBirthday/play.html?num=3&player1="+p1+"&player2="+p2+"&player3="+p3;
+        location.replace(loc);
+      }
+      else{
+        const loc="file:///C:/Users/ASUS/Documents/HerBirthday/play.html?num=4&player1="+p1+"&player2="+p2+"&player3="+p3+"&player4="+p4;
+        location.replace(loc);
+      }
+    });
 
-  $( "#cek" ).click(function() {
-    var sisa= $("#sisa-kartu").val();
-    var hpk = $("#hpk").val()
-    var sisaInt = parseInt(sisa,10);
-    var hasil = 0
-    if (sisaInt<5){
-      hasil=hpk*sisaInt;
-    }
-    if (sisaInt>4 && sisaInt <8){
-      hasil=hpk*sisaInt*2 
-    }
-    if (sisaInt>7 && sisaInt <13){
-      hasil=hpk*sisaInt*3
-    }
-    if (sisaInt>12 && sisaInt<14){
-      hasil=hpk*sisaInt*4
-    }
-    if (sisaInt>13 || sisaInt<1){
-      hasil="error"
-    }
-
-    
-    
-    $("#hasil").html("Rp."+hasil);
-  });
+    $("#reset").click(function(){
+      const p1=$("#p1-name").val('');
+      const p2=$("#p2-name").val('');
+      const p3=$("#p3-name").val('');
+      
+    });
   </script>
-  <script>
-//     function makeTimer() {
-//       var endTime = new Date("21 January 2021 00:00:00 GMT+07:00");	
-    		
-//       endTime = (Date.parse(endTime) / 1000);
   
-//       var now = new Date();
-//       now = (Date.parse(now) / 1000);
-  
-//       var timeLeft = endTime - now;
-  
-//       var days = Math.floor(timeLeft / 86400); 
-//       var hours = Math.floor((timeLeft - (days * 86400)) / 3600);
-//       var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600 )) / 60);
-//       var seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
-  
-//       if (hours < "10") { hours = "0" + hours; }
-//       if (minutes < "10") { minutes = "0" + minutes; }
-//       if (seconds < "10") { seconds = "0" + seconds; }
-  
-//       $("#days").html(days + "<span>Days</span>");
-//       $("#hours").html(hours + "<span>Hours</span>");
-//       $("#minutes").html(minutes + "<span>Minutes</span>");
-//       $("#seconds").html(seconds + "<span>Seconds</span>");		
-  
-// }
-// setInterval(function() { makeTimer() }, 1000);
-
-  </script>
-
-
+ 
 </body>
 
 </html>
