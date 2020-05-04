@@ -223,7 +223,7 @@
     // });
     
     $('#reset').click(function(){
-      var list=["sekop","hati","keriting","diamond","endper2","end2"];
+      var list=["sekop","hati","keriting","diamond","endper2","end2","endthrice2"];
       $('#playerList').addClass('d-flex');
       $('#playerList').removeClass('d-none');
       // $('#scoreBoard').addClass('d-none');
@@ -270,7 +270,7 @@
     });
 
     function clearInput(){
-      var list=["sekop","hati","keriting","diamond","endper2","end2"];
+      var list=["sekop","hati","keriting","diamond","endper2","end2","endthrice2"];
       for(let i =0; i <numOfPlayers;i++){
         for(l of list){
           $(getIdCheck(l,i)).prop("checked",false);
