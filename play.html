@@ -48,9 +48,21 @@
       </div>
         <div class="d-flex justify-content-center pt-2">
           <button id="finish" class="btn btn-primary btn-lg m-2">Hitung Total</button>
-          <button id="reset" class="btn btn-secondary btn-lg m-2">Hapus Total</button>
+          <button id="reset" class="btn btn-secondary btn-lg m-2">Bersihkan</button>
           <a class="btn btn-dark btn-lg m-2" href="index.html">Game baru</a>
         </div>
+        <div class="d-flex justify-content-center pt-2">
+          <table class="table">
+            <thead>
+              <tr id="playerName">
+                <th span="col">Game</th>
+              </tr>
+            </thead>
+            <tbody id="tableContent">
+            </tbody>
+          </table>
+        </div>
+
 
 
       
@@ -75,14 +87,14 @@
     const player4 = urlParams.get('player4');
     var gameCount=-1;
 
-
+    
     var arrName=[player1,player2,player3,player4];
     $("#numPlay").html(numOfPlayers+" Players Capsah")
     for(let i =0; i <numOfPlayers;i++){
+      $('#playerName').append("<th span='col'>"+arrName[i]+"</th>")
       $("#playerList").append(`
-      <div class="col-xl-3 col-md-6 col-md-6 pb-lg-0 p-3">
-          <div class="card m-auto" style="width: 18rem;">
-            <img class="card-img-top" src="img/person`+i+`.png" alt="Card image cap">
+      <div class="col-xl-3 col-md-4 col-sm-6 pb-lg-0 p-3">
+          <div class="card m-auto" >
             <div class="card-body">
               <div class="card-title">
                 <span class="pr-2"id="player-`+i+`">`+arrName[i]+`</span>
@@ -143,6 +155,7 @@
           </div>
         </div>`)
     }
+    
     var history=[]
     var person=[
         {
@@ -236,37 +249,46 @@
         $("#playerwin-"+i).addClass("d-none");
         $('#result-'+i).empty();
         // person[i].pay=[]
+        $("#tableContent").html("");
       }
     });
 
     $('#finish').click(function(){
-        totalList=[]
+      var total=[0,0,0,0]
+        for(let j=0; j <history.length;j++){
+          for (let i=0;i<numOfPlayers;i++){
+            console.log(i,history[j][i]);
+            total[i]=total[i]+history[j][i];
+          }
+      }
+      printTable(total,"Total");
+        // totalList=[]
 
-        for(let i = 0 ; i < numOfPlayers;i++){
-          for(let l = 0;l < numOfPlayers;l++){
-            if(i==l){
-              continue;
-            }
-            else{
-              var total=0;
-              for(arr of person[i].pay){
-                if (arr[0]==l){
-                  total=total+arr[1];
-                }
-              }
-              totalList.push([i,l,total]);
-            }
-          }
-        }
-        for(let i =0;i< numOfPlayers;i++){
-          $('#result-'+i).html("");
-        }
-        for(transaction of totalList){
-          var loc="#result-"+transaction[0];
-          if (!transaction[2]==0){
-            $(loc).append("<div><b>"+person[transaction[0]].name+"->"+person[transaction[1]].name+"="+transaction[2]+"<b/></div>");
-          }
-        }
+        // for(let i = 0 ; i < numOfPlayers;i++){
+        //   for(let l = 0;l < numOfPlayers;l++){
+        //     if(i==l){
+        //       continue;
+        //     }
+        //     else{
+        //       var total=0;
+        //       for(arr of person[i].pay){
+        //         if (arr[0]==l){
+        //           total=total+arr[1];
+        //         }
+        //       }
+        //       totalList.push([i,l,total]);
+        //     }
+        //   }
+        // }
+        // for(let i =0;i< numOfPlayers;i++){
+        //   $('#result-'+i).html("");
+        // }
+        // for(transaction of totalList){
+        //   var loc="#result-"+transaction[0];
+        //   if (!transaction[2]==0){
+        //     $(loc).append("<div><b>"+person[transaction[0]].name+"->"+person[transaction[1]].name+"="+transaction[2]+"<b/></div>");
+        //   }
+        // }
     });
 
     function clearInput(){
@@ -283,6 +305,16 @@
     $('#newRound').click(function(){
       clearInput();
     });
+
+    function printTable(list,gamecount){
+      var content=""
+      for(let i=0; i<numOfPlayers;i++){
+        content=content+"<td>"+list[i]+"</td>";
+      }
+      $('#tableContent').append(` <tr>
+                <th scope="row">`+gamecount+`</th>`+content+"</tr>");
+      
+    }
     $("#hitung").click(function(){
       var getWinnerIndex;
       var harga = $("#harga-per-mata").val();
@@ -298,7 +330,6 @@
         person[i].end2=$(getIdCheck("end2",i)).is(":checked");
 
         person[i].value=getRealValue(person[i].sisa)+getExtra(person[i]);
-        console.log(person[i].value);
 
         if(person[i].value<1){ 
           if (winnerFound){
@@ -312,23 +343,40 @@
 
       }
       gameCount=gameCount+1;
+      temp=[]
       for(let i=0;i<numOfPlayers;i++){
         var first= person[i].value;
         for(let l=i+1;l<numOfPlayers;l++){
           var second= person[l].value;
             if (first>second){
-              person[i].pay.push([l,(first-second)*harga]);
-              history.push([gameCount,person[l].name,person[i].name,(first-second)*harga])
+                temp.push([i,l,(first-second)]);
+
+              // person[i].pay.push([l,(first-second)*harga]);
+              // history.push([gameCount,person[l].name,person[i].name,(first-second)*harga])
               // $("#result-"+i).append("<span><b>"+printOut(person[i].name,person[l].name,(first-second)*harga)+"</b></span><br>");
             }
             else if (first< second){
-              person[l].pay.push([i,(second-first)*harga]);
-              history.push([gameCount,person[i].name,person[l].name,(first-second)*harga])
+              temp.push([l,i,(second-first)]);
+
+              // person[l].pay.push([i,(second-first)*harga]);
+              // history.push([gameCount,person[i].name,person[l].name,(first-second)*harga])
               // $("#result-"+l).append("<span><b>"+printOut(person[l].name,person[i].name,(second-first)*harga)+"</b></span><br>");
 
             }
+
         }
       }
+      result=[0,0,0];
+      console.log(temp);
+      for(x of temp){
+        var kalah = x[0];
+        var menang = x[1];
+        var harga = x[2];
+        result[kalah]= result[kalah]-x[2];
+        result[menang]= result[menang]+x[2];
+      }
+      history.push(result);
+      printTable(result,gameCount);
       clearInput();
     })
 
