@@ -38,12 +38,7 @@
           <div class="d-flex justify-content-center pt-2">
             <button id="hitung" class="btn btn-info btn-lg m-2">Hitung</button>
             <button id="newRound" class="btn btn-warning btn-lg m-2">Cancel Input</button>
-            <button id="finish" class="btn btn-primary btn-lg m-2">Hitung Total</button>
-            <button id="reset" class="btn btn-secondary btn-lg m-2">Reset Game</button>
-            <!-- <button id="history" class="btn btn-secondary btn-lg m-2">Liat History</button> -->
-
-            <!-- <button id="home" class="btn btn-secondary btn-lg m-2">Home</button> -->
-    
+           
           </div>
         </div>
       </div>
@@ -51,11 +46,12 @@
         
 
       </div>
-      <div class="row d-flex justify-content-center">
-        <div id="scoreBoard">
+        <div class="d-flex justify-content-center pt-2">
+          <button id="finish" class="btn btn-primary btn-lg m-2">Hitung Total</button>
+          <button id="reset" class="btn btn-secondary btn-lg m-2">Hapus Total</button>
+          <a class="btn btn-dark btn-lg m-2" href="index.html">Game baru</a>
         </div>
 
-      </div>
 
       
     </div>
@@ -129,6 +125,10 @@
               </div>
               <div class="d-none" id="playerwin-`+i+`">
                 <div class="form-check">
+                  <input type="checkbox" class="form-check-input" id="p`+i+`-endthrice2">
+                  <label class="form-check-label" for="exampleCheck1">Selesai dengan three 2</label>
+                </div>
+                <div class="form-check">
                   <input type="checkbox" class="form-check-input" id="p`+i+`-endper2">
                   <label class="form-check-label" for="exampleCheck1">Selesai pakai per 2</label>
                 </div>
@@ -178,6 +178,7 @@
         val=obj.diamond ? val+5 : val;
         val=obj.endper2 ? val-25:val;
         val=obj.end2 ? val-10:val;
+        val=obj.endthrice2 ? val-50 : val;
         return val;
 
     }
@@ -234,7 +235,7 @@
         $('#playerlose-'+i).removeClass("d-none");
         $("#playerwin-"+i).addClass("d-none");
         $('#result-'+i).empty();
-        person[i].pay=[]
+        // person[i].pay=[]
       }
     });
 
@@ -292,10 +293,14 @@
         person[i].hati=$(getIdCheck("hati",i)).is(":checked");
         person[i].keriting=$(getIdCheck("keriting",i)).is(":checked");
         person[i].diamond=$(getIdCheck("diamond",i)).is(":checked");
+        person[i].endthrice2=$(getIdCheck("endthrice2",i)).is(":checked");
         person[i].endper2=$(getIdCheck("endper2",i)).is(":checked");
         person[i].end2=$(getIdCheck("end2",i)).is(":checked");
+
         person[i].value=getRealValue(person[i].sisa)+getExtra(person[i]);
-        if(person[i].value<1){
+        console.log(person[i].value);
+
+        if(person[i].value<1){ 
           if (winnerFound){
             alert("There can only be one winner");
             return;
