@@ -257,7 +257,6 @@
       var total=[0,0,0,0]
         for(let j=0; j <history.length;j++){
           for (let i=0;i<numOfPlayers;i++){
-            console.log(i,history[j][i]);
             total[i]=total[i]+history[j][i];
           }
       }
@@ -312,7 +311,7 @@
         content=content+"<td>"+list[i]+"</td>";
       }
       $('#tableContent').append(` <tr>
-                <th scope="row">`+gamecount+`</th>`+content+"</tr>");
+                <th scope="row">`+gamecount+1+`</th>`+content+"</tr>");
       
     }
     $("#hitung").click(function(){
