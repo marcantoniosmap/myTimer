@@ -31,13 +31,14 @@
       <h1 id="numPlay" class="text-center p-lg-2 p-5"></h1>
       <div class="row d-flex justify-content-center">
         <div class="col-lg-4 col-sm-6 col-8">
-          <div class="row">
+          <!-- <div class="row">
             <label for="rate" class="col-lg-6 my-auto">Harga per-mata: </label>
             <input type="text" id="harga-per-mata" class="col-lg-6 form-control"value="10000">
-          </div>
+          </div> -->
           <div class="d-flex justify-content-center pt-2">
-            <button id="hitung" class="btn btn-info btn-lg m-2">Hitung</button>
-            <button id="newRound" class="btn btn-warning btn-lg m-2">Cancel Input</button>
+            <a class="btn btn-dark btn-lg m-2" href="index.html">Game baru</a>
+
+            
            
           </div>
         </div>
@@ -47,9 +48,10 @@
 
       </div>
         <div class="d-flex justify-content-center pt-2">
-          <button id="finish" class="btn btn-primary btn-lg m-2">Hitung Total</button>
-          <button id="reset" class="btn btn-secondary btn-lg m-2">Bersihkan</button>
-          <a class="btn btn-dark btn-lg m-2" href="index.html">Game baru</a>
+            <button id="hitung" class="btn btn-info btn-lg m-2">Hitung</button>
+            <button id="newRound" class="btn btn-warning btn-lg m-2">Cancel Input</button>
+            <button id="undo" class="btn btn-primary btn-lg m-2">Undo</button>
+          <!-- <button id="reset" class="btn btn-secondary btn-lg m-2">Bersihkan</button> -->
         </div>
         <div class="d-flex justify-content-center pt-2">
           <table class="table">
@@ -254,40 +256,12 @@
     });
 
     $('#finish').click(function(){
-      var total=[0,0,0,0]
-        for(let j=0; j <history.length;j++){
-          for (let i=0;i<numOfPlayers;i++){
-            total[i]=total[i]+history[j][i];
-          }
-      }
-      printTable(total,"Total");
-        // totalList=[]
-
-        // for(let i = 0 ; i < numOfPlayers;i++){
-        //   for(let l = 0;l < numOfPlayers;l++){
-        //     if(i==l){
-        //       continue;
-        //     }
-        //     else{
-        //       var total=0;
-        //       for(arr of person[i].pay){
-        //         if (arr[0]==l){
-        //           total=total+arr[1];
-        //         }
-        //       }
-        //       totalList.push([i,l,total]);
-        //     }
-        //   }
-        // }
-        // for(let i =0;i< numOfPlayers;i++){
-        //   $('#result-'+i).html("");
-        // }
-        // for(transaction of totalList){
-        //   var loc="#result-"+transaction[0];
-        //   if (!transaction[2]==0){
-        //     $(loc).append("<div><b>"+person[transaction[0]].name+"->"+person[transaction[1]].name+"="+transaction[2]+"<b/></div>");
-        //   }
-        // }
+      
+    });
+    $('#undo').click(function(){
+      history.pop();
+      gameCount=gameCount-1;
+      printTable();
     });
 
     function clearInput(){
@@ -305,13 +279,32 @@
       clearInput();
     });
 
-    function printTable(list,gamecount){
+    function printTable(){
       var content=""
-      for(let i=0; i<numOfPlayers;i++){
-        content=content+"<td>"+list[i]+"</td>";
+      $('#tableContent').html("");
+      for (let j=0; j<history.length;j++){
+        $('#tableContent').append(`<tr>`);
+          $('#tableContent').append(`<th scope="row">`+(j+1)+`</th>`);
+        for(let i=0; i<numOfPlayers;i++){
+          $('#tableContent').append("<td>"+history[j][i]+"</td>");
+        }
+        $('#tableContent').append("</tr>");
       }
-      $('#tableContent').append(` <tr>
-                <th scope="row">`+(gamecount+1)+`</th>`+content+"</tr>");
+      
+      var total=[0,0,0,0];
+      for(let j=0; j <history.length;j++){
+        for (let i=0;i<numOfPlayers;i++){
+          total[i]=total[i]+history[j][i];
+        }
+      }
+      $('#tableContent').append(`<tr>`);
+      $('#tableContent').append(`<th scope="row">Total</th>`);
+      for(let i=0; i<numOfPlayers;i++){
+          $('#tableContent').append("<td>"+total[i]+"</td>");
+        }
+      $('#tableContent').append(` </tr>`);
+
+    
       
     }
     $("#hitung").click(function(){
@@ -375,7 +368,7 @@
         result[menang]= result[menang]+x[2];
       }
       history.push(result);
-      printTable(result,gameCount);
+      printTable();
       clearInput();
     })
 
