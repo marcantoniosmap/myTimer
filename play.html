@@ -110,7 +110,7 @@
                 <div class="form-group row">
                   <label for="player0" class="col-sm-7 col-form-label">Remain:</label>
                   <div class="col-sm-5">
-                    <input type="text" class="form-control" id="player`+i+`" placeholder="0">
+                    <input type="number" class="form-control" id="player`+i+`" placeholder="0">
                   </div>
                 </div>
                 <div class="form-check mb-1">
@@ -319,6 +319,7 @@
       var harga = $("#harga-per-mata").val();
       var winnerFound=false;
       for(let i=0;i<numOfPlayers;i++){
+        console.log("")
         person[i].sisa=$(getId(i)).val();
         person[i].sekop=$(getIdCheck("sekop",i)).is(":checked");
         person[i].hati=$(getIdCheck("hati",i)).is(":checked");
@@ -345,6 +346,7 @@
       temp=[]
       for(let i=0;i<numOfPlayers;i++){
         var first= person[i].value;
+
         for(let l=i+1;l<numOfPlayers;l++){
           var second= person[l].value;
             if (first>second){
@@ -365,8 +367,7 @@
 
         }
       }
-      result=[0,0,0];
-      console.log(temp);
+      result=[0,0,0,0];
       for(x of temp){
         var kalah = x[0];
         var menang = x[1];
