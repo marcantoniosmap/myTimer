@@ -9928,7 +9928,7 @@ input[type=checkbox]
 
 #tableTotal tr,th,td{
   background-color: white;
-  position: sticky;
+  /* position: sticky; */
   bottom: 0;
 }
 
