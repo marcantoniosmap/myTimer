@@ -49,6 +49,11 @@
             Cancel Input
           </button>
           <button id="undo" class="btn btn-primary btn-lg m-2">Undo</button>
+
+            <div class="form-group px-4">
+              <label for="boost">Level Mulitiplication</label>
+              <input type="number" class="form-control" id="boost" aria-describedby="boost" value=1 placeholder="0">
+            </div>
           <!-- <button id="reset" class="btn btn-secondary btn-lg m-2">Bersihkan</button> -->
         </div>
         <div class="d-flex justify-content-center pt-2">
@@ -178,6 +183,7 @@
         }
 
         var history = [];
+        var boostHistory=[]
         var person = [
           {
             name: player1,
@@ -282,6 +288,7 @@
         $("#undo").click(function () {
           if (history.length > 0) {
             history.pop();
+            boostHistory.pop()
             gameCount = gameCount - 1;
             printTable();
           }
@@ -305,6 +312,7 @@
             $("#playerlose-" + i).removeClass("d-none");
             $("#playerwin-" + i).addClass("d-none");
           }
+          $('#boost').val(1)
         }
         $("#newRound").click(function () {
           clearInput();
@@ -314,8 +322,12 @@
           var content = "";
           $("#tableContent").html("");
           for (let j = 0; j < history.length; j++) {
+            var mul=''
             $("#tableContent").append(`<tr>`);
-            $("#tableContent").append(`<th scope="row">` + (j + 1) + `</th>`);
+              if (boostHistory[j]!=='1'){
+                mul = 'x'+boostHistory[j]
+              }
+            $("#tableContent").append(`<th scope="row">` + (j + 1) +`<span class="text-primary pl-2">`+ mul+`</span>` +`</th>`);
             for (let i = 0; i < numOfPlayers; i++) {
               $("#tableContent").append("<td>" + history[j][i] + "</td>");
             }
@@ -396,7 +408,14 @@
             result[kalah] = result[kalah] - x[2];
             result[menang] = result[menang] + x[2];
           }
+          var multiplicationValue=$('#boost').val()
+          result.map((value,index)=>{
+            result[index]=value*multiplicationValue
+          })
+          console.log(result)
           history.push(result);
+          console.log(multiplicationValue)
+          boostHistory.push(multiplicationValue)
           printTable();
           clearInput();
         });
