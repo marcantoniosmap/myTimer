@@ -10063,3 +10063,12 @@ input[type=checkbox]
 #timer #seconds {
   color: #dfd388;
 }
+
+.btn-redo{
+  background-color: var(--orange);
+  color: white;
+}
+
+.disabled{
+  opacity: 20% !important;
+}

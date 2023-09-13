@@ -48,7 +48,10 @@
           <button id="newRound" class="btn btn-warning btn-lg m-2">
             Cancel Input
           </button>
-          <button id="undo" class="btn btn-primary btn-lg m-2">Undo</button>
+          <div class="d-flex flex-column my-1">
+            <button id="undo" class="btn btn-primary  my-1">Undo</button>
+            <button id="redo" class="btn btn-redo disabled my-1">Redo</button>
+          </div>
 
             <div class="form-group px-4">
               <label for="boost">Level Mulitiplication</label>
@@ -183,7 +186,10 @@
         }
 
         var history = [];
-        var boostHistory=[]
+        var historyUndo =[];
+        var boostHistory=[];
+        var boostHistoryUndo='';
+
         var person = [
           {
             name: player1,
@@ -287,12 +293,28 @@
 
         $("#undo").click(function () {
           if (history.length > 0) {
+            historyUndo=history[history.length-1]
+            boostHistoryUndo=boostHistory[boostHistory.length-1]
             history.pop();
             boostHistory.pop()
             gameCount = gameCount - 1;
             printTable();
+            $("#redo").removeClass('disabled')
           }
         });
+
+
+        $("#redo").click(function (){
+          if (historyUndo.length > 0){
+            history.push(historyUndo)
+            boostHistory.push(boostHistoryUndo)
+            historyUndo=[]
+            boostHistoryUndo=''
+            printTable()
+            $("#redo").addClass('disabled')
+
+          }
+        })
 
         function clearInput() {
           var list = [
