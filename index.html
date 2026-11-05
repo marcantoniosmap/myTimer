@@ -53,7 +53,7 @@
     button { cursor: pointer; touch-action: manipulation; }
     [hidden] { display: none !important; }
     a { color: var(--gold-text); }
-    .label { font-family: var(--sans); font-size: 13px; letter-spacing: 2px; color: var(--muted); font-weight: 600; margin: 0; text-transform: uppercase; }
+    .label { font-family: var(--sans); font-size: 14px; letter-spacing: 2px; color: var(--muted); font-weight: 600; margin: 0; text-transform: uppercase; }
     .btn-ghost { height: 52px; padding: 0 16px; border-radius: 10px; border: 1px solid var(--line-btn); background: transparent; color: var(--text); font-family: var(--sans); font-size: 16px; }
     .btn-ghost:disabled { border-color: var(--line); color: #7F9A8C; cursor: default; }
     .btn-gold { height: 56px; padding: 0 22px; border: 0; border-radius: 10px; background: var(--gold); color: var(--on-gold); font-family: var(--serif); font-size: 21px; font-weight: 700; letter-spacing: 2px; }
@@ -82,7 +82,7 @@
     .name-row label { font-family: var(--sans); font-size: 15px; color: var(--ink-soft); }
     .name-row label b { color: var(--ink); }
     .name-row input { height: 56px; border: 1px solid var(--cream-line); border-radius: 10px; background: #FFFFFF; color: var(--ink); padding: 0 14px; font-size: 22px; font-family: var(--serif); }
-    .names-note { font-family: var(--sans); font-size: 14px; color: var(--ink-soft); margin: 0; }
+    .names-note { font-family: var(--sans); font-size: 16px; color: var(--ink-soft); margin: 0; }
     .setup-actions { display: grid; grid-template-columns: 1fr 2fr; gap: 10px; }
     .setup-actions .btn-gold { height: 60px; }
     .setup-actions .btn-ghost { height: 60px; }
@@ -98,7 +98,7 @@
     .bar { grid-area: head; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px; padding-top: max(14px, env(safe-area-inset-top)); background: var(--felt-dark); border-bottom: 1px solid var(--line); }
     .bar-title { display: flex; flex-direction: column; gap: 2px; }
     .bar-mark { font-size: 22px; letter-spacing: 4px; font-weight: 700; color: var(--gold-text); }
-    .bar-meta { font-family: var(--sans); font-size: 14px; color: var(--muted); }
+    .bar-meta { font-family: var(--sans); font-size: 15px; color: var(--muted); }
     .bar a { font-family: var(--sans); font-size: 16px; text-decoration: none; border: 1px solid var(--gold-line); border-radius: 8px; padding: 12px 16px; white-space: nowrap; }
     .bar-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
     .sound-btn { display: flex; align-items: center; gap: 8px; height: 46px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--line-btn); background: transparent; color: var(--text-soft); font-family: var(--sans); font-size: 15px; }
@@ -125,12 +125,12 @@
     .sx-sheet { width: 100%; max-width: 760px; max-height: calc(100vh - 32px); max-height: calc(100dvh - 32px); overflow-y: auto; background: var(--felt); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6); }
     .sx-head { position: sticky; top: 0; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 16px 20px; background: var(--felt-dark); border-bottom: 1px solid var(--line); }
     .sx-head h2 { margin: 0; font-family: var(--serif); font-size: 22px; letter-spacing: 3px; color: var(--gold-text); }
-    .sx-steps { display: flex; gap: 6px; font-family: var(--sans); font-size: 13px; color: var(--muted); }
+    .sx-steps { display: flex; gap: 6px; font-family: var(--sans); font-size: 14px; color: var(--muted); }
     .sx-steps span { padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); }
     .sx-steps span.on { border-color: var(--gold); color: var(--gold-text); }
     .sx-body { padding: 20px; display: flex; flex-direction: column; gap: 18px; }
     .sx-q { font-family: var(--serif); font-size: 22px; margin: 0; }
-    .sx-q small { display: block; font-family: var(--sans); font-size: 15px; color: var(--muted); font-weight: 400; margin-top: 4px; }
+    .sx-q small { display: block; font-family: var(--sans); font-size: 17px; color: var(--muted); font-weight: 400; margin-top: 4px; }
     .sx-presets { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
     .sx-preset { height: 60px; border-radius: 10px; border: 1px solid var(--gold-line); background: transparent; color: var(--gold-text); font-family: var(--serif); font-size: 20px; font-weight: 700; }
     .sx-preset[aria-pressed="true"] { background: var(--gold); border-color: var(--gold); color: var(--on-gold); }
@@ -146,14 +146,14 @@
     .sx-prow .pt { font-family: var(--sans); font-size: 15px; color: var(--muted); }
     .sx-prow .rp { font-family: var(--serif); font-size: 20px; font-weight: 700; min-width: 160px; text-align: right; }
     .sx-foot { display: flex; justify-content: flex-end; align-items: center; gap: 10px; flex-wrap: wrap; }
-    .sx-copied { font-family: var(--sans); font-size: 14px; color: var(--gold-text); }
+    .sx-copied { font-family: var(--sans); font-size: 16px; color: var(--gold-text); }
     .sx-receipt { background: var(--cream); color: var(--ink); border-radius: 14px; padding: 22px 22px 18px; box-shadow: 0 4px 0 #08241C; font-family: var(--sans); }
     .sx-r-head { display: flex; align-items: center; gap: 14px; padding-bottom: 14px; border-bottom: 2px dashed var(--cream-line); }
     .sx-r-head svg { width: 52px; height: 52px; flex-shrink: 0; }
     .sx-r-title { font-family: var(--serif); font-size: 22px; font-weight: 800; letter-spacing: 3px; margin: 0; }
-    .sx-r-meta { font-size: 14px; color: var(--ink-soft); margin: 2px 0 0; }
+    .sx-r-meta { font-size: 16px; color: var(--ink-soft); margin: 2px 0 0; }
     .sx-r-section { padding-top: 14px; }
-    .sx-r-section h3 { margin: 0 0 8px; font-size: 12px; letter-spacing: 2px; color: var(--ink-soft); font-weight: 700; }
+    .sx-r-section h3 { margin: 0 0 8px; font-size: 14px; letter-spacing: 2px; color: var(--ink-soft); font-weight: 700; }
     .sx-r-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
     .sx-r-table td { padding: 8px 0; border-bottom: 1px solid #E3DCCB; font-size: 17px; text-align: left; color: var(--ink); }
     .sx-r-table td:first-child { color: var(--ink); white-space: normal; }
@@ -163,7 +163,7 @@
     .sx-transfers { display: flex; flex-direction: column; gap: 8px; }
     .sx-even { margin: 0; padding: 12px 0; font-size: 16px; color: var(--ink-soft); }
     .sx-tf, .sx-tf-head { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto; align-items: center; gap: 10px; }
-    .sx-tf-head { padding: 0 14px 2px; font-size: 12px; letter-spacing: 1px; color: var(--ink-soft); }
+    .sx-tf-head { padding: 0 14px 2px; font-size: 13px; letter-spacing: 1px; color: var(--ink-soft); }
     .sx-tf { padding: 12px 14px; border-radius: 10px; background: #FFFFFF; border: 1px solid var(--cream-line); }
     .sx-tf .from { font-weight: 700; font-size: 18px; color: var(--red-suit); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .sx-tf .to { font-weight: 700; font-size: 18px; color: #1F6B43; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -174,10 +174,10 @@
     .sx-tf.paid { opacity: 0.55; }
     .sx-tf.paid .check { background: var(--felt); border-color: var(--felt); color: var(--cream); }
     .sx-tf.paid .amt { text-decoration: line-through; }
-    .sx-r-foot { padding-top: 14px; font-size: 13px; color: var(--ink-soft); text-align: center; margin: 0; }
+    .sx-r-foot { padding-top: 16px; font-size: 16px; color: var(--ink-soft); text-align: center; margin: 0; }
     .sx-choice { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; width: 100%; padding: 18px 20px; border-radius: 12px; border: 1px solid var(--gold-line); background: var(--felt-tile); color: var(--text); text-align: left; }
     .sx-choice b { font-family: var(--serif); font-size: 21px; color: var(--gold-text); }
-    .sx-choice span { font-family: var(--sans); font-size: 15px; color: var(--muted); }
+    .sx-choice span { font-family: var(--sans); font-size: 17px; color: var(--muted); }
     .sx-choice:first-of-type { border-color: var(--gold); box-shadow: inset 0 0 0 1px var(--gold); }
     @media (max-width: 600px) {
       .settle-btn span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
@@ -192,17 +192,27 @@
       .sx-tf-head { display: none; }
       .sx-tf { grid-template-columns: minmax(0, 1fr) auto; row-gap: 2px; }
       .sx-tf .from { grid-column: 1; grid-row: 1; }
-      .sx-tf .from::after { content: "  pays ↓"; font-weight: 400; font-size: 13px; color: var(--ink-soft); }
+      .sx-tf .from::after { content: "  pays ↓"; font-weight: 400; font-size: 15px; color: var(--ink-soft); }
       .sx-tf .to { grid-column: 1; grid-row: 2; }
       .sx-tf .arrow { display: none; }
       .sx-tf .pay { grid-column: 2; grid-row: 1 / span 2; flex-direction: column; align-items: flex-end; gap: 6px; }
       .sx-foot > .btn-ghost, .sx-foot > .btn-gold { flex: 1 1 100%; }
     }
 
+    /* ---------- JACKPOT: a player wins 60+ points in one round ---------- */
+    .jp { position: fixed; inset: 0; z-index: 45; cursor: pointer; -webkit-tap-highlight-color: transparent; overflow: hidden; }
+    .jp-dim { position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 45%, rgba(6, 31, 24, 0.6), rgba(2, 10, 8, 0.94)); opacity: 0; }
+    .jp-layer { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.5vh; padding: 16px; text-align: center; opacity: 0; }
+    .jp-kicker { font-family: var(--sans); font-weight: 700; letter-spacing: 0.35em; color: var(--gold-text); font-size: clamp(16px, 2.4vw, 26px); text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6); }
+    .jp-score { font-family: var(--serif); font-weight: 900; font-size: clamp(84px, 16vw, 190px); line-height: 1; color: var(--gold-text); text-shadow: 0 6px 0 #6B4F12, 0 0 50px rgba(226, 201, 138, 0.6); font-variant-numeric: tabular-nums; }
+    .jp-big { font-family: var(--serif); font-weight: 900; font-size: clamp(48px, 9vw, 110px); line-height: 1; letter-spacing: 0.04em; color: var(--cream); text-shadow: 0 5px 0 rgba(0, 0, 0, 0.35), 0 0 36px rgba(201, 162, 75, 0.5); opacity: 0; }
+    .jp-skip { position: absolute; right: 16px; bottom: max(14px, env(safe-area-inset-bottom)); font-family: var(--sans); font-size: 15px; letter-spacing: 1px; color: rgba(241, 235, 221, 0.6); }
+    .jp canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+
     /* ---------- "round settled" stamp after Calculate ---------- */
     .seat { position: relative; }
     .stamp { position: fixed; left: 50%; top: 46%; z-index: 40; pointer-events: none; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 14px 34px 16px; border: 3px double var(--gold); border-radius: 14px; background: rgba(6, 31, 24, 0.94); box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55); transform: translate(-50%, -50%); }
-    .stamp small { font-family: var(--sans); font-size: 14px; font-weight: 600; letter-spacing: 6px; color: var(--muted); }
+    .stamp small { font-family: var(--sans); font-size: 16px; font-weight: 600; letter-spacing: 6px; color: var(--muted); }
     .stamp b { font-family: var(--serif); font-size: 40px; font-weight: 800; letter-spacing: 6px; color: var(--gold-text); }
     .crown { position: absolute; left: 50%; top: -20px; width: 40px; height: 40px; margin-left: -20px; z-index: 3; pointer-events: none; filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.4)); }
     @media (min-width: 900px) and (min-height: 560px) { .stamp { left: calc(50% - 165px); } }
@@ -217,7 +227,7 @@
 
     .entry { grid-area: main; padding: 14px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
     .entry-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap; }
-    .entry-hint { font-family: var(--sans); font-size: 14px; color: var(--muted); }
+    .entry-hint { font-family: var(--sans); font-size: 16px; color: var(--muted); }
     .seats { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 12px; }
 
     .seat { background: var(--cream); color: var(--ink); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 3px 0 #08241C; min-width: 0; }
@@ -232,7 +242,7 @@
     .stepper input { flex: 1; min-width: 0; height: 60px; border: 0; background: #FFFFFF; text-align: center; font-family: var(--serif); font-size: 34px; font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; -moz-appearance: textfield; }
     .stepper input::-webkit-outer-spin-button, .stepper input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
     .stepper input::placeholder { color: #B5AE9C; }
-    .mini { font-family: var(--sans); font-size: 12px; letter-spacing: 1px; color: var(--ink-soft); text-transform: uppercase; margin: 0; }
+    .mini { font-family: var(--sans); font-size: 14px; letter-spacing: 1px; color: var(--ink-soft); text-transform: uppercase; margin: 0; }
     .chips { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
     .chips.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .chip { position: relative; display: block; }
@@ -246,14 +256,14 @@
     .sheet { grid-area: sheet; padding: 6px 14px 16px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
     .sheet-scroll { overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 17px; }
-    th { font-family: var(--sans); font-size: 13px; color: var(--muted); font-weight: 600; text-align: right; padding: 8px 4px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+    th { font-family: var(--sans); font-size: 14px; color: var(--muted); font-weight: 600; text-align: right; padding: 8px 4px; border-bottom: 1px solid var(--line); white-space: nowrap; }
     th:first-child, td:first-child { text-align: left; }
     td { padding: 10px 4px; text-align: right; border-bottom: 1px solid var(--line-soft); }
     td:first-child { color: var(--muted); white-space: nowrap; }
-    .mult-tag { color: var(--gold-text); font-size: 13px; padding-left: 4px; }
+    .mult-tag { color: var(--gold-text); font-size: 14px; padding-left: 4px; }
     tfoot td { font-weight: 700; font-size: 19px; border-bottom: 0; padding-top: 12px; }
     tfoot td:first-child { color: var(--gold-text); }
-    .empty { font-family: var(--sans); font-size: 15px; color: var(--muted); padding: 12px 0; margin: 0; }
+    .empty { font-family: var(--sans); font-size: 16px; color: var(--muted); padding: 12px 0; margin: 0; }
     .up { color: var(--up); } .down { color: var(--down); } .even { color: var(--text); }
 
     .ctrl { grid-area: ctrl; position: sticky; bottom: 0; z-index: 2; background: var(--felt-dark); border-top: 1px solid var(--line); padding: 10px 14px; padding-bottom: max(12px, env(safe-area-inset-bottom)); display: flex; flex-direction: column; gap: 10px; font-family: var(--sans); }
@@ -287,11 +297,11 @@
     .ix-logo { position: absolute; left: 50%; top: 50%; width: 150px; height: 150px; margin: -75px 0 0 -75px; opacity: 0; filter: drop-shadow(0 6px 0 rgba(0, 0, 0, 0.35)); }
     .ix-banner { position: absolute; left: 0; right: 0; bottom: 7%; display: flex; justify-content: center; opacity: 0; padding: 0 16px; }
     .ix-banner-box { position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 12px 44px 14px; background: #061F18; border-top: 2px solid var(--gold); border-bottom: 2px solid var(--gold); text-align: center; }
-    .ix-banner-small { font-family: var(--sans); font-size: 15px; font-weight: 600; letter-spacing: 6px; color: var(--muted); }
+    .ix-banner-small { font-family: var(--sans); font-size: 17px; font-weight: 600; letter-spacing: 6px; color: var(--muted); }
     .ix-banner-big { font-family: var(--serif); font-size: 34px; font-weight: 800; letter-spacing: 4px; color: var(--gold-text); }
     .ix-banner-box::after { content: ""; position: absolute; top: 0; bottom: 0; width: 40%; left: -50%; background: linear-gradient(100deg, transparent, rgba(255, 240, 200, 0.45), transparent); }
     .ix-flash { position: absolute; inset: 0; background: #FFF6DC; opacity: 0; pointer-events: none; }
-    .ix-skip { position: absolute; right: 16px; bottom: max(14px, env(safe-area-inset-bottom)); font-family: var(--sans); font-size: 13px; color: rgba(241, 235, 221, 0.55); letter-spacing: 1px; opacity: 0; }
+    .ix-skip { position: absolute; right: 16px; bottom: max(14px, env(safe-area-inset-bottom)); font-family: var(--sans); font-size: 15px; color: rgba(241, 235, 221, 0.55); letter-spacing: 1px; opacity: 0; }
 
     .ix.run .ix-logo { animation: ixLogoIn 0.55s cubic-bezier(0.2, 1.4, 0.4, 1) 0s forwards, ixLogoOut 0.35s ease-in 0.75s forwards; }
     .ix.run .ix-panel { animation: ixPanelIn 0.5s cubic-bezier(0.2, 0.9, 0.25, 1) forwards; animation-delay: calc(0.85s + var(--i) * 0.14s); }
@@ -762,6 +772,24 @@
             introBus = null;
             if (on) whoosh(master, t + 0.02, 0.45, 1800, 300, 0.25);      // panels split away
           },
+          jackpot: function () {
+            if (!ready()) return;
+            var t = ctx.currentTime + 0.03;
+            function tone(at, f, type, peak, dur) {
+              var o = ctx.createOscillator(); o.type = type; o.frequency.value = f;
+              var g = ctx.createGain(); env(g, at, peak, 0.01, dur);
+              o.connect(g); g.connect(master); o.start(at); o.stop(at + dur + 0.05);
+            }
+            for (var i = 0; i < 18; i++) tone(t + i * 0.055 * (1 + i * 0.03), 1400 + (i % 3) * 120, "square", 0.05, 0.03); // reel ticks
+            thud(master, t + 1.15, 1);                                                                                     // reel lands
+            [[0, 523], [0.12, 659], [0.24, 784], [0.42, 1047]].forEach(function (n, k) {                                   // fanfare
+              var dur = k === 3 ? 1.3 : 0.2;
+              tone(t + 1.2 + n[0], n[1], "sawtooth", 0.2, dur);
+              tone(t + 1.2 + n[0], n[1] * 1.005, "triangle", 0.32, dur);
+              bell(master, t + 1.2 + n[0], n[1] * 2, 0.11, dur);
+            });
+            for (var c = 0; c < 22; c++) bell(master, t + 1.3 + Math.random() * 1.6, 1800 + Math.random() * 1800, 0.05 + Math.random() * 0.05, 0.5); // coins
+          },
           stamp: function () {
             if (!ready()) return;
             var t = ctx.currentTime + 0.02;
@@ -783,8 +811,130 @@
 
       // ---- after a successful Calculate: "ROUND n SETTLED" stamp + crown on the round's winner ----
       var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-      function settleFx(roundResult, roundNo) {
+      // ---- JACKPOT: confetti cannons, coin rain and a fanfare for a 60+ point round ----
+      var JACKPOT_AT = 60;
+      var GOLDS = ["#C9A24B", "#E2C98A", "#F3DFA6", "#B8902F"];
+      function pick(a) { return a[Math.floor(Math.random() * a.length)]; }
+
+      function confettiCanvas(canvas) {
+        var ctx = canvas.getContext("2d"), list = [], raf = 0, last = 0, box = null;
+        var dpr = Math.min(2, window.devicePixelRatio || 1);
+        function size() {
+          var r = canvas.getBoundingClientRect();
+          canvas.width = r.width * dpr; canvas.height = r.height * dpr;
+          ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+          box = { width: r.width, height: r.height };
+        }
+        size();
+        function loop(now) {
+          // physics in "60 fps frames" so it looks the same on 60 Hz and 120 Hz iPads
+          var k = last ? Math.min(3, (now - last) / 16.667) : 1; last = now;
+          ctx.clearRect(0, 0, box.width, box.height);
+          for (var i = list.length - 1; i >= 0; i--) {
+            var p = list[i], dk = Math.pow(p.drag, k);
+            p.vy += p.g * k; p.vx *= dk; p.vy *= dk; p.x += p.vx * k; p.y += p.vy * k; p.rot += p.vr * k; p.life -= k;
+            if (p.life <= 0 || p.y > box.height + 40) { list.splice(i, 1); continue; }
+            ctx.save();
+            ctx.globalAlpha = Math.min(1, p.life / 30);
+            ctx.translate(p.x, p.y);
+            if (p.coin) {
+              ctx.rotate(p.rot * 0.2); ctx.scale(Math.cos(p.rot), 1);
+              ctx.fillStyle = "#B8902F"; ctx.beginPath(); ctx.arc(0, 0, p.s, 0, 7); ctx.fill();
+              ctx.fillStyle = "#F3DFA6"; ctx.beginPath(); ctx.arc(-p.s * 0.15, -p.s * 0.15, p.s * 0.72, 0, 7); ctx.fill();
+              ctx.strokeStyle = "#8C6A22"; ctx.lineWidth = 1.2; ctx.stroke();
+            } else {
+              ctx.rotate(p.rot); ctx.scale(1, Math.cos(p.rot * 2.5));
+              ctx.fillStyle = p.c; ctx.fillRect(-p.s / 2, -p.s / 4, p.s, p.s / 2);
+            }
+            ctx.restore();
+          }
+          if (list.length) raf = requestAnimationFrame(loop); else { raf = 0; last = 0; }
+        }
+        function add(p) { list.push(p); if (!raf) raf = requestAnimationFrame(loop); }
+        return {
+          cannon: function (fromLeft, n, coins) {
+            var x = fromLeft ? 0 : box.width, dir = fromLeft ? 1 : -1;
+            for (var i = 0; i < n; i++) {
+              var ang = -Math.PI / 2 + dir * (0.35 + Math.random() * 0.45), sp = (box.height / 40) * (0.7 + Math.random() * 0.6);
+              var coin = coins && Math.random() < 0.3;
+              add({ coin: coin, x: x, y: box.height, vx: Math.cos(ang) * sp, vy: Math.sin(ang) * sp, g: 0.16, drag: 0.985,
+                    rot: Math.random() * 6, vr: (Math.random() - 0.5) * 0.3, s: coin ? 8 + Math.random() * 6 : 8 + Math.random() * 8,
+                    c: pick(GOLDS.concat(["#F4EFE3", "#F4EFE3", "#C2413A", "#1F6B43"])), life: 200 + Math.random() * 120 });
+            }
+          },
+          coinRain: function (n) {
+            for (var i = 0; i < n; i++) {
+              add({ coin: true, x: Math.random() * box.width, y: -20 - Math.random() * box.height * 0.8, vx: (Math.random() - 0.5) * 1.2, vy: 1 + Math.random() * 2,
+                    g: 0.07, drag: 0.995, rot: Math.random() * 6, vr: (Math.random() - 0.5) * 0.3, s: 9 + Math.random() * 7, life: 400 });
+            }
+          },
+          stop: function () { list.length = 0; if (raf) cancelAnimationFrame(raf); raf = 0; last = 0; }
+        };
+      }
+
+      function jackpotFx(name, gain) {
+        var old = byId("jackpot"); if (old) old.remove();
+        var canAnimate = typeof document.body.animate === "function";
+        var score = el("div", { className: "jp-score", text: "+00" });
+        var big = el("div", { className: "jp-big", text: "JACKPOT!" });
+        var layer = el("div", { className: "jp-layer" }, [
+          el("div", { className: "jp-kicker", text: name.toUpperCase() + " · ONE ROUND" }), score, big
+        ]);
+        var dim = el("div", { className: "jp-dim" });
+        var canvas = el("canvas", { "aria-hidden": "true" });
+        var box = el("div", { className: "jp", id: "jackpot", role: "status", "aria-label": "Jackpot! " + name + " wins " + gain + " points this round." }, [
+          dim, layer, canvas, el("div", { className: "jp-skip", text: "TAP TO CLOSE" })
+        ]);
+        document.body.appendChild(box);
+        var fx = confettiCanvas(canvas), timers = [], spinning = true, done = false;
+        function later(fn, ms) { timers.push(setTimeout(fn, ms)); }
+        function close() {
+          if (done) return; done = true;
+          timers.forEach(clearTimeout);
+          var finish = function () { fx.stop(); box.remove(); };
+          if (canAnimate) box.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 400, fill: "forwards" }).onfinish = finish;
+          else finish();
+        }
+        box.addEventListener("click", close);
+        Sound.jackpot();
+
+        if (!canAnimate || reduceMotion) {
+          // calm version: no spinning, shaking or flying confetti
+          score.textContent = "+" + gain; big.style.opacity = 1; dim.style.opacity = 1; layer.style.opacity = 1;
+          later(close, 3000);
+          return;
+        }
+        dim.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 300, fill: "forwards" });
+        layer.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 250, fill: "forwards" });
+        var n = 0;
+        (function spin() {
+          if (!spinning) return;
+          score.textContent = "+" + (10 + Math.floor(Math.random() * 89)); n++;
+          later(spin, 40 + n * 4);
+        })();
+        later(function () {
+          spinning = false;
+          score.textContent = "+" + gain;
+          score.animate([{ transform: "scale(1.8)", filter: "brightness(2)" }, { transform: "scale(1)", filter: "brightness(1)" }], { duration: 420, easing: "cubic-bezier(0.3, 1.6, 0.5, 1)" });
+          layer.animate([{ transform: "translate(0, 0)" }, { transform: "translate(-8px, 4px)" }, { transform: "translate(6px, -5px)" }, { transform: "translate(-4px, 2px)" }, { transform: "translate(0, 0)" }], { duration: 320 });
+          big.animate([{ opacity: 0, transform: "scale(0.6) rotate(-6deg)" }, { opacity: 1, transform: "scale(1.08) rotate(2deg)", offset: 0.7 }, { opacity: 1, transform: "scale(1) rotate(0)" }], { duration: 500, fill: "forwards", easing: "ease-out" });
+          fx.cannon(true, 110, true); fx.cannon(false, 110, true);
+          later(function () { fx.coinRain(80); }, 350);
+          later(function () { fx.cannon(true, 60, false); fx.cannon(false, 60, false); }, 900);
+        }, 1150);
+        later(close, 4200);
+      }
+
+      function settleFx(roundResult, roundNo, level) {
         Array.prototype.forEach.call(document.querySelectorAll(".stamp, .crown"), function (x) { x.remove(); });
+        var top = Math.max.apply(null, roundResult);
+        // Jackpot = 60 points before the level: ×1 needs +60, ×2 needs +120, ×1.5 needs +90 …
+        var lvl = parseFloat(level);
+        if (!(lvl > 0)) lvl = 1;
+        if (top > 0 && top >= JACKPOT_AT * lvl && currentGame) {
+          jackpotFx(currentGame.names[roundResult.indexOf(top)], top);
+          return;
+        }
         Sound.stamp();
 
         var stamp = el("div", { className: "stamp", role: "status" }, [
@@ -1153,7 +1303,7 @@
           boostHistory.push(multiplicationValue);
           printTable();
           clearInput();
-          settleFx(result.slice(0, numOfPlayers), history.length);
+          settleFx(result.slice(0, numOfPlayers), history.length, multiplicationValue);
         };
 
         printTable();
@@ -1409,6 +1559,19 @@
         var p2 = byId("p2-name").value;
         var p3 = byId("p3-name").value;
         var p4 = byId("p4-name").value;
+        // Every player needs a different name (ignoring capitals and extra spaces),
+        // otherwise the score sheet and the settle-up report can't tell them apart.
+        var seen = {}, dup = null;
+        [p1, p2, p3, p4].forEach(function (nm) {
+          var key = nm.trim().replace(/\s+/g, " ").toLowerCase();
+          if (!key) return;
+          if (seen[key] && !dup) dup = nm.trim();
+          seen[key] = true;
+        });
+        if (dup) {
+          alert("\"" + dup + "\" is used twice. Every player needs a different name.");
+          return;
+        }
         if (p1 == "" || p2 == "") {
           alert("You have to fill in the first and second player");
         } else if (p3 == "" && p4 == "") {
