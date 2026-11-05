@@ -919,6 +919,10 @@
               }
             }
           }
+          if (!winnerFound) {
+            alert("No winner this round: one player must have 0 cards left (and no 2s in hand)");
+            return;
+          }
           gameCount = gameCount + 1;
           var temp = [];
           for (var a = 0; a < numOfPlayers; a++) {
