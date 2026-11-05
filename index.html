@@ -101,20 +101,22 @@
     .bar-meta { font-family: var(--sans); font-size: 15px; color: var(--muted); }
     .bar a { font-family: var(--sans); font-size: 16px; text-decoration: none; border: 1px solid var(--gold-line); border-radius: 8px; padding: 12px 16px; white-space: nowrap; }
     .bar-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
-    .sound-btn { display: flex; align-items: center; gap: 8px; height: 46px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--line-btn); background: transparent; color: var(--text-soft); font-family: var(--sans); font-size: 15px; }
-    .sound-btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .sound-btn { display: flex; align-items: center; justify-content: center; width: 46px; height: 46px; padding: 0; border-radius: 8px; border: 1px solid var(--line-btn); background: transparent; color: var(--text-soft); font-family: var(--sans); font-size: 15px; }
+    .sound-btn svg { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
     .sound-btn .spk { fill: currentColor; stroke: none; }
     .sound-btn .mute { display: none; }
     .sound-btn[aria-pressed="false"] .wave { display: none; }
-    .sound-btn[aria-pressed="false"] .mute { display: inline; }
+    .sound-btn[aria-pressed="false"] .mute { display: inline; stroke-width: 2.4; }
     .sound-btn[aria-pressed="false"] { color: #7F9A8C; }
     .bar-mark { white-space: nowrap; }
     @media (max-width: 480px) {
       .bar { padding-left: 12px; padding-right: 12px; }
       .bar-brand { gap: 10px; }
       .logo-sm { width: 34px; height: 34px; }
-      .bar-mark { font-size: 19px; letter-spacing: 3px; }
-      .bar a { padding: 12px 12px; }
+      .bar-mark { font-size: 17px; letter-spacing: 2px; }
+      .bar a { padding: 12px 10px; font-size: 15px; }
+      .bar-actions { gap: 6px; }
+      .bar-brand { min-width: 0; }
     }
     @media (max-width: 480px) { .sound-btn span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); } .sound-btn { width: 46px; justify-content: center; padding: 0; } }
 
@@ -250,6 +252,9 @@
     .chip span { display: flex; align-items: center; justify-content: center; height: 54px; border-radius: 10px; border: 1px solid var(--cream-line); background: #FFFFFF; color: var(--ink); font-size: 20px; font-weight: 700; text-align: center; line-height: 1.15; padding: 0 4px; }
     .chip.red span { color: var(--red-suit); }
     .chip.word span { font-family: var(--sans); font-size: 15px; font-weight: 600; }
+    .chip.finish span { flex-direction: column; height: auto; min-height: 96px; gap: 6px; padding: 10px 4px 8px; }
+    .chip.finish b { font-weight: 600; }
+    .fin-cards { width: 58px; height: 42px; flex-shrink: 0; overflow: visible; filter: drop-shadow(0 1px 1px rgba(0, 0, 0, 0.25)); }
     .chip input:checked + span { background: var(--felt); border-color: var(--felt); color: var(--cream); }
     .chip input:focus-visible + span { outline: 3px solid var(--gold); outline-offset: 2px; }
 
@@ -399,6 +404,8 @@
       .chips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .chips.three { grid-template-columns: minmax(0, 1fr); }
       .chip span { height: 58px; }
+      .chip.finish span { flex-direction: row; justify-content: flex-start; height: auto; min-height: 70px; gap: 10px; padding: 6px 10px; text-align: left; }
+      .chip.finish .fin-cards { width: 66px; height: 48px; }
       .ctrl { position: static; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 16px; padding: 14px 22px 16px 28px; background: transparent; border-top: 0; }
       .level { flex: 0 0 auto; }
       .lvl { flex: 0 0 56px; height: 58px; }
@@ -461,9 +468,8 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 9v.01M18 15v.01"/></svg>
           <span>Settle up</span>
         </button>
-        <button type="button" class="sound-btn" id="soundBtn" aria-pressed="true">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path class="spk" d="M4 9h4l5-4v14l-5-4H4z"/><path class="wave" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"/><path class="mute" d="M16.5 9.5l5 5m0-5l-5 5"/></svg>
-          <span id="soundLabel">Sound on</span>
+        <button type="button" class="sound-btn" id="soundBtn" aria-pressed="true" aria-label="Sound on" title="Sound on">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path class="spk" d="M4 9h4l5-4v14l-5-4H4z"/><path class="wave" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"/><path class="mute" d="M3.5 3.5l17 17"/></svg>
         </button>
         <a href="./" id="newGame">New game</a>
       </div>
@@ -477,7 +483,6 @@
     <main class="entry">
       <div class="entry-head">
         <h2 class="label" id="roundLabel">Round 1 — cards left</h2>
-        <span class="entry-hint">Tap each 2 still in hand</span>
       </div>
       <div class="seats" id="playerList"></div>
     </main>
@@ -555,7 +560,6 @@
             <h3>FINAL SCORES</h3>
             <table class="sx-r-table"><tbody id="sxScores"></tbody></table>
           </div>
-          <p class="sx-r-foot">Fewest transfers possible · tap ✓ when a transfer is done</p>
         </div>
         <div class="sx-foot">
           <button type="button" class="btn-ghost" id="sxBack">Change value</button>
@@ -669,7 +673,8 @@
         void intro.offsetWidth;
         intro.classList.add("run");
         Sound.intro(n);
-        introLater(finishIntro, 3300);
+        // banner appears at ~2.3 s; keep it up ~3 s so it can be read, then open the panels
+        introLater(finishIntro, 5300);
       }
 
       function finishIntro() {
@@ -804,7 +809,8 @@
       function syncSoundBtn() {
         var b = byId("soundBtn");
         b.setAttribute("aria-pressed", Sound.isOn() ? "true" : "false");
-        byId("soundLabel").textContent = Sound.isOn() ? "Sound on" : "Sound off";
+        b.setAttribute("aria-label", Sound.isOn() ? "Sound on — tap to mute" : "Sound off — tap to turn on");
+        b.title = Sound.isOn() ? "Sound on" : "Sound off";
       }
       byId("soundBtn").addEventListener("click", function () { Sound.set(!Sound.isOn()); syncSoundBtn(); });
       syncSoundBtn();
@@ -1003,11 +1009,40 @@
         { key: "diamond", sym: "♦", red: true }
       ];
       var FINISHES = [
-        { key: "endthrice2", label: "Three 2s" },
-        { key: "endper2", label: "Pair of 2s" },
-        { key: "end2", label: "Single 2" }
+        { key: "endthrice2", label: "Three 2s", cards: 3 },
+        { key: "endper2", label: "Pair of 2s", cards: 2 },
+        { key: "end2", label: "Single 2", cards: 1 }
       ];
       var ALL_FLAGS = ["sekop", "hati", "keriting", "diamond", "endper2", "end2", "endthrice2"];
+
+      // Small fanned playing cards (2♠ 2♥ 2♣) used as the picture on the "Finished with" buttons.
+      function finishCards(count) {
+        var NS = "http://www.w3.org/2000/svg";
+        var svg = document.createElementNS(NS, "svg");
+        svg.setAttribute("viewBox", "0 0 64 46");
+        svg.setAttribute("class", "fin-cards");
+        svg.setAttribute("aria-hidden", "true");
+        var looks = [["s-spade", "#1E2A24"], ["s-heart", "#A3262A"], ["s-club", "#1E2A24"]];
+        var angles = { 1: [0], 2: [-11, 11], 3: [-20, 0, 20] }[count];
+        angles.forEach(function (deg, k) {
+          var g = document.createElementNS(NS, "g");
+          g.setAttribute("transform", "rotate(" + deg + " 32 48) translate(20 7)");
+          var card = document.createElementNS(NS, "rect");
+          card.setAttribute("width", "24"); card.setAttribute("height", "33"); card.setAttribute("rx", "3.5");
+          card.setAttribute("fill", "#FFFDF6"); card.setAttribute("stroke", "#8C7A4A"); card.setAttribute("stroke-width", "1.4");
+          var two = document.createElementNS(NS, "text");
+          two.setAttribute("x", "4"); two.setAttribute("y", "11"); two.setAttribute("font-size", "10"); two.setAttribute("font-weight", "800");
+          two.setAttribute("font-family", "Roboto Slab, Georgia, serif"); two.setAttribute("fill", looks[k][1]);
+          two.textContent = "2";
+          var suit = document.createElementNS(NS, "use");
+          suit.setAttribute("href", "#" + looks[k][0]);
+          suit.setAttribute("x", "6"); suit.setAttribute("y", "12"); suit.setAttribute("width", "14"); suit.setAttribute("height", "14");
+          suit.setAttribute("fill", looks[k][1]);
+          g.appendChild(card); g.appendChild(two); g.appendChild(suit);
+          svg.appendChild(g);
+        });
+        return svg;
+      }
 
       function el(tag, attrs, children) {
         var node = document.createElement(tag);
@@ -1066,13 +1101,21 @@
         }
 
         function buildSeat(i, name) {
-          var toggle = el("button", { type: "button", className: "win-toggle", id: "win-" + i, text: "Mark winner" });
+          var toggle = el("button", { type: "button", className: "win-toggle", id: "win-" + i, text: "Winner" });
           var minus = el("button", { type: "button", "aria-label": "One card fewer for " + name, text: "−" });
           var input = el("input", { type: "number", id: "player" + i, min: "0", inputmode: "numeric", placeholder: "0", "aria-label": "Cards left for " + name });
           var plus = el("button", { type: "button", "aria-label": "One card more for " + name, text: "+" });
+          // Every 2 still in hand is a card in hand, so "cards left" can't go below the 2s ticked.
+          function twosTicked() {
+            return SUITS.filter(function (s) { return byId("p" + i + "-" + s.key).checked; }).length;
+          }
           minus.addEventListener("click", function () {
-            var v = (parseInt(input.value, 10) || 0) - 1;
+            var v = Math.max((parseInt(input.value, 10) || 0) - 1, twosTicked());
             input.value = v > 0 ? v : "";
+          });
+          input.addEventListener("change", function () {
+            var min = twosTicked();
+            if (min > 0 && (parseInt(input.value, 10) || 0) < min) input.value = min;
           });
           plus.addEventListener("click", function () {
             input.value = (parseInt(input.value, 10) || 0) + 1;
@@ -1096,13 +1139,16 @@
                   return;
                 }
               }
+              // A 2 still in hand is also a card in hand: make "cards left" at least the number of 2s ticked.
+              var twos = SUITS.filter(function (s) { return isChecked(s.key, i); }).length;
+              if ((parseInt(input.value, 10) || 0) < twos) input.value = twos;
             });
           });
 
           var finishChips = FINISHES.map(function (f) {
-            return el("label", { className: "chip word" }, [
+            return el("label", { className: "chip word finish" }, [
               el("input", { type: "checkbox", id: "p" + i + "-" + f.key }),
-              el("span", { text: f.label })
+              el("span", null, [finishCards(f.cards), el("b", { text: f.label })])
             ]);
           });
 
@@ -1127,7 +1173,7 @@
           byId("playerlose-" + i).hidden = isWinner;
           byId("playerwin-" + i).hidden = !isWinner;
           byId("seat-" + i).classList.toggle("is-winner", isWinner);
-          byId("win-" + i).textContent = isWinner ? "WINNER" : "Mark winner";
+          byId("win-" + i).textContent = isWinner ? "WINNER ✓" : "Winner";
           byId("win-" + i).setAttribute("aria-pressed", isWinner ? "true" : "false");
         }
 
@@ -1254,6 +1300,15 @@
             }
             if (holders.length > 1) {
               alert("There is only one 2" + SUITS[s].sym + " in a deck, but it is ticked for " + holders.join(" and ") + ". Untick it for all but one player.");
+              return;
+            }
+          }
+          // Backstop: a player can't hold more 2s than cards.
+          for (var c = 0; c < numOfPlayers; c++) {
+            var held = SUITS.filter(function (s2) { return isChecked(s2.key, c); }).length;
+            var cardsLeft = parseInt(byId(getId(c)).value, 10) || 0;
+            if (held > cardsLeft) {
+              alert(arrName[c] + " has " + held + (held === 1 ? " two" : " twos") + " ticked but only " + cardsLeft + (cardsLeft === 1 ? " card" : " cards") + " left. Cards left must be at least " + held + ".");
               return;
             }
           }
@@ -1546,7 +1601,7 @@
         }
       });
       byId("sxDone").addEventListener("click", function () {
-        byId("sxSameNames").textContent = currentGame.names.join(" · ") + " — plays the intro again";
+        byId("sxSameNames").textContent = currentGame.names.join(" · ");
         settleStep(3);
       });
       byId("sxBack2").addEventListener("click", function () { settleStep(2); });
