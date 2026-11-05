@@ -1,246 +1,800 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-
-
-  <link rel="icon" href="img/icon2.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0A2E24">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="icon" href="img/icon2.ico" sizes="any">
+  <link rel="icon" href="img/logo.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="img/logo.svg">
+  <link rel="preload" href="fonts/roboto-slab.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/roboto.woff2" as="font" type="font/woff2" crossorigin>
   <title>Capsah Banting</title>
+  <style>
+    :root {
+      --felt: #0E3B2E;
+      --felt-dark: #0A2E24;
+      --felt-tile: #134A3A;
+      --line: #2E5E4C;
+      --line-soft: #1F5242;
+      --line-btn: #4B7564;
+      --cream: #F4EFE3;
+      --cream-2: #E7E0CF;
+      --cream-line: #B9B09A;
+      --ink: #1E2A24;
+      --ink-soft: #5B6A62;
+      --text: #F1EBDD;
+      --text-soft: #DCE6DF;
+      --muted: #B9C9BF;
+      --gold: #C9A24B;
+      --gold-text: #E2C98A;
+      --gold-line: #8C7A4A;
+      --gold-dark: #B8902F;
+      --on-gold: #1A1406;
+      --red-suit: #A3262A;
+      --up: #9FE0B8;
+      --down: #F2A08F;
+      --serif: "Roboto Slab", Georgia, "Times New Roman", serif;
+      --sans: "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    :root {
+      /* Tiled card-suit pattern, drawn in gold at very low opacity over the felt. */
+      --suits-soft: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='168' height='168' viewBox='0 0 168 168'><g fill='%23E2C98A' fill-opacity='0.075'><g transform='translate(16 18) rotate(-14 12 12)'><path d='M12 1.5C9 5.6 2.8 9.2 2.8 14c0 2.9 2.3 4.8 4.8 4.8 1.6 0 3-.7 3.8-1.9-.2 2-1 3.6-2.6 5.1h6.4c-1.6-1.5-2.4-3.1-2.6-5.1.8 1.2 2.2 1.9 3.8 1.9 2.5 0 4.8-1.9 4.8-4.8 0-4.8-6.2-8.4-9.2-12.5z'/></g><g transform='translate(100 30) rotate(12 12 12)'><path d='M12 21.5S2.6 15.6 1.6 9.6C.9 5.7 3.5 2.5 7 2.5c2.2 0 3.9 1.2 5 3 1.1-1.8 2.8-3 5-3 3.5 0 6.1 3.2 5.4 7.1-1 6-10.4 11.9-10.4 11.9z'/></g><g transform='translate(46 104) rotate(8 12 12)'><path d='M12 1.5 20.5 12 12 22.5 3.5 12z'/></g><g transform='translate(122 112) rotate(-10 12 12)'><circle cx='12' cy='6.6' r='4.6'/><circle cx='6.2' cy='13.4' r='4.6'/><circle cx='17.8' cy='13.4' r='4.6'/><path d='M11 11.5h2c0 4.4.9 7.4 3.2 10H7.8c2.3-2.6 3.2-5.6 3.2-10z'/></g></g></svg>");
+      --suits-faint: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='168' height='168' viewBox='0 0 168 168'><g fill='%23E2C98A' fill-opacity='0.04'><g transform='translate(16 18) rotate(-14 12 12)'><path d='M12 1.5C9 5.6 2.8 9.2 2.8 14c0 2.9 2.3 4.8 4.8 4.8 1.6 0 3-.7 3.8-1.9-.2 2-1 3.6-2.6 5.1h6.4c-1.6-1.5-2.4-3.1-2.6-5.1.8 1.2 2.2 1.9 3.8 1.9 2.5 0 4.8-1.9 4.8-4.8 0-4.8-6.2-8.4-9.2-12.5z'/></g><g transform='translate(100 30) rotate(12 12 12)'><path d='M12 21.5S2.6 15.6 1.6 9.6C.9 5.7 3.5 2.5 7 2.5c2.2 0 3.9 1.2 5 3 1.1-1.8 2.8-3 5-3 3.5 0 6.1 3.2 5.4 7.1-1 6-10.4 11.9-10.4 11.9z'/></g><g transform='translate(46 104) rotate(8 12 12)'><path d='M12 1.5 20.5 12 12 22.5 3.5 12z'/></g><g transform='translate(122 112) rotate(-10 12 12)'><circle cx='12' cy='6.6' r='4.6'/><circle cx='6.2' cy='13.4' r='4.6'/><circle cx='17.8' cy='13.4' r='4.6'/><path d='M11 11.5h2c0 4.4.9 7.4 3.2 10H7.8c2.3-2.6 3.2-5.6 3.2-10z'/></g></g></svg>");
+    }
+    @font-face { font-family: "Roboto Slab"; src: url("fonts/roboto-slab.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+    @font-face { font-family: "Roboto"; src: url("fonts/roboto.woff2") format("woff2"); font-weight: 100 900; font-style: normal; font-display: swap; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--felt); color: var(--text); font-family: var(--serif); -webkit-text-size-adjust: 100%; }
+    body { min-height: 100vh; min-height: 100dvh; }
+    button, input { font: inherit; color: inherit; }
+    button { cursor: pointer; touch-action: manipulation; }
+    [hidden] { display: none !important; }
+    a { color: var(--gold-text); }
+    .label { font-family: var(--sans); font-size: 13px; letter-spacing: 2px; color: var(--muted); font-weight: 600; margin: 0; text-transform: uppercase; }
+    .btn-ghost { height: 52px; padding: 0 16px; border-radius: 10px; border: 1px solid var(--line-btn); background: transparent; color: var(--text); font-family: var(--sans); font-size: 16px; }
+    .btn-ghost:disabled { border-color: var(--line); color: #7F9A8C; cursor: default; }
+    .btn-gold { height: 56px; padding: 0 22px; border: 0; border-radius: 10px; background: var(--gold); color: var(--on-gold); font-family: var(--serif); font-size: 21px; font-weight: 700; letter-spacing: 2px; }
+    .btn-gold:active, .btn-ghost:active { transform: translateY(1px); }
+    :focus-visible { outline: 3px solid var(--gold-text); outline-offset: 2px; }
 
+    /* ---------- setup ---------- */
+    .setup { min-height: 100vh; min-height: 100dvh; display: flex; align-items: center; justify-content: center; padding: 32px 16px; }
+    body {
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 40%, rgba(255, 255, 255, 0.06), transparent 70%),
+        radial-gradient(ellipse 120% 90% at 50% 50%, transparent 55%, rgba(0, 0, 0, 0.28)),
+        var(--suits-soft),
+        var(--felt);
+    }
+    .setup-card { width: 100%; max-width: 520px; display: flex; flex-direction: column; gap: 18px; }
+    .brand { text-align: center; display: flex; flex-direction: column; align-items: center; }
+    .logo { display: block; flex-shrink: 0; }
+    .logo-lg { width: 104px; height: 104px; margin-bottom: 14px; filter: drop-shadow(0 4px 0 #08241C); }
+    .logo-sm { width: 40px; height: 40px; }
+    .brand-mark { font-size: 40px; letter-spacing: 8px; font-weight: 700; color: var(--gold-text); margin: 0; }
+    .brand-sub { font-family: var(--sans); font-size: 16px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); margin: 6px 0 0; }
+    .bar-brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .names { background: var(--cream); color: var(--ink); border-radius: 14px; padding: 20px; display: flex; flex-direction: column; gap: 14px; box-shadow: 0 3px 0 #08241C; }
+    .name-row { display: flex; flex-direction: column; gap: 6px; }
+    .name-row label { font-family: var(--sans); font-size: 15px; color: var(--ink-soft); }
+    .name-row label b { color: var(--ink); }
+    .name-row input { height: 56px; border: 1px solid var(--cream-line); border-radius: 10px; background: #FFFFFF; color: var(--ink); padding: 0 14px; font-size: 22px; font-family: var(--serif); }
+    .names-note { font-family: var(--sans); font-size: 14px; color: var(--ink-soft); margin: 0; }
+    .setup-actions { display: grid; grid-template-columns: 1fr 2fr; gap: 10px; }
+    .setup-actions .btn-gold { height: 60px; }
+    .setup-actions .btn-ghost { height: 60px; }
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Merriweather|Merriweather+Sans|Princess+Sofia&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
+    /* ---------- game ---------- */
+    .play {
+      background:
+        radial-gradient(ellipse 120% 100% at 40% 40%, transparent 60%, rgba(0, 0, 0, 0.22)),
+        var(--suits-faint),
+        var(--felt);
+    }
+    .play { display: grid; grid-template-columns: minmax(0, 1fr); grid-template-areas: "head" "stand" "main" "sheet" "ctrl"; min-height: 100vh; min-height: 100dvh; }
+    .bar { grid-area: head; display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 14px 16px; padding-top: max(14px, env(safe-area-inset-top)); background: var(--felt-dark); border-bottom: 1px solid var(--line); }
+    .bar-title { display: flex; flex-direction: column; gap: 2px; }
+    .bar-mark { font-size: 22px; letter-spacing: 4px; font-weight: 700; color: var(--gold-text); }
+    .bar-meta { font-family: var(--sans); font-size: 14px; color: var(--muted); }
+    .bar a { font-family: var(--sans); font-size: 16px; text-decoration: none; border: 1px solid var(--gold-line); border-radius: 8px; padding: 12px 16px; white-space: nowrap; }
+    .bar-actions { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .sound-btn { display: flex; align-items: center; gap: 8px; height: 46px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--line-btn); background: transparent; color: var(--text-soft); font-family: var(--sans); font-size: 15px; }
+    .sound-btn svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .sound-btn .spk { fill: currentColor; stroke: none; }
+    .sound-btn .mute { display: none; }
+    .sound-btn[aria-pressed="false"] .wave { display: none; }
+    .sound-btn[aria-pressed="false"] .mute { display: inline; }
+    .sound-btn[aria-pressed="false"] { color: #7F9A8C; }
+    .bar-mark { white-space: nowrap; }
+    @media (max-width: 480px) {
+      .bar { padding-left: 12px; padding-right: 12px; }
+      .bar-brand { gap: 10px; }
+      .logo-sm { width: 34px; height: 34px; }
+      .bar-mark { font-size: 19px; letter-spacing: 3px; }
+      .bar a { padding: 12px 12px; }
+    }
+    @media (max-width: 480px) { .sound-btn span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); } .sound-btn { width: 46px; justify-content: center; padding: 0; } }
 
-  <!-- Theme CSS - Includes Bootstrap -->
-  <link href="css/creative.css" rel="stylesheet">
-  <link rel="stylesheet" href="css/animate.min.css">
+    /* ---------- "round settled" stamp after Calculate ---------- */
+    .seat { position: relative; }
+    .stamp { position: fixed; left: 50%; top: 46%; z-index: 40; pointer-events: none; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 14px 34px 16px; border: 3px double var(--gold); border-radius: 14px; background: rgba(6, 31, 24, 0.94); box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55); transform: translate(-50%, -50%); }
+    .stamp small { font-family: var(--sans); font-size: 14px; font-weight: 600; letter-spacing: 6px; color: var(--muted); }
+    .stamp b { font-family: var(--serif); font-size: 40px; font-weight: 800; letter-spacing: 6px; color: var(--gold-text); }
+    .crown { position: absolute; left: 50%; top: -20px; width: 40px; height: 40px; margin-left: -20px; z-index: 3; pointer-events: none; filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.4)); }
+    @media (min-width: 900px) and (min-height: 560px) { .stamp { left: calc(50% - 165px); } }
 
+    .stand { grid-area: stand; background: var(--felt-dark); border-bottom: 1px solid var(--line); }
+    .stand .label { display: none; }
+    .tiles { display: grid; grid-template-columns: repeat(var(--n), minmax(0, 1fr)); }
+    .tile { display: flex; flex-direction: column; align-items: center; padding: 10px 4px; border-top: 3px solid transparent; min-width: 0; }
+    .tile.lead { border-top-color: var(--gold); }
+    .tile-name { font-family: var(--sans); font-size: 14px; color: var(--text-soft); max-width: 100%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .tile-total { font-size: 26px; font-weight: 700; font-variant-numeric: tabular-nums; }
+
+    .entry { grid-area: main; padding: 14px; display: flex; flex-direction: column; gap: 12px; min-width: 0; }
+    .entry-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+    .entry-hint { font-family: var(--sans); font-size: 14px; color: var(--muted); }
+    .seats { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 12px; }
+
+    .seat { background: var(--cream); color: var(--ink); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 3px 0 #08241C; min-width: 0; }
+    .seat.is-winner { outline: 3px solid var(--gold); }
+    .seat-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .seat-name { font-size: 22px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
+    .win-toggle { flex-shrink: 0; height: 48px; padding: 0 14px; border-radius: 10px; border: 1px solid var(--felt); background: transparent; color: var(--felt); font-family: var(--sans); font-size: 15px; }
+    .seat.is-winner .win-toggle { background: var(--gold-dark); border-color: var(--gold-dark); color: var(--on-gold); font-weight: 800; letter-spacing: 1px; }
+    .lose, .win { display: flex; flex-direction: column; gap: 12px; }
+    .stepper { display: flex; align-items: stretch; border: 1px solid var(--cream-line); border-radius: 10px; overflow: hidden; background: #FFFFFF; }
+    .stepper button { width: 60px; border: 0; background: var(--cream-2); font-size: 28px; color: var(--ink); }
+    .stepper input { flex: 1; min-width: 0; height: 60px; border: 0; background: #FFFFFF; text-align: center; font-family: var(--serif); font-size: 34px; font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; -moz-appearance: textfield; }
+    .stepper input::-webkit-outer-spin-button, .stepper input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .stepper input::placeholder { color: #B5AE9C; }
+    .mini { font-family: var(--sans); font-size: 12px; letter-spacing: 1px; color: var(--ink-soft); text-transform: uppercase; margin: 0; }
+    .chips { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
+    .chips.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .chip { position: relative; display: block; }
+    .chip input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+    .chip span { display: flex; align-items: center; justify-content: center; height: 54px; border-radius: 10px; border: 1px solid var(--cream-line); background: #FFFFFF; color: var(--ink); font-size: 20px; font-weight: 700; text-align: center; line-height: 1.15; padding: 0 4px; }
+    .chip.red span { color: var(--red-suit); }
+    .chip.word span { font-family: var(--sans); font-size: 15px; font-weight: 600; }
+    .chip input:checked + span { background: var(--felt); border-color: var(--felt); color: var(--cream); }
+    .chip input:focus-visible + span { outline: 3px solid var(--gold); outline-offset: 2px; }
+
+    .sheet { grid-area: sheet; padding: 6px 14px 16px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+    .sheet-scroll { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 17px; }
+    th { font-family: var(--sans); font-size: 13px; color: var(--muted); font-weight: 600; text-align: right; padding: 8px 4px; border-bottom: 1px solid var(--line); white-space: nowrap; }
+    th:first-child, td:first-child { text-align: left; }
+    td { padding: 10px 4px; text-align: right; border-bottom: 1px solid var(--line-soft); }
+    td:first-child { color: var(--muted); white-space: nowrap; }
+    .mult-tag { color: var(--gold-text); font-size: 13px; padding-left: 4px; }
+    tfoot td { font-weight: 700; font-size: 19px; border-bottom: 0; padding-top: 12px; }
+    tfoot td:first-child { color: var(--gold-text); }
+    .empty { font-family: var(--sans); font-size: 15px; color: var(--muted); padding: 12px 0; margin: 0; }
+    .up { color: var(--up); } .down { color: var(--down); } .even { color: var(--text); }
+
+    .ctrl { grid-area: ctrl; position: sticky; bottom: 0; z-index: 2; background: var(--felt-dark); border-top: 1px solid var(--line); padding: 10px 14px; padding-bottom: max(12px, env(safe-area-inset-bottom)); display: flex; flex-direction: column; gap: 10px; font-family: var(--sans); }
+    .level { display: flex; align-items: center; gap: 6px; }
+    .level-label { font-size: 15px; color: var(--text-soft); padding-right: 4px; }
+    .lvl { flex: 1; min-width: 0; height: 48px; border-radius: 8px; border: 1px solid var(--gold-line); background: transparent; color: var(--gold-text); font-size: 18px; font-weight: 700; }
+    .lvl[aria-pressed="true"] { background: var(--gold); border-color: var(--gold); color: var(--on-gold); }
+    .custom { display: flex; align-items: center; height: 48px; border: 1px solid var(--gold-line); border-radius: 8px; overflow: hidden; flex: 1.4; min-width: 0; }
+    .custom.on { border-color: var(--gold); box-shadow: inset 0 0 0 1px var(--gold); }
+    .custom span { padding: 0 6px 0 10px; color: var(--gold-text); font-size: 18px; font-weight: 700; }
+    .custom input { flex: 1; min-width: 0; height: 100%; border: 0; background: transparent; color: var(--text); font-size: 19px; font-weight: 700; padding: 0 8px 0 0; -moz-appearance: textfield; }
+    .custom input::-webkit-outer-spin-button, .custom input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+    .actions { display: grid; grid-template-columns: 1fr 1fr 1fr 2fr; gap: 8px; }
+    .actions .btn-ghost, .actions .btn-gold { padding: 0 6px; }
+
+    /* ---------- intro: players face off, then the calculator ---------- */
+    .ix { position: fixed; inset: 0; z-index: 50; overflow: hidden; cursor: pointer; -webkit-tap-highlight-color: transparent; }
+    .ix-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 70% at 50% 45%, rgba(201, 162, 75, 0.10), transparent 70%), #061F18; }
+    .ix-panels { position: absolute; inset: -4% -3%; display: flex; }
+    .ix-panel { position: relative; flex: 1; transform: skewX(-9deg); overflow: hidden; border-left: 3px solid var(--gold); opacity: 0; }
+    .ix-panel:first-child { border-left: 0; }
+    .ix-panel:nth-child(odd) { background: linear-gradient(180deg, #134A3A, #0A2E24); }
+    .ix-panel:nth-child(even) { background: linear-gradient(180deg, #0F4033, #082A20); }
+    .ix-in { position: absolute; inset: 0; transform: skewX(9deg); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 0 10% 16%; }
+    .ix-suit { position: absolute; width: 62%; max-width: 300px; aspect-ratio: 1; left: 50%; top: 46%; transform: translate(-50%, -50%); opacity: 0.13; }
+    .ix-suit.red { fill: #E06A5E; } .ix-suit.black { fill: var(--gold-text); }
+    .ix-seat { position: relative; font-family: var(--sans); font-size: 14px; letter-spacing: 4px; color: var(--gold-text); font-weight: 600; opacity: 0; }
+    .ix-name { position: relative; font-family: var(--serif); font-weight: 800; font-size: clamp(26px, calc(14vw / var(--n)), 66px); line-height: 1.05; color: var(--cream); text-align: center; text-shadow: 0 3px 0 rgba(0, 0, 0, 0.35); max-width: 100%; overflow-wrap: anywhere; opacity: 0; }
+    .ix-rule { position: relative; height: 3px; width: 0; background: var(--gold); border-radius: 2px; }
+    .ix-vs { position: absolute; width: 92px; height: 92px; margin: -46px 0 0 -46px; border-radius: 50%; background: radial-gradient(circle at 35% 30%, #F3DFA6, var(--gold) 55%, #8C6A22); border: 3px solid var(--cream); display: flex; align-items: center; justify-content: center; font-family: var(--serif); font-weight: 900; font-size: 34px; color: var(--on-gold); box-shadow: 0 6px 18px rgba(0, 0, 0, 0.5); opacity: 0; pointer-events: none; }
+    .ix-logo { position: absolute; left: 50%; top: 50%; width: 150px; height: 150px; margin: -75px 0 0 -75px; opacity: 0; filter: drop-shadow(0 6px 0 rgba(0, 0, 0, 0.35)); }
+    .ix-banner { position: absolute; left: 0; right: 0; bottom: 7%; display: flex; justify-content: center; opacity: 0; padding: 0 16px; }
+    .ix-banner-box { position: relative; overflow: hidden; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 12px 44px 14px; background: #061F18; border-top: 2px solid var(--gold); border-bottom: 2px solid var(--gold); text-align: center; }
+    .ix-banner-small { font-family: var(--sans); font-size: 15px; font-weight: 600; letter-spacing: 6px; color: var(--muted); }
+    .ix-banner-big { font-family: var(--serif); font-size: 34px; font-weight: 800; letter-spacing: 4px; color: var(--gold-text); }
+    .ix-banner-box::after { content: ""; position: absolute; top: 0; bottom: 0; width: 40%; left: -50%; background: linear-gradient(100deg, transparent, rgba(255, 240, 200, 0.45), transparent); }
+    .ix-flash { position: absolute; inset: 0; background: #FFF6DC; opacity: 0; pointer-events: none; }
+    .ix-skip { position: absolute; right: 16px; bottom: max(14px, env(safe-area-inset-bottom)); font-family: var(--sans); font-size: 13px; color: rgba(241, 235, 221, 0.55); letter-spacing: 1px; opacity: 0; }
+
+    .ix.run .ix-logo { animation: ixLogoIn 0.55s cubic-bezier(0.2, 1.4, 0.4, 1) 0s forwards, ixLogoOut 0.35s ease-in 0.75s forwards; }
+    .ix.run .ix-panel { animation: ixPanelIn 0.5s cubic-bezier(0.2, 0.9, 0.25, 1) forwards; animation-delay: calc(0.85s + var(--i) * 0.14s); }
+    .ix.run .ix-panel:nth-child(even) { animation-name: ixPanelInAlt; }
+    .ix.run .ix-seat { animation: ixFade 0.3s ease-out forwards; animation-delay: calc(1.15s + var(--i) * 0.14s); }
+    .ix.run .ix-name { animation: ixNameIn 0.45s cubic-bezier(0.2, 1.3, 0.4, 1) forwards; animation-delay: calc(1.1s + var(--i) * 0.14s); }
+    .ix.run .ix-rule { animation: ixRule 0.4s ease-out forwards; animation-delay: calc(1.3s + var(--i) * 0.14s); }
+    .ix.run .ix-vs { animation: ixVs 0.42s cubic-bezier(0.3, 1.6, 0.5, 1) forwards; animation-delay: calc(1.75s + var(--j) * 0.12s); }
+    .ix.run .ix-flash { animation: ixFlash 0.35s ease-out 1.8s forwards; }
+    .ix.run .ix-panels { animation: ixShake 0.3s linear 1.8s; }
+    .ix.run .ix-banner { animation: ixBannerIn 0.4s cubic-bezier(0.2, 1.2, 0.4, 1) 2.3s forwards; }
+    .ix.run .ix-banner-box::after { animation: ixSweep 0.8s ease-in-out 2.5s forwards; }
+    .ix.run .ix-skip { animation: ixFade 0.4s ease-out 0.6s forwards; }
+
+    .ix.out { pointer-events: none; }
+    .ix.out .ix-panel { animation: ixPanelOut 0.55s cubic-bezier(0.6, 0, 0.8, 0.4) forwards !important; animation-delay: calc(var(--i) * 0.06s) !important; opacity: 1; }
+    .ix.out .ix-panel:nth-child(even) { animation-name: ixPanelOutAlt !important; }
+    .ix.out .ix-vs, .ix.out .ix-banner, .ix.out .ix-skip, .ix.out .ix-logo { animation: ixFadeOut 0.2s ease-in forwards !important; }
+    .ix.out .ix-bg { animation: ixFadeOut 0.45s ease-in 0.15s forwards; }
+    .ix.out .ix-flash { display: none; }
+
+    @keyframes ixLogoIn { from { opacity: 0; transform: perspective(600px) rotateY(180deg) scale(0.4); } to { opacity: 1; transform: perspective(600px) rotateY(0) scale(1); } }
+    @keyframes ixLogoOut { from { opacity: 1; } to { opacity: 0; transform: scale(0.6) translateY(-40px); } }
+    @keyframes ixPanelIn { from { opacity: 0; transform: skewX(-9deg) translateY(-110%); } to { opacity: 1; transform: skewX(-9deg) translateY(0); } }
+    @keyframes ixPanelInAlt { from { opacity: 0; transform: skewX(-9deg) translateY(110%); } to { opacity: 1; transform: skewX(-9deg) translateY(0); } }
+    @keyframes ixPanelOut { from { opacity: 1; transform: skewX(-9deg) translateY(0); } to { opacity: 1; transform: skewX(-9deg) translateY(-115%); } }
+    @keyframes ixPanelOutAlt { from { opacity: 1; transform: skewX(-9deg) translateY(0); } to { opacity: 1; transform: skewX(-9deg) translateY(115%); } }
+    @keyframes ixNameIn { from { opacity: 0; transform: scale(1.6); letter-spacing: 0.2em; } to { opacity: 1; transform: scale(1); letter-spacing: 0; } }
+    @keyframes ixRule { to { width: 60%; } }
+    @keyframes ixVs { 0% { opacity: 0; transform: scale(2.6) rotate(-20deg); } 70% { opacity: 1; transform: scale(0.92) rotate(3deg); } 100% { opacity: 1; transform: scale(1) rotate(0); } }
+    @keyframes ixFlash { 0% { opacity: 0; } 25% { opacity: 0.22; } 100% { opacity: 0; } }
+    @keyframes ixShake { 0%, 100% { transform: translate(0, 0); } 20% { transform: translate(-5px, 2px); } 40% { transform: translate(4px, -3px); } 60% { transform: translate(-3px, 2px); } 80% { transform: translate(2px, -1px); } }
+    @keyframes ixBannerIn { from { opacity: 0; transform: scale(1.25); } to { opacity: 1; transform: scale(1); } }
+    @keyframes ixFade { to { opacity: 1; } }
+    @keyframes ixFadeOut { from { opacity: 1; } to { opacity: 0; } }
+    @keyframes ixSweep { to { left: 120%; } }
+
+    /* phone / upright tablet: stacked bands sliding in from the sides */
+    @media (max-aspect-ratio: 4/5) {
+      .ix-panels { inset: -6% -4% 15% -4%; flex-direction: column; }
+      .ix-panel { transform: skewY(-6deg); border-left: 0; border-top: 3px solid var(--gold); }
+      .ix-panel:first-child { border-top: 0; }
+      .ix-panel:first-child .ix-in { padding-top: 6%; }
+      .ix-in { transform: skewY(6deg); align-items: flex-start; gap: 6px; padding: 0 10% 0 12%; }
+      .ix-suit { width: auto; height: 70%; left: auto; right: 6%; transform: translateY(-50%); }
+      .ix-name { font-size: clamp(30px, 10vw, 48px); text-align: left; }
+      .ix-vs { width: 64px; height: 64px; margin: -32px 0 0 -32px; font-size: 24px; }
+      .ix-banner { bottom: max(3%, env(safe-area-inset-bottom)); }
+      .ix-banner-box { padding: 10px 22px 12px; }
+      .ix-banner-small { font-size: 13px; letter-spacing: 4px; }
+      .ix-banner-big { font-size: 26px; letter-spacing: 3px; }
+      .ix-skip { bottom: auto; top: max(12px, env(safe-area-inset-top)); }
+      @keyframes ixRule { to { width: 40%; } }
+      @keyframes ixPanelIn { from { opacity: 0; transform: skewY(-6deg) translateX(-110%); } to { opacity: 1; transform: skewY(-6deg) translateX(0); } }
+      @keyframes ixPanelInAlt { from { opacity: 0; transform: skewY(-6deg) translateX(110%); } to { opacity: 1; transform: skewY(-6deg) translateX(0); } }
+      @keyframes ixPanelOut { from { opacity: 1; transform: skewY(-6deg) translateX(0); } to { opacity: 1; transform: skewY(-6deg) translateX(-115%); } }
+      @keyframes ixPanelOutAlt { from { opacity: 1; transform: skewY(-6deg) translateX(0); } to { opacity: 1; transform: skewY(-6deg) translateX(115%); } }
+    }
+
+    /* iPad "Reduce Motion" setting: a short, calm fade instead */
+    @media (prefers-reduced-motion: reduce) {
+      .ix.run .ix-panel, .ix.run .ix-name, .ix.run .ix-seat, .ix.run .ix-vs, .ix.run .ix-banner { animation: ixFade 0.4s ease-out forwards !important; animation-delay: 0.2s !important; }
+      .ix.run .ix-rule { width: 60%; animation: none; }
+      .ix.run .ix-panels, .ix.run .ix-flash, .ix.run .ix-logo { animation: none !important; }
+      .ix.out .ix-panel { animation: ixFadeOut 0.3s ease-in forwards !important; }
+    }
+
+    /* ---------- tablet / desktop landscape ---------- */
+    @media (min-width: 900px) and (min-height: 560px) {
+      .play { height: 100vh; height: 100dvh; grid-template-columns: minmax(0, 1fr) 330px; grid-template-rows: auto auto minmax(0, 1fr) auto; grid-template-areas: "head head" "main stand" "main sheet" "ctrl sheet"; }
+      .bar { padding: 14px 28px; }
+      .bar-title { flex-direction: row; align-items: baseline; gap: 18px; }
+      .bar-mark { font-size: 26px; letter-spacing: 5px; }
+      .bar-meta { font-size: 16px; }
+      .stand, .sheet { background: var(--felt-dark); border-left: 1px solid var(--line); }
+      .stand { border-bottom: 0; padding: 20px 24px 6px; display: flex; flex-direction: column; gap: 10px; }
+      .stand .label { display: block; }
+      .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+      .tile { align-items: flex-start; background: var(--felt-tile); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+      .tile.lead { border-color: var(--gold); }
+      .tile-name { font-size: 16px; }
+      .tile-total { font-size: 30px; }
+      .sheet { padding: 14px 20px 20px; min-height: 0; }
+      .sheet table { font-size: 15px; }
+      .sheet td, .sheet th { padding-left: 3px; padding-right: 3px; }
+      .sheet tfoot td { font-size: 17px; }
+      .sheet-scroll { flex: 1; min-height: 0; overflow-y: auto; }
+      .entry { padding: 20px 22px 12px 28px; overflow-y: auto; min-height: 0; }
+      .seats { grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 14px; flex: 1; align-content: start; }
+      .seat { padding: 16px; }
+      .seat-top { flex-direction: column; align-items: stretch; text-align: center; }
+      .seat-name { font-size: 24px; }
+      .win-toggle { height: 52px; font-size: 16px; }
+      .stepper button { width: 46px; }
+      .chips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .chips.three { grid-template-columns: minmax(0, 1fr); }
+      .chip span { height: 58px; }
+      .ctrl { position: static; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 16px; padding: 14px 22px 16px 28px; background: transparent; border-top: 0; }
+      .level { flex: 0 0 auto; }
+      .lvl { flex: 0 0 56px; height: 58px; }
+      .custom { flex: 0 0 92px; height: 58px; }
+      .actions { flex: 0 0 auto; grid-template-columns: 72px 72px 72px 160px; }
+      .actions .btn-gold { font-size: 19px; letter-spacing: 1px; }
+      .actions .btn-ghost, .actions .btn-gold { height: 58px; }
+    }
+  </style>
 </head>
 
-<body id="page-top">
+<body>
+  <svg width="0" height="0" style="position: absolute" aria-hidden="true" focusable="false">
+    <symbol id="s-spade" viewBox="0 0 24 24"><path d="M12 1.5C9 5.6 2.8 9.2 2.8 14c0 2.9 2.3 4.8 4.8 4.8 1.6 0 3-.7 3.8-1.9-.2 2-1 3.6-2.6 5.1h6.4c-1.6-1.5-2.4-3.1-2.6-5.1.8 1.2 2.2 1.9 3.8 1.9 2.5 0 4.8-1.9 4.8-4.8 0-4.8-6.2-8.4-9.2-12.5z"/></symbol>
+    <symbol id="s-heart" viewBox="0 0 24 24"><path d="M12 21.5S2.6 15.6 1.6 9.6C.9 5.7 3.5 2.5 7 2.5c2.2 0 3.9 1.2 5 3 1.1-1.8 2.8-3 5-3 3.5 0 6.1 3.2 5.4 7.1-1 6-10.4 11.9-10.4 11.9z"/></symbol>
+    <symbol id="s-club" viewBox="0 0 24 24"><circle cx="12" cy="6.6" r="4.6"/><circle cx="6.2" cy="13.4" r="4.6"/><circle cx="17.8" cy="13.4" r="4.6"/><path d="M11 11.5h2c0 4.4.9 7.4 3.2 10H7.8c2.3-2.6 3.2-5.6 3.2-10z"/></symbol>
+    <symbol id="s-diamond" viewBox="0 0 24 24"><path d="M12 1.5 20.5 12 12 22.5 3.5 12z"/></symbol>
+    <symbol id="crown" viewBox="0 0 24 24"><path d="M3 18h18l-1.6-10-4.4 4-3-7-3 7-4.4-4z" fill="#C9A24B" stroke="#F6E3AE" stroke-width="1" stroke-linejoin="round"/><rect x="3" y="19" width="18" height="2.4" rx="1" fill="#C9A24B"/></symbol>
+    <symbol id="logo" viewBox="0 0 64 64">
+      <rect x="2" y="2" width="60" height="60" rx="11" fill="#F4EFE3" stroke="#C9A24B" stroke-width="3"/>
+      <use href="#s-spade" x="9" y="9" width="21" height="21" fill="#1E2A24"/>
+      <use href="#s-heart" x="34" y="9" width="21" height="21" fill="#A3262A"/>
+      <use href="#s-diamond" x="9" y="34" width="21" height="21" fill="#A3262A"/>
+      <use href="#s-club" x="34" y="34" width="21" height="21" fill="#1E2A24"/>
+    </symbol>
+  </svg>
 
-  <div id="setup-view" style="height: 100vh;">
-    <div class="container h-100">
-      <h1 class="text-center p-lg-2 p-5">Big2 Game Calculator</h1>
-      <p class="text-center">Follow <a href="https://www.instagram.com/rahardja.premium.motor/" target="_blank">@rahardja.premium.motor</a> on Instagram</p>
-      <div class="my-4">
-        <div class="row d-flex justify-content-center">
-            <label class="col-lg-5 my-auto">Player 1 name: </label>
-            <input type="text" id="p1-name" class="col-lg-5 form-control" placeholder="">
-        </div>
+  <div id="setup-view" class="setup">
+    <div class="setup-card">
+      <div class="brand">
+        <svg class="logo logo-lg" viewBox="0 0 64 64" role="img" aria-label="Big Two logo: spade, heart, club and diamond"><use href="#logo"></use></svg>
+        <h1 class="brand-mark">BIG TWO</h1>
+        <p class="brand-sub">Game Calculator</p>
       </div>
-      <div class="my-4">
-        <div class="row d-flex justify-content-center">
-            <label class="col-lg-5 my-auto">Player 2 name: </label>
-            <input type="text" id="p2-name" class="col-lg-5 form-control" placeholder="">
-        </div>
+      <form id="names-form" class="names" autocomplete="off">
+        <div class="name-row"><label for="p1-name"><b>Player 1</b></label><input type="text" id="p1-name" enterkeyhint="next"></div>
+        <div class="name-row"><label for="p2-name"><b>Player 2</b></label><input type="text" id="p2-name" enterkeyhint="next"></div>
+        <div class="name-row"><label for="p3-name"><b>Player 3</b> · optional</label><input type="text" id="p3-name" enterkeyhint="next"></div>
+        <div class="name-row"><label for="p4-name"><b>Player 4</b> · optional</label><input type="text" id="p4-name" enterkeyhint="go"></div>
+        <p class="names-note">Leave players 3 and 4 empty for a 2-player game.</p>
+      </form>
+      <div class="setup-actions">
+        <button type="button" id="resetNames" class="btn-ghost">Reset</button>
+        <button type="button" id="mulai" class="btn-gold">START</button>
       </div>
-      <div class="my-4">
-        <div class="row d-flex justify-content-center">
-            <label class="col-lg-5 my-auto">Player 3 name: </label>
-            <input type="text" id="p3-name" class="col-lg-5 form-control" placeholder="">
-        </div>
-      </div>
-      <div class="my-4">
-        <div class="row d-flex justify-content-center">
-            <label class="col-lg-5 my-auto">Player 4 name: </label>
-            <input type="text" id="p4-name" class="col-lg-5 form-control" placeholder="">
-        </div>
-      </div>
-      <div class="d-flex justify-content-center pt-2">
-        <button id="mulai" class="btn btn-primary btn-lg m-2">Start</button>
-        <button id="resetNames" class="btn btn-secondary btn-lg m-2">Reset</button>
-    </div>
     </div>
   </div>
 
-    <div id="play-view" class="d-none" style="height: 100vh;">
-      <div class="container h-100">
-        <h1 id="numPlay" class="text-center p-lg-2 p-5"></h1>
-        <div class="row d-flex justify-content-center">
-          <div class="col-lg-4 col-sm-6 col-8">
-            <!-- <div class="row">
-            <label for="rate" class="col-lg-6 my-auto">Harga per-mata: </label>
-            <input type="text" id="harga-per-mata" class="col-lg-6 form-control"value="10000">
-          </div> -->
-            <div class="d-flex justify-content-center pt-2">
-              <a class="btn btn-dark btn-lg m-2" id="newGame" href="./">New Game</a>
-            </div>
-          </div>
-        </div>
-        <div id="playerList" class="row d-flex justify-content-center"></div>
-        <div class="d-flex justify-content-center pt-2">
-          <button id="hitung" class="btn btn-info btn-lg m-2">Calculate</button>
-          <button id="newRound" class="btn btn-warning btn-lg m-2">
-            Cancel Input
-          </button>
-          <div class="d-flex flex-column my-1">
-            <button id="undo" class="btn btn-primary  my-1">Undo</button>
-            <button id="redo" class="btn btn-redo disabled my-1">Redo</button>
-          </div>
-
-            <div class="form-group px-4">
-              <label for="boost">Level Mulitiplication</label>
-              <input type="number" class="form-control" id="boost" aria-describedby="boost" value=1 placeholder="0">
-            </div>
-          <!-- <button id="reset" class="btn btn-secondary btn-lg m-2">Bersihkan</button> -->
-        </div>
-        <div class="d-flex justify-content-center pt-2">
-          <table class="table">
-            <thead>
-              <tr id="playerName">
-                <th span="col">Game</th>
-              </tr>
-            </thead>
-            <tbody id="tableContent"></tbody>
-            <tfoot id="tableTotal"></tfoot>
-          </table>
+  <div id="play-view" class="play" hidden>
+    <header class="bar">
+      <div class="bar-brand">
+        <svg class="logo logo-sm" viewBox="0 0 64 64" aria-hidden="true"><use href="#logo"></use></svg>
+        <div class="bar-title">
+          <span class="bar-mark">BIG TWO</span>
+          <span class="bar-meta" id="numPlay"></span>
         </div>
       </div>
+      <div class="bar-actions">
+        <button type="button" class="sound-btn" id="soundBtn" aria-pressed="true">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path class="spk" d="M4 9h4l5-4v14l-5-4H4z"/><path class="wave" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"/><path class="mute" d="M16.5 9.5l5 5m0-5l-5 5"/></svg>
+          <span id="soundLabel">Sound on</span>
+        </button>
+        <a href="./" id="newGame">New game</a>
+      </div>
+    </header>
+
+    <section class="stand" aria-label="Standings">
+      <h2 class="label">Standings</h2>
+      <div class="tiles" id="standings"></div>
+    </section>
+
+    <main class="entry">
+      <div class="entry-head">
+        <h2 class="label" id="roundLabel">Round 1 — cards left</h2>
+        <span class="entry-hint">Tap each 2 still in hand</span>
+      </div>
+      <div class="seats" id="playerList"></div>
+    </main>
+
+    <section class="sheet" aria-label="Score sheet">
+      <h2 class="label">Score sheet</h2>
+      <div class="sheet-scroll">
+        <table>
+          <thead><tr id="playerName"><th scope="col">#</th></tr></thead>
+          <tbody id="tableContent"></tbody>
+          <tfoot id="tableTotal"></tfoot>
+        </table>
+        <p class="empty" id="emptySheet">No rounds yet.</p>
+      </div>
+    </section>
+
+    <footer class="ctrl">
+      <div class="level" role="group" aria-label="Level multiplier">
+        <span class="level-label">Level</span>
+        <button type="button" class="lvl" data-level="1" aria-pressed="true">×1</button>
+        <button type="button" class="lvl" data-level="2" aria-pressed="false">×2</button>
+        <button type="button" class="lvl" data-level="3" aria-pressed="false">×3</button>
+        <button type="button" class="lvl" data-level="4" aria-pressed="false">×4</button>
+        <label class="custom" id="customWrap"><span>×</span><input type="number" id="boost" value="1" inputmode="decimal" aria-label="Custom level multiplier"></label>
+      </div>
+      <div class="actions">
+        <button type="button" id="newRound" class="btn-ghost">Clear</button>
+        <button type="button" id="undo" class="btn-ghost">Undo</button>
+        <button type="button" id="redo" class="btn-ghost" disabled>Redo</button>
+        <button type="button" id="hitung" class="btn-gold">CALCULATE</button>
+      </div>
+    </footer>
+  </div>
+
+  <div id="intro" class="ix" hidden aria-live="polite">
+    <div class="ix-bg"></div>
+    <div class="ix-panels" id="ixPanels"></div>
+    <div id="ixVsRow"></div>
+    <svg class="ix-logo" viewBox="0 0 64 64" aria-hidden="true"><use href="#logo"></use></svg>
+    <div class="ix-banner">
+      <div class="ix-banner-box">
+        <span class="ix-banner-small">PREPARE YOUR MONEY</span>
+        <span class="ix-banner-big">LET'S PLAY!</span>
+      </div>
     </div>
+    <div class="ix-flash"></div>
+    <div class="ix-skip">TAP TO SKIP</div>
+  </div>
 
-  <!-- Bootstrap core JavaScript -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.js"></script>
   <script>
-      function startGame(numOfPlayers, player1, player2, player3, player4) {
+    (function () {
+      var byId = function (id) { return document.getElementById(id); };
+
+      // ---- intro: names face off, then the calculator is revealed ----
+      var INTRO_SUITS = [["s-spade", "black"], ["s-heart", "red"], ["s-club", "black"], ["s-diamond", "red"]];
+      var introTimers = [];
+      function introLater(fn, ms) { introTimers.push(setTimeout(fn, ms)); }
+
+      function placeIntroVs() {
+        var intro = byId("intro");
+        if (intro.hidden) return;
+        var n = parseInt(intro.style.getPropertyValue("--n"), 10);
+        var W = intro.clientWidth, H = intro.clientHeight;
+        var portrait = W / H <= 0.8;
+        Array.prototype.forEach.call(intro.querySelectorAll(".ix-vs"), function (v, k) {
+          var j = k + 1, x, y;
+          if (portrait) {
+            // bands span -6%..85% of the height, skewY(-6deg) about their centre
+            x = W * 0.72;
+            y = -0.06 * H + (j / n) * 0.91 * H - (x - W / 2) * Math.tan(6 * Math.PI / 180);
+          } else {
+            // columns span -3%..103% of the width, skewX(-9deg) about their centre
+            y = H * 0.62;
+            x = -0.03 * W + (j / n) * 1.06 * W - (y - H / 2) * Math.tan(9 * Math.PI / 180);
+          }
+          v.style.left = x + "px";
+          v.style.top = y + "px";
+        });
+      }
+      window.addEventListener("resize", placeIntroVs);
+
+      function playIntro(names) {
+        var intro = byId("intro");
+        var panels = byId("ixPanels");
+        var vsRow = byId("ixVsRow");
+        var n = names.length;
+        panels.textContent = "";
+        vsRow.textContent = "";
+        intro.style.setProperty("--n", n);
+        names.forEach(function (name, i) {
+          var suit = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+          suit.setAttribute("class", "ix-suit " + INTRO_SUITS[i][1]);
+          suit.setAttribute("viewBox", "0 0 24 24");
+          suit.setAttribute("aria-hidden", "true");
+          var use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+          use.setAttribute("href", "#" + INTRO_SUITS[i][0]);
+          suit.appendChild(use);
+          var panel = el("div", { className: "ix-panel" }, [
+            el("div", { className: "ix-in" }, [
+              suit,
+              el("div", { className: "ix-seat", text: "PLAYER " + (i + 1) }),
+              el("div", { className: "ix-name", text: name }),
+              el("div", { className: "ix-rule" })
+            ])
+          ]);
+          panel.style.setProperty("--i", i);
+          panels.appendChild(panel);
+        });
+        for (var j = 1; j < n; j++) {
+          var vs = el("div", { className: "ix-vs", text: "VS", "aria-hidden": "true" });
+          vs.style.setProperty("--j", j - 1);
+          vsRow.appendChild(vs);
+        }
+        intro.setAttribute("aria-label", names.join(" versus ") + ". Prepare your money, let's play!");
+        intro.classList.remove("run", "out");
+        intro.hidden = false;
+        placeIntroVs();
+        void intro.offsetWidth;
+        intro.classList.add("run");
+        Sound.intro(n);
+        introLater(finishIntro, 3300);
+      }
+
+      function finishIntro() {
+        var intro = byId("intro");
+        if (intro.hidden || intro.classList.contains("out")) return;
+        introTimers.forEach(clearTimeout);
+        introTimers = [];
+        Sound.introOut();
+        intro.classList.add("out");
+        introLater(function () {
+          intro.hidden = true;
+          intro.classList.remove("run", "out");
+        }, 750);
+      }
+      byId("intro").addEventListener("click", finishIntro);
+
+      // ---- sound effects: generated by the browser (no audio files, works offline) ----
+      var Sound = (function () {
+        var ctx = null, master = null, noiseBuf = null, introBus = null;
+        var on = true;
+        try { on = localStorage.getItem("bigtwo-sound") !== "off"; } catch (e) {}
+
+        function ready() {
+          if (!on) return false;
+          var AC = window.AudioContext || window.webkitAudioContext;
+          if (!AC) return false;
+          if (!ctx) {
+            ctx = new AC();
+            var comp = ctx.createDynamicsCompressor();
+            master = ctx.createGain();
+            master.gain.value = 0.7;
+            master.connect(comp);
+            comp.connect(ctx.destination);
+            noiseBuf = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate);
+            var d = noiseBuf.getChannelData(0);
+            for (var i = 0; i < d.length; i++) d[i] = Math.random() * 2 - 1;
+          }
+          if (ctx.state === "suspended") ctx.resume();
+          return true;
+        }
+        function env(g, t, peak, attack, release) {
+          g.gain.setValueAtTime(0.0001, t);
+          g.gain.exponentialRampToValueAtTime(peak, t + attack);
+          g.gain.exponentialRampToValueAtTime(0.0001, t + attack + release);
+        }
+        // airy swish: filtered noise sweeping between two pitches
+        function whoosh(out, t, dur, f0, f1, peak) {
+          var src = ctx.createBufferSource(); src.buffer = noiseBuf;
+          var bp = ctx.createBiquadFilter(); bp.type = "bandpass"; bp.Q.value = 1.1;
+          bp.frequency.setValueAtTime(f0, t); bp.frequency.exponentialRampToValueAtTime(f1, t + dur);
+          var g = ctx.createGain(); env(g, t, peak, dur * 0.35, dur * 0.65);
+          src.connect(bp); bp.connect(g); g.connect(out);
+          src.start(t); src.stop(t + dur + 0.05);
+        }
+        // low "thump" like a heavy stamp or a chip stack landing on felt
+        function thud(out, t, peak) {
+          var o = ctx.createOscillator(); o.type = "sine";
+          o.frequency.setValueAtTime(140, t); o.frequency.exponentialRampToValueAtTime(42, t + 0.28);
+          var g = ctx.createGain(); env(g, t, peak, 0.006, 0.36);
+          o.connect(g); g.connect(out); o.start(t); o.stop(t + 0.45);
+          var n = ctx.createBufferSource(); n.buffer = noiseBuf;
+          var lp = ctx.createBiquadFilter(); lp.type = "lowpass"; lp.frequency.value = 1100;
+          var g2 = ctx.createGain(); env(g2, t, peak * 0.5, 0.003, 0.08);
+          n.connect(lp); lp.connect(g2); g2.connect(out); n.start(t); n.stop(t + 0.12);
+        }
+        // soft bell / coin ring
+        function bell(out, t, freq, peak, dur) {
+          [[1, 1], [2.01, 0.35], [3.02, 0.12]].forEach(function (p) {
+            var o = ctx.createOscillator(); o.type = "sine"; o.frequency.value = freq * p[0];
+            var g = ctx.createGain(); env(g, t, peak * p[1], 0.008, dur);
+            o.connect(g); g.connect(out); o.start(t); o.stop(t + dur + 0.1);
+          });
+        }
+
+        return {
+          isOn: function () { return on; },
+          set: function (v) {
+            on = v;
+            try { localStorage.setItem("bigtwo-sound", v ? "on" : "off"); } catch (e) {}
+            if (!v && introBus) { introBus.gain.value = 0; }
+          },
+          intro: function (n) {
+            if (!ready()) return;
+            var t = ctx.currentTime + 0.03;
+            introBus = ctx.createGain(); introBus.connect(master);
+            whoosh(introBus, t, 0.55, 300, 2600, 0.35);                    // logo flips in
+            bell(introBus, t + 0.32, 659, 0.12, 0.9);
+            for (var i = 0; i < n; i++) whoosh(introBus, t + 0.85 + i * 0.14, 0.32, 2200, 500, 0.3); // panels slide in
+            for (var j = 0; j < n - 1; j++) thud(introBus, t + 1.82 + j * 0.12, 0.85);                // VS coins land
+            bell(introBus, t + 2.32, 784, 0.22, 1.4);                      // "Let's play!"
+            bell(introBus, t + 2.42, 1175, 0.16, 1.3);
+            whoosh(introBus, t + 2.45, 0.8, 3000, 7000, 0.06);             // shine across the banner
+          },
+          introOut: function () {
+            if (!ctx || !introBus) return;
+            var t = ctx.currentTime, bus = introBus;
+            bus.gain.setValueAtTime(bus.gain.value, t);
+            bus.gain.linearRampToValueAtTime(0, t + 0.12);
+            setTimeout(function () { bus.disconnect(); }, 400);
+            introBus = null;
+            if (on) whoosh(master, t + 0.02, 0.45, 1800, 300, 0.25);      // panels split away
+          },
+          stamp: function () {
+            if (!ready()) return;
+            var t = ctx.currentTime + 0.02;
+            whoosh(master, t, 0.3, 900, 250, 0.18);                        // seal drops
+            thud(master, t + 0.31, 1);                                      // seal lands
+            bell(master, t + 0.42, 1319, 0.14, 0.9);                        // crown "ting"
+            bell(master, t + 0.5, 1760, 0.09, 0.8);
+          }
+        };
+      })();
+
+      function syncSoundBtn() {
+        var b = byId("soundBtn");
+        b.setAttribute("aria-pressed", Sound.isOn() ? "true" : "false");
+        byId("soundLabel").textContent = Sound.isOn() ? "Sound on" : "Sound off";
+      }
+      byId("soundBtn").addEventListener("click", function () { Sound.set(!Sound.isOn()); syncSoundBtn(); });
+      syncSoundBtn();
+
+      // ---- after a successful Calculate: "ROUND n SETTLED" stamp + crown on the round's winner ----
+      var reduceMotion = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      function settleFx(roundResult, roundNo) {
+        Array.prototype.forEach.call(document.querySelectorAll(".stamp, .crown"), function (x) { x.remove(); });
+        Sound.stamp();
+
+        var stamp = el("div", { className: "stamp", role: "status" }, [
+          el("small", { text: "ROUND " + roundNo }),
+          el("b", { text: "SETTLED" })
+        ]);
+        document.body.appendChild(stamp);
+        var canAnimate = typeof stamp.animate === "function";
+
+        var best = Math.max.apply(null, roundResult);
+        var winner = best > 0 ? roundResult.indexOf(best) : -1;
+
+        if (canAnimate && !reduceMotion) {
+          stamp.animate([
+            { opacity: 0, transform: "translate(-50%, -50%) scale(2.2) rotate(-8deg)" },
+            { opacity: 1, transform: "translate(-50%, -50%) scale(0.96) rotate(-3deg)", offset: 0.55 },
+            { opacity: 1, transform: "translate(-50%, -50%) scale(1) rotate(-3deg)" }
+          ], { duration: 380, easing: "cubic-bezier(0.3, 1.4, 0.5, 1)", fill: "forwards" });
+        } else if (canAnimate) {
+          stamp.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200, fill: "forwards" });
+        }
+
+        setTimeout(function () {
+          if (canAnimate && !reduceMotion) {
+            document.querySelector(".entry").animate([
+              { transform: "translate(0, 0)" }, { transform: "translate(-3px, 2px)" },
+              { transform: "translate(2px, -2px)" }, { transform: "translate(0, 0)" }
+            ], { duration: 220 });
+          }
+          if (winner >= 0 && byId("seat-" + winner)) {
+            var crown = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+            crown.setAttribute("class", "crown");
+            crown.setAttribute("viewBox", "0 0 24 24");
+            crown.setAttribute("aria-hidden", "true");
+            var use = document.createElementNS("http://www.w3.org/2000/svg", "use");
+            use.setAttribute("href", "#crown");
+            crown.appendChild(use);
+            byId("seat-" + winner).appendChild(crown);
+            if (canAnimate) {
+              crown.animate(reduceMotion
+                ? [{ opacity: 0 }, { opacity: 1 }]
+                : [{ opacity: 0, transform: "translateY(-26px) rotate(-15deg)" }, { opacity: 1, transform: "translateY(0) rotate(0)" }],
+                { duration: 380, easing: "cubic-bezier(0.3, 1.5, 0.5, 1)", fill: "both" });
+            }
+            setTimeout(function () {
+              if (canAnimate) crown.animate([{ opacity: 1 }, { opacity: 0 }], { duration: 400, fill: "forwards" }).onfinish = function () { crown.remove(); };
+              else crown.remove();
+            }, 1900);
+          }
+        }, 330);
+
+        setTimeout(function () {
+          if (canAnimate) {
+            stamp.animate([{ opacity: 1 }, { opacity: 0, transform: "translate(-50%, -50%) scale(1.06) rotate(-3deg)" }], { duration: 300, fill: "forwards" })
+              .onfinish = function () { stamp.remove(); };
+          } else {
+            stamp.remove();
+          }
+        }, 1100);
+      }
+      var SUITS = [
+        { key: "sekop", sym: "♠", red: false },
+        { key: "hati", sym: "♥", red: true },
+        { key: "keriting", sym: "♣", red: false },
+        { key: "diamond", sym: "♦", red: true }
+      ];
+      var FINISHES = [
+        { key: "endthrice2", label: "Three 2s" },
+        { key: "endper2", label: "Pair of 2s" },
+        { key: "end2", label: "Single 2" }
+      ];
+      var ALL_FLAGS = ["sekop", "hati", "keriting", "diamond", "endper2", "end2", "endthrice2"];
+
+      function el(tag, attrs, children) {
+        var node = document.createElement(tag);
+        if (attrs) {
+          for (var k in attrs) {
+            if (k === "text") node.textContent = attrs[k];
+            else if (k === "className") node.className = attrs[k];
+            else node.setAttribute(k, attrs[k]);
+          }
+        }
+        (children || []).forEach(function (c) { node.appendChild(c); });
+        return node;
+      }
+
+      function fmt(v) {
+        if (v > 0) return "+" + v;
+        if (v < 0) return "−" + Math.abs(v);
+        return "0";
+      }
+      function tone(v) { return v > 0 ? "up" : v < 0 ? "down" : "even"; }
+
+      function startGame(numOfPlayers, arrName) {
         var gameCount = -1;
-
-        var arrName = [player1, player2, player3, player4];
-        $("#numPlay").html(numOfPlayers + " Players Big Two");
-        for (let i = 0; i < numOfPlayers; i++) {
-          $("#playerName").append("<th span='col'>" + arrName[i] + "</th>");
-          $("#playerList").append(
-            `
-      <div class="col-xl-3 col-md-4 col-sm-6 pb-md-0 p-3">
-          <div class="card m-auto" >
-            <div class="card-body">
-              <div class="card-title">
-                <span class="pr-2"id="player-` +
-              i +
-              `">` +
-              arrName[i] +
-              `</span>
-                <button id="win-` +
-              i +
-              `"class=" btn btn-success">Win</button>
-              </div>
-              <div id="playerlose-` +
-              i +
-              `">
-                <div class="form-group row">
-                  <label for="player0" class="col-sm-7 col-form-label">Remain:</label>
-                  <div class="col-sm-5">
-                    <input type="number" class="form-control" id="player` +
-              i +
-              `" placeholder="0">
-                  </div>
-                </div>
-                <div class="form-check mb-1">
-                  <input type="checkbox" class="form-check-input" id="p` +
-              i +
-              `-sekop">
-                  <label class="pl-1 form-check-label row" for="exampleCheck1">
-                  <p class="col-1 mb-0 font-weight-bold">2</p>
-                  <img class="col-1 p-0" width="10%" src="img/spade.svg">
-                  </label>
-                </div>
-                <div class="form-check mb-1">
-                  <input type="checkbox" class="form-check-input" id="p` +
-              i +
-              `-hati">
-                  <label class="pl-1 form-check-label row" for="exampleCheck1">
-                    <p class="col-1 mb-0 font-weight-bold">2</p>
-                  <img class="col-1 p-0" width="10%" src="img/heart.svg">
-                  </label>
-                </div>
-                <div class="form-check mb-1">
-                  <input type="checkbox" class="form-check-input" id="p` +
-              i +
-              `-keriting">
-                  <label class="pl-1 form-check-label row" for="exampleCheck1">
-                    <p class="col-1 mb-0 font-weight-bold">2</p>
-                  <img class="col-1 p-0" width="10%" src="img/keriting.svg"></label>
-                </div>
-                <div class="form-check mb-1">
-                  <input type="checkbox" class="form-check-input" id="p` +
-              i +
-              `-diamond">
-                  <label class="pl-1 form-check-label row" for="exampleCheck1">
-                    <p class=" col-1 mb-0 font-weight-bold">2</p>
-                  <img class="col-1 p-0" width="10%" src="img/diamond.svg">
-                  </label>
-                </div>
-              </div>
-              <div class="d-none" id="playerwin-` +
-              i +
-              `">
-                <div class="form-check mb-1">
-                  <input type="checkbox" class="form-check-input" id="p` +
-              i +
-              `-endthrice2">
-                  <label class="form-check-label" for="exampleCheck1">Selesai dengan three 2</label>
-                </div>
-                <div class="form-check mb-1">
-                  <input type="checkbox" class="form-check-input" id="p` +
-              i +
-              `-endper2">
-                  <label class="form-check-label" for="exampleCheck1">Selesai pakai per 2</label>
-                </div>
-                <div class="form-check mb-1">
-                  <input type="checkbox" class="form-check-input" id="p` +
-              i +
-              `-end2">
-                  <label class="form-check-label" for="exampleCheck1">Selesai dengan 2</label>
-                </div>
-              </div>
-              <div id="result-` +
-              i +
-              `">
-              </div>
-            </div>
-          </div>
-        </div>`
-          );
-        }
-
         var history = [];
-        var historyUndo =[];
-        var boostHistory=[];
-        var boostHistoryUndo='';
+        var historyUndo = [];
+        var boostHistory = [];
+        var boostHistoryUndo = "";
+        var person = [{}, {}, {}, {}];
 
-        var person = [
-          {
-            name: player1,
-            pay: [],
-          },
-          {
-            name: player2,
-            pay: [],
-          },
-          {
-            name: player3,
-            pay: [],
-          },
-          {
-            name: player4,
-            pay: [],
-          },
-        ];
+        document.documentElement.style.setProperty("--n", numOfPlayers);
+        byId("numPlay").textContent = numOfPlayers + " players";
 
-        function getId(i) {
-          return "#player" + i;
+        for (var i = 0; i < numOfPlayers; i++) {
+          byId("playerName").appendChild(el("th", { scope: "col", text: arrName[i] }));
+          byId("playerList").appendChild(buildSeat(i, arrName[i]));
         }
-        function getIdCheck(lambang, num) {
-          return "#p" + num + "-" + lambang;
+
+        function buildSeat(i, name) {
+          var toggle = el("button", { type: "button", className: "win-toggle", id: "win-" + i, text: "Mark winner" });
+          var minus = el("button", { type: "button", "aria-label": "One card fewer for " + name, text: "−" });
+          var input = el("input", { type: "number", id: "player" + i, min: "0", inputmode: "numeric", placeholder: "0", "aria-label": "Cards left for " + name });
+          var plus = el("button", { type: "button", "aria-label": "One card more for " + name, text: "+" });
+          minus.addEventListener("click", function () {
+            var v = (parseInt(input.value, 10) || 0) - 1;
+            input.value = v > 0 ? v : "";
+          });
+          plus.addEventListener("click", function () {
+            input.value = (parseInt(input.value, 10) || 0) + 1;
+          });
+
+          var suitChips = SUITS.map(function (s) {
+            return el("label", { className: "chip" + (s.red ? " red" : "") }, [
+              el("input", { type: "checkbox", id: "p" + i + "-" + s.key, "aria-label": name + " holds the 2 of " + s.key }),
+              el("span", { text: "2" + s.sym })
+            ]);
+          });
+          var finishChips = FINISHES.map(function (f) {
+            return el("label", { className: "chip word" }, [
+              el("input", { type: "checkbox", id: "p" + i + "-" + f.key }),
+              el("span", { text: f.label })
+            ]);
+          });
+
+          var lose = el("div", { className: "lose", id: "playerlose-" + i }, [
+            el("div", { className: "stepper" }, [minus, input, plus]),
+            el("p", { className: "mini", text: "2s still in hand" }),
+            el("div", { className: "chips" }, suitChips)
+          ]);
+          var win = el("div", { className: "win", id: "playerwin-" + i, hidden: "" }, [
+            el("p", { className: "mini", text: "Finished with" }),
+            el("div", { className: "chips three" }, finishChips)
+          ]);
+          var seat = el("div", { className: "seat", id: "seat-" + i }, [
+            el("div", { className: "seat-top" }, [el("span", { className: "seat-name", text: name }), toggle]),
+            lose, win
+          ]);
+          toggle.addEventListener("click", function () { showWinner(i, lose.hidden === false); });
+          return seat;
         }
+
+        function showWinner(i, isWinner) {
+          byId("playerlose-" + i).hidden = isWinner;
+          byId("playerwin-" + i).hidden = !isWinner;
+          byId("seat-" + i).classList.toggle("is-winner", isWinner);
+          byId("win-" + i).textContent = isWinner ? "WINNER" : "Mark winner";
+          byId("win-" + i).setAttribute("aria-pressed", isWinner ? "true" : "false");
+        }
+
+        function getId(i) { return "player" + i; }
+        function getIdCheck(lambang, num) { return "p" + num + "-" + lambang; }
+        function isChecked(lambang, num) { return byId(getIdCheck(lambang, num)).checked; }
+
         function getExtra(obj) {
-          val = 0;
+          var val = 0;
           val = obj.sekop ? val + 10 : val;
           val = obj.hati ? val + 5 : val;
           val = obj.keriting ? val + 5 : val;
@@ -249,9 +803,6 @@
           val = obj.end2 ? val - 10 : val;
           val = obj.endthrice2 ? val - 50 : val;
           return val;
-        }
-        function printOut(lose, winner, value) {
-          return lose + " bayar ke " + winner + " " + value;
         }
 
         function getRealValue(num) {
@@ -273,148 +824,91 @@
           }
         }
 
-        // $('#history').click(function(){
-        //   console.log(history.length);
-        //   for (let x=0; x<history.length;x++){
-        //     if (x==0){
-        //       $('#scoreBoard').append("<h3>Game"+(history[x][0]+1)+"</h3>");
-        //     }
-        //     else{
-        //       if (!history[x-1][0]==history[x][0]){
-        //         $('#scoreBoard').append("<h3>Game"+(history[x][0]+1)+"</h3>");
-        //       }
-        //     }
-
-        //     $('#scoreBoard').append("<span><b>"+printOut(history[x][1],history[x][2],history[x][3]+"</b></span><br>"));
-        //   }
-        // });
-
-        $("#reset").click(function () {
-          var list = [
-            "sekop",
-            "hati",
-            "keriting",
-            "diamond",
-            "endper2",
-            "end2",
-            "endthrice2",
-          ];
-          $("#playerList").addClass("d-flex");
-          $("#playerList").removeClass("d-none");
-          // $('#scoreBoard').addClass('d-none');
-          for (let i = 0; i < numOfPlayers; i++) {
-            for (l of list) {
-              $(getIdCheck(l, i)).prop("checked", false);
-            }
-            $(getId(i)).val("");
-            $("#playerlose-" + i).removeClass("d-none");
-            $("#playerwin-" + i).addClass("d-none");
-            $("#result-" + i).empty();
-            // person[i].pay=[]
-            $("#tableContent").html("");
-          }
-        });
-
-        $("#undo").click(function () {
-          if (history.length > 0) {
-            historyUndo=history[history.length-1]
-            boostHistoryUndo=boostHistory[boostHistory.length-1]
-            history.pop();
-            boostHistory.pop()
-            gameCount = gameCount - 1;
-            printTable();
-            $("#redo").removeClass('disabled')
-          }
-        });
-
-
-        $("#redo").click(function (){
-          if (historyUndo.length > 0){
-            history.push(historyUndo)
-            boostHistory.push(boostHistoryUndo)
-            historyUndo=[]
-            boostHistoryUndo=''
-            printTable()
-            $("#redo").addClass('disabled')
-
-          }
-        })
-
         function clearInput() {
-          var list = [
-            "sekop",
-            "hati",
-            "keriting",
-            "diamond",
-            "endper2",
-            "end2",
-            "endthrice2",
-          ];
-          for (let i = 0; i < numOfPlayers; i++) {
-            for (l of list) {
-              $(getIdCheck(l, i)).prop("checked", false);
-            }
-            $(getId(i)).val("");
-            $("#playerlose-" + i).removeClass("d-none");
-            $("#playerwin-" + i).addClass("d-none");
+          for (var i = 0; i < numOfPlayers; i++) {
+            ALL_FLAGS.forEach(function (l) { byId(getIdCheck(l, i)).checked = false; });
+            byId(getId(i)).value = "";
+            showWinner(i, false);
           }
-          //$('#boost').val(1)
-          //boost stays forever
+          // boost stays forever
         }
-        $("#newRound").click(function () {
-          clearInput();
-        });
 
         function printTable() {
-          var content = "";
-          $("#tableContent").html("");
-          for (let j = 0; j < history.length; j++) {
-            var mul=''
-            $("#tableContent").append(`<tr>`);
-              if (boostHistory[j]!=='1'){
-                mul = 'x'+boostHistory[j]
-              }
-            $("#tableContent").append(`<th scope="row">` + (j + 1) +`<span class="text-primary pl-2">`+ mul+`</span>` +`</th>`);
-            for (let i = 0; i < numOfPlayers; i++) {
-              $("#tableContent").append("<td>" + history[j][i] + "</td>");
+          var body = byId("tableContent");
+          body.textContent = "";
+          for (var j = 0; j < history.length; j++) {
+            var tr = el("tr");
+            var first = el("td", { text: String(j + 1) });
+            if (boostHistory[j] !== "1") first.appendChild(el("span", { className: "mult-tag", text: "×" + boostHistory[j] }));
+            tr.appendChild(first);
+            for (var i = 0; i < numOfPlayers; i++) {
+              tr.appendChild(el("td", { className: tone(history[j][i]), text: fmt(history[j][i]) }));
             }
-            $("#tableContent").append("</tr>");
+            body.appendChild(tr);
           }
 
           var total = [0, 0, 0, 0];
-          for (let j = 0; j < history.length; j++) {
-            for (let i = 0; i < numOfPlayers; i++) {
-              total[i] = total[i] + history[j][i];
+          for (var j2 = 0; j2 < history.length; j2++) {
+            for (var i2 = 0; i2 < numOfPlayers; i2++) {
+              total[i2] = total[i2] + history[j2][i2];
             }
           }
-          $("#tableTotal").html("");
-          var contentTotal = "";
-          contentTotal = contentTotal + `<tr><th scope="row">Total</th>`;
-          for (let i = 0; i < numOfPlayers; i++) {
-            contentTotal = contentTotal + "<td>" + total[i] + "</td>";
-          }
-          contentTotal = contentTotal + "</tr>";
-          $("#tableTotal").append(contentTotal);
-        }
-        $("#hitung").click(function () {
-          var getWinnerIndex;
-          var harga = $("#harga-per-mata").val();
-          var winnerFound = false;
-          for (let i = 0; i < numOfPlayers; i++) {
-            console.log("");
-            person[i].sisa = $(getId(i)).val();
-            person[i].sekop = $(getIdCheck("sekop", i)).is(":checked");
-            person[i].hati = $(getIdCheck("hati", i)).is(":checked");
-            person[i].keriting = $(getIdCheck("keriting", i)).is(":checked");
-            person[i].diamond = $(getIdCheck("diamond", i)).is(":checked");
-            person[i].endthrice2 = $(getIdCheck("endthrice2", i)).is(
-              ":checked"
-            );
-            person[i].endper2 = $(getIdCheck("endper2", i)).is(":checked");
-            person[i].end2 = $(getIdCheck("end2", i)).is(":checked");
 
-            person[i].value =
-              getRealValue(person[i].sisa) + getExtra(person[i]);
+          var foot = byId("tableTotal");
+          foot.textContent = "";
+          var row = el("tr", null, [el("td", { text: "Total" })]);
+          for (var i3 = 0; i3 < numOfPlayers; i3++) {
+            row.appendChild(el("td", { className: tone(total[i3]), text: fmt(total[i3]) }));
+          }
+          foot.appendChild(row);
+          foot.hidden = history.length === 0;
+          byId("emptySheet").hidden = history.length > 0;
+
+          var best = Math.max.apply(null, total.slice(0, numOfPlayers));
+          var tiles = byId("standings");
+          tiles.textContent = "";
+          for (var i4 = 0; i4 < numOfPlayers; i4++) {
+            var lead = history.length > 0 && best > 0 && total[i4] === best;
+            tiles.appendChild(el("div", { className: "tile" + (lead ? " lead" : "") }, [
+              el("span", { className: "tile-name", text: arrName[i4] }),
+              el("span", { className: "tile-total " + tone(total[i4]), text: fmt(total[i4]) })
+            ]));
+          }
+          byId("roundLabel").textContent = "Round " + (history.length + 1) + " — cards left";
+        }
+
+        byId("newRound").addEventListener("click", function () { clearInput(); });
+
+        byId("undo").addEventListener("click", function () {
+          if (history.length > 0) {
+            historyUndo = history[history.length - 1];
+            boostHistoryUndo = boostHistory[boostHistory.length - 1];
+            history.pop();
+            boostHistory.pop();
+            gameCount = gameCount - 1;
+            printTable();
+            byId("redo").disabled = false;
+          }
+        });
+
+        byId("redo").addEventListener("click", function () {
+          if (historyUndo.length > 0) {
+            history.push(historyUndo);
+            boostHistory.push(boostHistoryUndo);
+            historyUndo = [];
+            boostHistoryUndo = "";
+            printTable();
+            byId("redo").disabled = true;
+          }
+        });
+
+        byId("hitung").addEventListener("click", function () {
+          var winnerFound = false;
+          for (var i = 0; i < numOfPlayers; i++) {
+            person[i].name = arrName[i];
+            person[i].sisa = byId(getId(i)).value;
+            ALL_FLAGS.forEach(function (l) { person[i][l] = isChecked(l, i); });
+            person[i].value = getRealValue(person[i].sisa) + getExtra(person[i]);
 
             if (person[i].value < 1) {
               if (winnerFound) {
@@ -426,132 +920,111 @@
             }
           }
           gameCount = gameCount + 1;
-          temp = [];
-          for (let i = 0; i < numOfPlayers; i++) {
-            var first = person[i].value;
-
-            for (let l = i + 1; l < numOfPlayers; l++) {
-              var second = person[l].value;
+          var temp = [];
+          for (var a = 0; a < numOfPlayers; a++) {
+            var first = person[a].value;
+            for (var b = a + 1; b < numOfPlayers; b++) {
+              var second = person[b].value;
               if (first > second) {
-                temp.push([i, l, first - second]);
-
-                // person[i].pay.push([l,(first-second)*harga]);
-                // history.push([gameCount,person[l].name,person[i].name,(first-second)*harga])
-                // $("#result-"+i).append("<span><b>"+printOut(person[i].name,person[l].name,(first-second)*harga)+"</b></span><br>");
+                temp.push([a, b, first - second]);
               } else if (first < second) {
-                temp.push([l, i, second - first]);
-
-                // person[l].pay.push([i,(second-first)*harga]);
-                // history.push([gameCount,person[i].name,person[l].name,(first-second)*harga])
-                // $("#result-"+l).append("<span><b>"+printOut(person[l].name,person[i].name,(second-first)*harga)+"</b></span><br>");
+                temp.push([b, a, second - first]);
               }
             }
           }
-          result = [0, 0, 0, 0];
-          for (x of temp) {
+          var result = [0, 0, 0, 0];
+          temp.forEach(function (x) {
             var kalah = x[0];
             var menang = x[1];
-            var harga = x[2];
             result[kalah] = result[kalah] - x[2];
             result[menang] = result[menang] + x[2];
-          }
-          var multiplicationValue=$('#boost').val()
-          result.map((value,index)=>{
-            result[index]=value*multiplicationValue
-          })
-          console.log(result)
+          });
+          var multiplicationValue = byId("boost").value;
+          result = result.map(function (value) { return value * multiplicationValue; });
           history.push(result);
-          console.log(multiplicationValue)
-          boostHistory.push(multiplicationValue)
+          boostHistory.push(multiplicationValue);
           printTable();
           clearInput();
+          settleFx(result.slice(0, numOfPlayers), history.length);
         });
 
-        $("#win-0").click(function () {
-          $("#playerlose-0").addClass("d-none");
-          $("#playerwin-0").removeClass("d-none");
-        });
-
-        $("#win-1").click(function () {
-          $("#playerlose-1").addClass("d-none");
-          $("#playerwin-1").removeClass("d-none");
-        });
-        $("#win-2").click(function () {
-          $("#playerlose-2").addClass("d-none");
-          $("#playerwin-2").removeClass("d-none");
-        });
-        $("#win-3").click(function () {
-          $("#playerlose-3").addClass("d-none");
-          $("#playerwin-3").removeClass("d-none");
-        });
+        printTable();
       }
 
-    function showGame(num, p1, p2, p3, p4) {
-      $("#setup-view").addClass("d-none");
-      $("#play-view").removeClass("d-none");
-      document.title = "Big Two";
-      window.onbeforeunload = function (e) {
-        return "Sure you want to leave?";
-      };
-      startGame(num, p1, p2, p3, p4);
-    }
-
-    function openGame(num, players) {
-      const params = new URLSearchParams({ num: num });
-      for (let i = 0; i < num; i++) {
-        params.set("player" + (i + 1), players[i]);
+      // ---- level multiplier (custom value allowed) ----
+      var boost = byId("boost");
+      function syncLevel() {
+        var matched = false;
+        Array.prototype.forEach.call(document.querySelectorAll(".lvl"), function (b) {
+          var on = b.getAttribute("data-level") === boost.value;
+          if (on) matched = true;
+          b.setAttribute("aria-pressed", on ? "true" : "false");
+        });
+        byId("customWrap").classList.toggle("on", !matched);
       }
-      history.replaceState(null, "", "?" + params.toString());
-      showGame(num, players[0], players[1], players[2], players[3]);
-    }
+      Array.prototype.forEach.call(document.querySelectorAll(".lvl"), function (b) {
+        b.addEventListener("click", function () { boost.value = b.getAttribute("data-level"); syncLevel(); });
+      });
+      boost.addEventListener("input", syncLevel);
+      syncLevel();
 
-    $(document).ready(function () {
-      const urlParams = new URLSearchParams(window.location.search);
+      // ---- screens ----
+      function showGame(num, names) {
+        byId("setup-view").hidden = true;
+        byId("play-view").hidden = false;
+        document.title = "Big Two";
+        window.onbeforeunload = function () { return "Sure you want to leave?"; };
+        startGame(num, names);
+      }
+
+      function openGame(num, players) {
+        var params = new URLSearchParams({ num: num });
+        for (var i = 0; i < num; i++) params.set("player" + (i + 1), players[i]);
+        try {
+          history.replaceState(null, "", "?" + params.toString());
+        } catch (err) {
+          // Opened straight from a file (file://): the browser refuses to change the
+          // address, so a refresh won't keep the players — but the game still starts.
+        }
+        showGame(num, players);
+        playIntro(players.slice(0, num));
+      }
+
+      var urlParams = new URLSearchParams(window.location.search);
       if (urlParams.get("num")) {
-        showGame(
-          parseInt(urlParams.get("num"), 10),
-          urlParams.get("player1"),
-          urlParams.get("player2"),
-          urlParams.get("player3"),
-          urlParams.get("player4")
-        );
+        showGame(parseInt(urlParams.get("num"), 10), [
+          urlParams.get("player1"), urlParams.get("player2"),
+          urlParams.get("player3"), urlParams.get("player4")
+        ]);
       }
-    });
 
-    $("#newGame").click(function (e) {
-      e.preventDefault();
-      location.href = location.pathname;
-    });
+      byId("newGame").addEventListener("click", function (e) {
+        e.preventDefault();
+        location.href = location.pathname;
+      });
 
-    $("#mulai").click(function(){
-      const p1=$("#p1-name").val();
-      const p2=$("#p2-name").val();
-      const p3=$("#p3-name").val();
-      const p4=$("#p4-name").val();
-      if (p1==""|| p2==""){
-        alert("You have to fill in the first and second player");
-      }
-      else if (p3==""&&p4==""){
-        openGame(2, [p1, p2]);
-      }
-      else if (!p3==""&&p4==""){
-        openGame(3, [p1, p2, p3]);
-      }
-      else{
-        openGame(4, [p1, p2, p3, p4]);
-      }
-    });
+      byId("mulai").addEventListener("click", function () {
+        var p1 = byId("p1-name").value;
+        var p2 = byId("p2-name").value;
+        var p3 = byId("p3-name").value;
+        var p4 = byId("p4-name").value;
+        if (p1 == "" || p2 == "") {
+          alert("You have to fill in the first and second player");
+        } else if (p3 == "" && p4 == "") {
+          openGame(2, [p1, p2]);
+        } else if (!p3 == "" && p4 == "") {
+          openGame(3, [p1, p2, p3]);
+        } else {
+          openGame(4, [p1, p2, p3, p4]);
+        }
+      });
 
-    $("#resetNames").click(function(){
-      $("#p1-name").val('');
-      $("#p2-name").val('');
-      $("#p3-name").val('');
-      $("#p3-name").val('');
-      
-    });
+      byId("names-form").addEventListener("submit", function (e) { e.preventDefault(); byId("mulai").click(); });
+
+      byId("resetNames").addEventListener("click", function () {
+        ["p1-name", "p2-name", "p3-name", "p4-name"].forEach(function (id) { byId(id).value = ""; });
+      });
+    })();
   </script>
-  
- 
 </body>
-
 </html>
