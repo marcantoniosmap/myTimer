@@ -118,6 +118,87 @@
     }
     @media (max-width: 480px) { .sound-btn span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); } .sound-btn { width: 46px; justify-content: center; padding: 0; } }
 
+    /* ---------- settle up (end of the evening) ---------- */
+    .settle-btn { display: flex; align-items: center; gap: 8px; height: 46px; padding: 0 14px; border-radius: 8px; border: 1px solid var(--gold); background: var(--gold); color: var(--on-gold); font-family: var(--sans); font-size: 15px; font-weight: 700; white-space: nowrap; }
+    .settle-btn svg { width: 20px; height: 20px; }
+    .sx-scrim { position: fixed; inset: 0; z-index: 30; background: rgba(3, 15, 11, 0.72); display: flex; align-items: center; justify-content: center; padding: 16px; }
+    .sx-sheet { width: 100%; max-width: 760px; max-height: calc(100vh - 32px); max-height: calc(100dvh - 32px); overflow-y: auto; background: var(--felt); border: 1px solid var(--line); border-radius: 16px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6); }
+    .sx-head { position: sticky; top: 0; z-index: 1; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; padding: 16px 20px; background: var(--felt-dark); border-bottom: 1px solid var(--line); }
+    .sx-head h2 { margin: 0; font-family: var(--serif); font-size: 22px; letter-spacing: 3px; color: var(--gold-text); }
+    .sx-steps { display: flex; gap: 6px; font-family: var(--sans); font-size: 13px; color: var(--muted); }
+    .sx-steps span { padding: 4px 10px; border-radius: 999px; border: 1px solid var(--line); }
+    .sx-steps span.on { border-color: var(--gold); color: var(--gold-text); }
+    .sx-body { padding: 20px; display: flex; flex-direction: column; gap: 18px; }
+    .sx-q { font-family: var(--serif); font-size: 22px; margin: 0; }
+    .sx-q small { display: block; font-family: var(--sans); font-size: 15px; color: var(--muted); font-weight: 400; margin-top: 4px; }
+    .sx-presets { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+    .sx-preset { height: 60px; border-radius: 10px; border: 1px solid var(--gold-line); background: transparent; color: var(--gold-text); font-family: var(--serif); font-size: 20px; font-weight: 700; }
+    .sx-preset[aria-pressed="true"] { background: var(--gold); border-color: var(--gold); color: var(--on-gold); }
+    .sx-custom { display: flex; align-items: center; height: 64px; border-radius: 10px; background: var(--cream); color: var(--ink); border: 2px solid var(--cream-line); overflow: hidden; }
+    .sx-custom:focus-within { border-color: var(--gold); }
+    .sx-custom input { flex: 1; min-width: 0; height: 100%; border: 0; background: transparent; color: var(--ink); font-family: var(--serif); font-size: 28px; font-weight: 700; padding: 0 16px; outline: none; }
+    .sx-custom input::placeholder { color: #A9A08B; font-weight: 400; }
+    .sx-custom em { font-style: normal; padding: 0 16px; font-family: var(--sans); font-size: 15px; color: var(--ink-soft); white-space: nowrap; }
+    .sx-preview { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; }
+    .sx-prow { display: grid; grid-template-columns: 1fr auto auto; gap: 14px; align-items: baseline; padding: 12px 16px; border-bottom: 1px solid var(--line-soft); font-variant-numeric: tabular-nums; }
+    .sx-prow:last-child { border-bottom: 0; }
+    .sx-prow .nm { font-family: var(--sans); font-size: 18px; color: var(--text-soft); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .sx-prow .pt { font-family: var(--sans); font-size: 15px; color: var(--muted); }
+    .sx-prow .rp { font-family: var(--serif); font-size: 20px; font-weight: 700; min-width: 160px; text-align: right; }
+    .sx-foot { display: flex; justify-content: flex-end; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .sx-copied { font-family: var(--sans); font-size: 14px; color: var(--gold-text); }
+    .sx-receipt { background: var(--cream); color: var(--ink); border-radius: 14px; padding: 22px 22px 18px; box-shadow: 0 4px 0 #08241C; font-family: var(--sans); }
+    .sx-r-head { display: flex; align-items: center; gap: 14px; padding-bottom: 14px; border-bottom: 2px dashed var(--cream-line); }
+    .sx-r-head svg { width: 52px; height: 52px; flex-shrink: 0; }
+    .sx-r-title { font-family: var(--serif); font-size: 22px; font-weight: 800; letter-spacing: 3px; margin: 0; }
+    .sx-r-meta { font-size: 14px; color: var(--ink-soft); margin: 2px 0 0; }
+    .sx-r-section { padding-top: 14px; }
+    .sx-r-section h3 { margin: 0 0 8px; font-size: 12px; letter-spacing: 2px; color: var(--ink-soft); font-weight: 700; }
+    .sx-r-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    .sx-r-table td { padding: 8px 0; border-bottom: 1px solid #E3DCCB; font-size: 17px; text-align: left; color: var(--ink); }
+    .sx-r-table td:first-child { color: var(--ink); white-space: normal; }
+    .sx-r-table td:nth-child(2) { text-align: right; color: var(--ink-soft); font-size: 15px; padding-right: 14px; }
+    .sx-r-table td:last-child { text-align: right; font-family: var(--serif); font-weight: 700; }
+    .sx-r-table .pos { color: #1F6B43; } .sx-r-table .neg { color: var(--red-suit); }
+    .sx-transfers { display: flex; flex-direction: column; gap: 8px; }
+    .sx-even { margin: 0; padding: 12px 0; font-size: 16px; color: var(--ink-soft); }
+    .sx-tf, .sx-tf-head { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr) auto; align-items: center; gap: 10px; }
+    .sx-tf-head { padding: 0 14px 2px; font-size: 12px; letter-spacing: 1px; color: var(--ink-soft); }
+    .sx-tf { padding: 12px 14px; border-radius: 10px; background: #FFFFFF; border: 1px solid var(--cream-line); }
+    .sx-tf .from { font-weight: 700; font-size: 18px; color: var(--red-suit); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .sx-tf .to { font-weight: 700; font-size: 18px; color: #1F6B43; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .sx-tf .arrow { width: 34px; height: 20px; color: var(--gold-dark); }
+    .sx-tf .pay { display: flex; align-items: center; gap: 12px; }
+    .sx-tf .amt { font-family: var(--serif); font-weight: 800; font-size: 19px; white-space: nowrap; }
+    .sx-tf .check { width: 44px; height: 44px; border-radius: 50%; border: 2px solid var(--cream-line); background: #FFFFFF; display: flex; align-items: center; justify-content: center; color: transparent; flex-shrink: 0; }
+    .sx-tf.paid { opacity: 0.55; }
+    .sx-tf.paid .check { background: var(--felt); border-color: var(--felt); color: var(--cream); }
+    .sx-tf.paid .amt { text-decoration: line-through; }
+    .sx-r-foot { padding-top: 14px; font-size: 13px; color: var(--ink-soft); text-align: center; margin: 0; }
+    .sx-choice { display: flex; flex-direction: column; align-items: flex-start; gap: 4px; width: 100%; padding: 18px 20px; border-radius: 12px; border: 1px solid var(--gold-line); background: var(--felt-tile); color: var(--text); text-align: left; }
+    .sx-choice b { font-family: var(--serif); font-size: 21px; color: var(--gold-text); }
+    .sx-choice span { font-family: var(--sans); font-size: 15px; color: var(--muted); }
+    .sx-choice:first-of-type { border-color: var(--gold); box-shadow: inset 0 0 0 1px var(--gold); }
+    @media (max-width: 600px) {
+      .settle-btn span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+      .settle-btn { width: 46px; padding: 0; justify-content: center; }
+      .sx-scrim { padding: 0; align-items: flex-end; }
+      .sx-sheet { border-radius: 16px 16px 0 0; max-height: 94vh; max-height: 94dvh; }
+      .sx-body { padding: 16px; padding-bottom: max(16px, env(safe-area-inset-bottom)); }
+      .sx-prow { grid-template-columns: 1fr auto; }
+      .sx-prow .pt { display: none; }
+      .sx-prow .rp { min-width: 0; font-size: 18px; }
+      .sx-receipt { padding: 18px 16px 14px; }
+      .sx-tf-head { display: none; }
+      .sx-tf { grid-template-columns: minmax(0, 1fr) auto; row-gap: 2px; }
+      .sx-tf .from { grid-column: 1; grid-row: 1; }
+      .sx-tf .from::after { content: "  pays ↓"; font-weight: 400; font-size: 13px; color: var(--ink-soft); }
+      .sx-tf .to { grid-column: 1; grid-row: 2; }
+      .sx-tf .arrow { display: none; }
+      .sx-tf .pay { grid-column: 2; grid-row: 1 / span 2; flex-direction: column; align-items: flex-end; gap: 6px; }
+      .sx-foot > .btn-ghost, .sx-foot > .btn-gold { flex: 1 1 100%; }
+    }
+
     /* ---------- "round settled" stamp after Calculate ---------- */
     .seat { position: relative; }
     .stamp { position: fixed; left: 50%; top: 46%; z-index: 40; pointer-events: none; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 14px 34px 16px; border: 3px double var(--gold); border-radius: 14px; background: rgba(6, 31, 24, 0.94); box-shadow: 0 14px 40px rgba(0, 0, 0, 0.55); transform: translate(-50%, -50%); }
@@ -366,6 +447,10 @@
         </div>
       </div>
       <div class="bar-actions">
+        <button type="button" class="settle-btn" id="openSettle">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 9v.01M18 15v.01"/></svg>
+          <span>Settle up</span>
+        </button>
         <button type="button" class="sound-btn" id="soundBtn" aria-pressed="true">
           <svg viewBox="0 0 24 24" aria-hidden="true"><path class="spk" d="M4 9h4l5-4v14l-5-4H4z"/><path class="wave" d="M16 8.5a5 5 0 0 1 0 7M18.5 6a8.5 8.5 0 0 1 0 12"/><path class="mute" d="M16.5 9.5l5 5m0-5l-5 5"/></svg>
           <span id="soundLabel">Sound on</span>
@@ -415,6 +500,77 @@
         <button type="button" id="hitung" class="btn-gold">CALCULATE</button>
       </div>
     </footer>
+  </div>
+
+  <div class="sx-scrim" id="settle" hidden>
+    <div class="sx-sheet" role="dialog" aria-modal="true" aria-labelledby="sxTitle">
+      <div class="sx-head">
+        <h2 id="sxTitle">SETTLE UP</h2>
+        <div class="sx-steps"><span id="sxSt1" class="on">1 · Value</span><span id="sxSt2">2 · Transfers</span><span id="sxSt3">3 · Next</span></div>
+      </div>
+
+      <div class="sx-body" id="sxStep1">
+        <p class="sx-q">How many tokens is 1 point worth?<small>Pick one or type your own amount.</small></p>
+        <div class="sx-presets">
+          <button type="button" class="sx-preset" data-v="1000" aria-pressed="false">1.000</button>
+          <button type="button" class="sx-preset" data-v="5000" aria-pressed="false">5.000</button>
+          <button type="button" class="sx-preset" data-v="10000" aria-pressed="false">10.000</button>
+        </div>
+        <label class="sx-custom"><input id="sxRate" inputmode="numeric" autocomplete="off" placeholder="Custom" aria-label="Tokens per point"><em>token per point</em></label>
+        <div>
+          <h3 class="label" style="margin-bottom: 8px">Preview</h3>
+          <div class="sx-preview" id="sxPreview"></div>
+        </div>
+        <div class="sx-foot">
+          <button type="button" class="btn-ghost" id="sxCancel">Back to game</button>
+          <button type="button" class="btn-gold" id="sxToReport">SHOW TRANSFERS</button>
+        </div>
+      </div>
+
+      <div class="sx-body" id="sxStep2" hidden>
+        <div class="sx-receipt">
+          <div class="sx-r-head">
+            <svg viewBox="0 0 64 64" aria-hidden="true"><use href="#logo"></use></svg>
+            <div>
+              <p class="sx-r-title">FINAL SETTLEMENT</p>
+              <p class="sx-r-meta" id="sxMeta"></p>
+            </div>
+          </div>
+          <div class="sx-r-section">
+            <h3>WHO PAYS WHOM</h3>
+            <div class="sx-tf-head"><span>PAYS</span><span></span><span>RECEIVES</span><span>PAID?</span></div>
+            <div class="sx-transfers" id="sxTransfers"></div>
+          </div>
+          <div class="sx-r-section">
+            <h3>FINAL SCORES</h3>
+            <table class="sx-r-table"><tbody id="sxScores"></tbody></table>
+          </div>
+          <p class="sx-r-foot">Fewest transfers possible · tap ✓ when a transfer is done</p>
+        </div>
+        <div class="sx-foot">
+          <button type="button" class="btn-ghost" id="sxBack">Change value</button>
+          <button type="button" class="btn-ghost" id="sxCopy">Copy for WhatsApp</button>
+          <button type="button" class="btn-gold" id="sxDone">DONE</button>
+          <span class="sx-copied" id="sxCopied" role="status" hidden>Copied ✓</span>
+        </div>
+      </div>
+
+      <div class="sx-body" id="sxStep3" hidden>
+        <p class="sx-q">What next?<small>The scores of this game will be cleared.</small></p>
+        <button type="button" class="sx-choice" id="sxSame">
+          <b>New game · same players</b>
+          <span id="sxSameNames"></span>
+        </button>
+        <button type="button" class="sx-choice" id="sxNew">
+          <b>New game · new players</b>
+          <span>Go back to the names screen</span>
+        </button>
+        <div class="sx-foot">
+          <button type="button" class="btn-ghost" id="sxBack2">Back to transfers</button>
+          <button type="button" class="btn-ghost" id="sxKeep">Keep playing this game</button>
+        </div>
+      </div>
+    </div>
   </div>
 
   <div id="intro" class="ix" hidden aria-live="polite">
@@ -689,6 +845,7 @@
           }
         }, 1100);
       }
+      var currentGame = null;
       var SUITS = [
         { key: "sekop", sym: "♠", red: false },
         { key: "hati", sym: "♥", red: true },
@@ -730,6 +887,26 @@
         var boostHistoryUndo = "";
         var person = [{}, {}, {}, {}];
 
+        // A new game can start without reloading the page (works offline), so clear the last game first.
+        byId("playerName").textContent = "";
+        byId("playerName").appendChild(el("th", { scope: "col", text: "#" }));
+        byId("playerList").textContent = "";
+        byId("redo").disabled = true;
+        byId("boost").value = "1";
+        syncLevel();
+
+        currentGame = {
+          names: arrName.slice(0, numOfPlayers),
+          rounds: function () { return history.length; },
+          totals: function () {
+            var total = [0, 0, 0, 0];
+            for (var j = 0; j < history.length; j++) {
+              for (var i = 0; i < numOfPlayers; i++) total[i] = total[i] + history[j][i];
+            }
+            return total.slice(0, numOfPlayers);
+          }
+        };
+
         document.documentElement.style.setProperty("--n", numOfPlayers);
         byId("numPlay").textContent = numOfPlayers + " players";
 
@@ -757,6 +934,21 @@
               el("span", { text: "2" + s.sym })
             ]);
           });
+          // Ticking a 2 that another player already holds is refused straight away.
+          suitChips.forEach(function (chip, k) {
+            var box = chip.querySelector("input");
+            box.addEventListener("change", function () {
+              if (!box.checked) return;
+              for (var other = 0; other < numOfPlayers; other++) {
+                if (other !== i && isChecked(SUITS[k].key, other)) {
+                  box.checked = false;
+                  alert("There is only one 2" + SUITS[k].sym + " in a deck — it is already ticked for " + arrName[other] + ". Untick it there first.");
+                  return;
+                }
+              }
+            });
+          });
+
           var finishChips = FINISHES.map(function (f) {
             return el("label", { className: "chip word" }, [
               el("input", { type: "checkbox", id: "p" + i + "-" + f.key }),
@@ -877,9 +1069,10 @@
           byId("roundLabel").textContent = "Round " + (history.length + 1) + " — cards left";
         }
 
-        byId("newRound").addEventListener("click", function () { clearInput(); });
+        // .onclick (not addEventListener) so a new game replaces the old game's handlers.
+        byId("newRound").onclick = function () { clearInput(); };
 
-        byId("undo").addEventListener("click", function () {
+        byId("undo").onclick = function () {
           if (history.length > 0) {
             historyUndo = history[history.length - 1];
             boostHistoryUndo = boostHistory[boostHistory.length - 1];
@@ -889,9 +1082,9 @@
             printTable();
             byId("redo").disabled = false;
           }
-        });
+        };
 
-        byId("redo").addEventListener("click", function () {
+        byId("redo").onclick = function () {
           if (historyUndo.length > 0) {
             history.push(historyUndo);
             boostHistory.push(boostHistoryUndo);
@@ -900,9 +1093,20 @@
             printTable();
             byId("redo").disabled = true;
           }
-        });
+        };
 
-        byId("hitung").addEventListener("click", function () {
+        byId("hitung").onclick = function () {
+          // A deck has only one of each 2, so no two players can both hold the same one.
+          for (var s = 0; s < SUITS.length; s++) {
+            var holders = [];
+            for (var h = 0; h < numOfPlayers; h++) {
+              if (isChecked(SUITS[s].key, h)) holders.push(arrName[h]);
+            }
+            if (holders.length > 1) {
+              alert("There is only one 2" + SUITS[s].sym + " in a deck, but it is ticked for " + holders.join(" and ") + ". Untick it for all but one player.");
+              return;
+            }
+          }
           var winnerFound = false;
           for (var i = 0; i < numOfPlayers; i++) {
             person[i].name = arrName[i];
@@ -950,7 +1154,7 @@
           printTable();
           clearInput();
           settleFx(result.slice(0, numOfPlayers), history.length);
-        });
+        };
 
         printTable();
       }
@@ -1002,10 +1206,203 @@
         ]);
       }
 
+      // ---- new game without reloading the page (so it also works with no signal) ----
+      function backToNames(prefill) {
+        byId("settle").hidden = true;
+        byId("play-view").hidden = true;
+        byId("setup-view").hidden = false;
+        document.title = "Capsah Banting";
+        window.onbeforeunload = null;
+        ["p1-name", "p2-name", "p3-name", "p4-name"].forEach(function (id, k) {
+          byId(id).value = prefill && prefill[k] ? prefill[k] : "";
+        });
+        try { history.replaceState(null, "", location.pathname); } catch (err) {}
+        window.scrollTo(0, 0);
+      }
+      function restartSamePlayers() {
+        var names = currentGame.names.slice();
+        byId("settle").hidden = true;
+        showGame(names.length, names);
+        window.scrollTo(0, 0);
+        playIntro(names);
+      }
+
       byId("newGame").addEventListener("click", function (e) {
         e.preventDefault();
-        location.href = location.pathname;
+        if (currentGame && currentGame.rounds() > 0 &&
+            !confirm("Start a new game? The scores of this game will be cleared.")) return;
+        backToNames(null);
       });
+
+      // ---- settle up: tokens per point → who pays whom ----
+      var nf = new Intl.NumberFormat("id-ID");
+      var settleRate = 0;
+      function tok(v) { return nf.format(Math.round(Math.abs(v))) + " token"; }
+      function signedTok(v) { return (v > 0 ? "+" : v < 0 ? "−" : "") + tok(v); }
+      function ptsText(v) { return (v > 0 ? "+" : v < 0 ? "−" : "") + nf.format(Math.abs(v)) + " pts"; }
+
+      function settlePlayers() {
+        var totals = currentGame.totals();
+        return currentGame.names.map(function (name, i) { return { name: name, total: totals[i] }; });
+      }
+      // Whole tokens per player that still add up to exactly 0
+      // (only matters with half points from custom levels; the remainder goes to the biggest balance).
+      function tokensFor(list) {
+        var amts = list.map(function (p) { return Math.round(p.total * settleRate); });
+        var rest = amts.reduce(function (a, b) { return a + b; }, 0);
+        if (rest !== 0) {
+          var big = 0;
+          amts.forEach(function (a, i) { if (Math.abs(a) > Math.abs(amts[big])) big = i; });
+          amts[big] -= rest;
+        }
+        return amts;
+      }
+      // Biggest loser pays biggest winner first → never more than (players − 1) transfers.
+      function settleTransfers(list) {
+        var amts = tokensFor(list), debt = [], cred = [];
+        list.forEach(function (p, i) {
+          if (amts[i] < 0) debt.push({ name: p.name, left: -amts[i] });
+          else if (amts[i] > 0) cred.push({ name: p.name, left: amts[i] });
+        });
+        debt.sort(function (a, b) { return b.left - a.left; });
+        cred.sort(function (a, b) { return b.left - a.left; });
+        var out = [], d = 0, c = 0;
+        while (d < debt.length && c < cred.length) {
+          var pay = Math.min(debt[d].left, cred[c].left);
+          out.push({ from: debt[d].name, to: cred[c].name, amount: pay });
+          debt[d].left -= pay; cred[c].left -= pay;
+          if (debt[d].left === 0) d++;
+          if (cred[c].left === 0) c++;
+        }
+        return out;
+      }
+      function byTotal(list) { return list.slice().sort(function (a, b) { return b.total - a.total; }); }
+
+      function settleStep(n) {
+        [1, 2, 3].forEach(function (k) {
+          byId("sxStep" + k).hidden = k !== n;
+          byId("sxSt" + k).classList.toggle("on", k === n);
+        });
+        byId("settle").querySelector(".sx-sheet").scrollTop = 0;
+      }
+      function settleSync() {
+        Array.prototype.forEach.call(document.querySelectorAll(".sx-preset"), function (b) {
+          b.setAttribute("aria-pressed", String(+b.getAttribute("data-v") === settleRate));
+        });
+        var list = settlePlayers(), amts = tokensFor(list), box = byId("sxPreview");
+        box.textContent = "";
+        byTotal(list).forEach(function (p) {
+          var a = amts[list.indexOf(p)];
+          box.appendChild(el("div", { className: "sx-prow" }, [
+            el("span", { className: "nm", text: p.name }),
+            el("span", { className: "pt", text: ptsText(p.total) }),
+            el("span", { className: "rp " + tone(a), text: settleRate > 0 ? signedTok(a) : "—" })
+          ]));
+        });
+        byId("sxToReport").disabled = settleRate <= 0;
+        byId("sxToReport").style.opacity = settleRate > 0 ? "1" : "0.5";
+      }
+      function setSettleRate(v) {
+        settleRate = v;
+        byId("sxRate").value = v > 0 ? nf.format(v) : "";
+        settleSync();
+      }
+      function settleReport() {
+        var list = settlePlayers(), amts = tokensFor(list), tf = settleTransfers(list);
+        var today = new Date().toLocaleDateString("en-GB", { day: "numeric", month: "long", year: "numeric" });
+        var rounds = currentGame.rounds();
+        byId("sxMeta").textContent = today + " · " + rounds + (rounds === 1 ? " round" : " rounds") + " · " + tok(settleRate) + " per point";
+        var box = byId("sxTransfers");
+        box.textContent = "";
+        if (!tf.length) box.appendChild(el("p", { className: "sx-even", text: "Everyone is even — nobody pays." }));
+        tf.forEach(function (t) {
+          var arrow = document.createElementNS("http://www.w3.org/2000/svg", "svg");
+          arrow.setAttribute("class", "arrow"); arrow.setAttribute("viewBox", "0 0 34 20"); arrow.setAttribute("aria-hidden", "true");
+          arrow.innerHTML = '<path d="M2 10h28M22 3l8 7-8 7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>';
+          var check = el("button", { type: "button", className: "check", "aria-pressed": "false", "aria-label": t.from + " paid " + t.to + " " + tok(t.amount) });
+          check.innerHTML = '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5L20 7"/></svg>';
+          var row = el("div", { className: "sx-tf" }, [
+            el("span", { className: "from", text: t.from }),
+            arrow,
+            el("span", { className: "to", text: t.to }),
+            el("span", { className: "pay" }, [el("span", { className: "amt", text: tok(t.amount) }), check])
+          ]);
+          check.addEventListener("click", function () {
+            var on = !row.classList.contains("paid");
+            row.classList.toggle("paid", on);
+            check.setAttribute("aria-pressed", String(on));
+          });
+          box.appendChild(row);
+        });
+        var sc = byId("sxScores");
+        sc.textContent = "";
+        byTotal(list).forEach(function (p) {
+          var a = amts[list.indexOf(p)];
+          sc.appendChild(el("tr", null, [
+            el("td", { text: p.name }),
+            el("td", { text: ptsText(p.total) }),
+            el("td", { className: a > 0 ? "pos" : a < 0 ? "neg" : "", text: signedTok(a) })
+          ]));
+        });
+        return { list: list, amts: amts, tf: tf };
+      }
+      function whatsappText() {
+        var r = settleReport();
+        var lines = ["*BIG TWO — Final settlement*", byId("sxMeta").textContent, "", "*Who pays whom*"];
+        if (!r.tf.length) lines.push("Everyone is even — nobody pays.");
+        r.tf.forEach(function (t) { lines.push("• " + t.from + " → " + t.to + ": " + tok(t.amount)); });
+        lines.push("", "*Final scores*");
+        byTotal(r.list).forEach(function (p) {
+          lines.push(p.name + "  " + ptsText(p.total) + "  (" + signedTok(r.amts[r.list.indexOf(p)]) + ")");
+        });
+        return lines.join("\n");
+      }
+
+      byId("openSettle").addEventListener("click", function () {
+        if (!currentGame || currentGame.rounds() === 0) {
+          alert("Play at least one round before settling up.");
+          return;
+        }
+        byId("settle").hidden = false;
+        setSettleRate(settleRate);
+        settleStep(1);
+      });
+      Array.prototype.forEach.call(document.querySelectorAll(".sx-preset"), function (b) {
+        b.addEventListener("click", function () { setSettleRate(+b.getAttribute("data-v")); });
+      });
+      byId("sxRate").addEventListener("input", function () {
+        var digits = this.value.replace(/\D/g, "").slice(0, 12);
+        settleRate = digits ? parseInt(digits, 10) : 0;
+        this.value = digits ? nf.format(settleRate) : "";
+        settleSync();
+      });
+      byId("sxCancel").addEventListener("click", function () { byId("settle").hidden = true; });
+      byId("sxToReport").addEventListener("click", function () {
+        if (settleRate <= 0) return;
+        settleReport();
+        settleStep(2);
+      });
+      byId("sxBack").addEventListener("click", function () { settleStep(1); });
+      byId("sxCopy").addEventListener("click", function () {
+        var text = whatsappText();
+        var ok = function () {
+          byId("sxCopied").hidden = false;
+          setTimeout(function () { byId("sxCopied").hidden = true; }, 1800);
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(text).then(ok, function () { prompt("Copy this text:", text); });
+        } else {
+          prompt("Copy this text:", text);
+        }
+      });
+      byId("sxDone").addEventListener("click", function () {
+        byId("sxSameNames").textContent = currentGame.names.join(" · ") + " — plays the intro again";
+        settleStep(3);
+      });
+      byId("sxBack2").addEventListener("click", function () { settleStep(2); });
+      byId("sxKeep").addEventListener("click", function () { byId("settle").hidden = true; });
+      byId("sxSame").addEventListener("click", restartSamePlayers);
+      byId("sxNew").addEventListener("click", function () { backToNames(null); });
 
       byId("mulai").addEventListener("click", function () {
         var p1 = byId("p1-name").value;
