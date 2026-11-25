@@ -217,7 +217,6 @@
     .stamp small { font-family: var(--sans); font-size: 16px; font-weight: 600; letter-spacing: 6px; color: var(--muted); }
     .stamp b { font-family: var(--serif); font-size: 40px; font-weight: 800; letter-spacing: 6px; color: var(--gold-text); }
     .crown { position: absolute; left: 50%; top: -20px; width: 40px; height: 40px; margin-left: -20px; z-index: 3; pointer-events: none; filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.4)); }
-    @media (min-width: 900px) and (min-height: 560px) { .stamp { left: calc(50% - 165px); } }
 
     .stand { grid-area: stand; background: var(--felt-dark); border-bottom: 1px solid var(--line); }
     .stand .label { display: none; }
@@ -232,7 +231,7 @@
     .entry-hint { font-family: var(--sans); font-size: 16px; color: var(--muted); }
     .seats { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 12px; }
 
-    .seat { background: var(--cream); color: var(--ink); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 3px 0 #08241C; min-width: 0; }
+    .seat { container-type: inline-size; background: var(--cream); color: var(--ink); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 3px 0 #08241C; min-width: 0; }
     .seat.is-winner { outline: 3px solid var(--gold); }
     .seat-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
     .seat-name { font-size: 22px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
@@ -241,9 +240,22 @@
     .lose, .win { display: flex; flex-direction: column; gap: 12px; }
     .stepper { display: flex; align-items: stretch; border: 1px solid var(--cream-line); border-radius: 10px; overflow: hidden; background: #FFFFFF; }
     .stepper button { width: 60px; border: 0; background: var(--cream-2); font-size: 28px; color: var(--ink); }
-    .stepper input { flex: 1; min-width: 0; height: 60px; border: 0; background: #FFFFFF; text-align: center; font-family: var(--serif); font-size: 34px; font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; -moz-appearance: textfield; }
+    .stepper input { flex: 1; min-width: 0; height: 60px; border: 0; background: #FFFFFF; text-align: center; font-family: var(--serif); font-size: 34px; font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; -moz-appearance: textfield; padding: 0; margin: 0; }
     .stepper input::-webkit-outer-spin-button, .stepper input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
     .stepper input::placeholder { color: #B5AE9C; }
+    .stepper button { flex-shrink: 0; }
+    /* narrow cards (3–4 players on an iPad): smaller − / + so two digits always fit */
+    @container (max-width: 190px) { .stepper button { width: 36px !important; font-size: 22px; } .stepper input { font-size: 28px; } }
+    @container (max-width: 190px) { .chip.finish span { flex-direction: column !important; justify-content: center !important; text-align: center !important; gap: 4px !important; padding: 8px 4px !important; } .chip.finish .fin-cards { width: 54px !important; height: 40px !important; } .chip.finish b { font-size: 14px; } }
+    @container (max-width: 150px) { .stepper button { width: 30px !important; font-size: 20px; } .stepper input { font-size: 24px; } .win-toggle { font-size: 14px !important; padding: 0 6px; white-space: nowrap; } .mini { font-size: 12px; letter-spacing: 0.3px; } .seat-name { font-size: 20px !important; } }
+    @container (max-width: 125px) {
+      .stepper { flex-wrap: wrap; }
+      .stepper input { order: -1; flex: 1 0 100%; height: 48px; font-size: 28px; border-bottom: 1px solid var(--cream-line); }
+      .stepper button { flex: 1 1 50%; width: auto !important; height: 40px; }
+      .stepper button:first-of-type { border-right: 1px solid var(--cream-line); }
+    }
+    /* older iPads (iOS 15 and earlier) don't know the rule above: use the compact stepper on every iPad-width layout */
+    @supports not (container-type: inline-size) { @media (min-width: 900px) { .stepper button { width: 32px !important; font-size: 20px; } .stepper input { font-size: 24px; } } }
     .mini { font-family: var(--sans); font-size: 14px; letter-spacing: 1px; color: var(--ink-soft); text-transform: uppercase; margin: 0; }
     .chips { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
     .chips.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -259,6 +271,7 @@
     .chip input:focus-visible + span { outline: 3px solid var(--gold); outline-offset: 2px; }
 
     .sheet { grid-area: sheet; padding: 6px 14px 16px; display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+    .side { display: contents; }
     .sheet-scroll { overflow-x: auto; }
     table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; font-size: 17px; }
     th { font-family: var(--sans); font-size: 14px; color: var(--muted); font-weight: 600; text-align: right; padding: 8px 4px; border-bottom: 1px solid var(--line); white-space: nowrap; }
@@ -283,6 +296,17 @@
     .custom input::-webkit-outer-spin-button, .custom input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
     .actions { display: grid; grid-template-columns: 1fr 1fr 1fr 2fr; gap: 8px; }
     .actions .btn-ghost, .actions .btn-gold { padding: 0 6px; }
+
+    /* ---------- drag handle between the cards and the score panel (iPad layout only) ---------- */
+    .resizer { display: none; }
+    @media (min-width: 900px) and (min-height: 560px) {
+      .play { position: relative; }
+      .resizer { display: block; position: absolute; top: 70px; bottom: 0; left: calc(100% - var(--side) - 15px); width: 30px; z-index: 6; cursor: col-resize; touch-action: none; -webkit-tap-highlight-color: transparent; }
+      .resizer::after { content: ""; position: absolute; left: 50%; top: 50%; width: 10px; height: 72px; margin: -36px 0 0 -5px; border-radius: 6px; background: var(--gold-line); box-shadow: 0 0 0 3px rgba(10, 46, 36, 0.9); background-image: radial-gradient(circle, var(--felt-dark) 1.6px, transparent 2px); background-size: 10px 12px; background-position: center; transition: background-color 0.15s; }
+      .resizer:hover::after, .resizer.dragging::after, .resizer:focus-visible::after { background-color: var(--gold); }
+      .resizer:focus-visible { outline: none; }
+      .play.resizing { cursor: col-resize; user-select: none; -webkit-user-select: none; }
+    }
 
     /* ---------- intro: players face off, then the calculator ---------- */
     .ix { position: fixed; inset: 0; z-index: 50; overflow: hidden; cursor: pointer; -webkit-tap-highlight-color: transparent; }
@@ -376,29 +400,39 @@
 
     /* ---------- tablet / desktop landscape ---------- */
     @media (min-width: 900px) and (min-height: 560px) {
-      .play { height: 100vh; height: 100dvh; grid-template-columns: minmax(0, 1fr) 330px; grid-template-rows: auto auto minmax(0, 1fr) auto; grid-template-areas: "head head" "main stand" "main sheet" "ctrl sheet"; }
+      .play[data-n="4"] { --side: clamp(300px, 33vw, 420px) !important; }
+      .play[data-n="4"] .sheet table { font-size: 17px; }
+      .play[data-n="4"] .sheet tfoot td { font-size: 19px; }
+      .play[data-n="4"] .sheet td, .play[data-n="4"] .sheet th { padding-left: 2px; padding-right: 2px; }
+      .play { --side: clamp(330px, 38vw, 460px); height: 100vh; height: 100dvh; grid-template-columns: minmax(0, 1fr) var(--side); grid-template-rows: auto minmax(0, 1fr) auto; grid-template-areas: "head head" "main side" "ctrl side"; }
+      .side { grid-area: side; display: flex; flex-direction: column; min-height: 0; overflow-y: auto; overscroll-behavior: contain; -webkit-overflow-scrolling: touch; background: var(--felt-dark); border-left: 1px solid var(--line); }
+      .side .sheet thead th { position: sticky; top: 0; z-index: 2; background: var(--felt-dark); box-shadow: 0 1px 0 var(--line), 0 6px 8px -6px rgba(0, 0, 0, 0.6); padding-top: 12px; padding-bottom: 10px; }
       .bar { padding: 14px 28px; }
       .bar-title { flex-direction: row; align-items: baseline; gap: 18px; }
       .bar-mark { font-size: 26px; letter-spacing: 5px; }
       .bar-meta { font-size: 16px; }
-      .stand, .sheet { background: var(--felt-dark); border-left: 1px solid var(--line); }
-      .stand { border-bottom: 0; padding: 20px 24px 6px; display: flex; flex-direction: column; gap: 10px; }
+      .stand, .sheet { background: transparent; border-left: 0; }
+      .stand { border-bottom: 0; padding: 22px 26px 8px; display: flex; flex-direction: column; gap: 10px; }
       .stand .label { display: block; }
-      .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-      .tile { align-items: flex-start; background: var(--felt-tile); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+      .tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
+      .tile { align-items: flex-start; background: var(--felt-tile); border: 1px solid var(--line); border-radius: 12px; padding: 14px 18px; }
       .tile.lead { border-color: var(--gold); }
-      .tile-name { font-size: 16px; }
-      .tile-total { font-size: 30px; }
-      .sheet { padding: 14px 20px 20px; min-height: 0; }
-      .sheet table { font-size: 15px; }
-      .sheet td, .sheet th { padding-left: 3px; padding-right: 3px; }
-      .sheet tfoot td { font-size: 17px; }
-      .sheet-scroll { flex: 1; min-height: 0; overflow-y: auto; }
-      .entry { padding: 20px 22px 12px 28px; overflow-y: auto; min-height: 0; }
-      .seats { grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 14px; flex: 1; align-content: start; }
-      .seat { padding: 16px; }
+      .tile-name { font-size: 18px; }
+      .tile-total { font-size: 40px; }
+      .sheet { padding: 16px 26px 22px; min-height: 0; }
+      .sheet table { font-size: 19px; }
+      .sheet th { font-size: 15px; }
+      .sheet td, .sheet th { padding-left: 4px; padding-right: 4px; }
+      .sheet td { padding-top: 11px; padding-bottom: 11px; }
+      .sheet tfoot td { font-size: 22px; }
+      .sheet-scroll { overflow: visible; }
+      .sheet { overflow: visible; }
+      .side > * { flex-shrink: 0; }
+      .entry { padding: 16px 16px 10px 20px; overflow-y: auto; min-height: 0; }
+      .seats { grid-template-columns: repeat(var(--n), minmax(0, 1fr)); gap: 10px; flex: 1; align-content: start; }
+      .seat { padding: 12px; }
       .seat-top { flex-direction: column; align-items: stretch; text-align: center; }
-      .seat-name { font-size: 24px; }
+      .seat-name { font-size: 22px; }
       .win-toggle { height: 52px; font-size: 16px; }
       .stepper button { width: 46px; }
       .chips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -406,7 +440,7 @@
       .chip span { height: 58px; }
       .chip.finish span { flex-direction: row; justify-content: flex-start; height: auto; min-height: 70px; gap: 10px; padding: 6px 10px; text-align: left; }
       .chip.finish .fin-cards { width: 66px; height: 48px; }
-      .ctrl { position: static; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px 16px; padding: 14px 22px 16px 28px; background: transparent; border-top: 0; }
+      .ctrl { position: static; flex-direction: row; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 10px 12px; padding: 10px 16px 14px 20px; background: transparent; border-top: 0; }
       .level { flex: 0 0 auto; }
       .lvl { flex: 0 0 56px; height: 58px; }
       .custom { flex: 0 0 92px; height: 58px; }
@@ -475,11 +509,6 @@
       </div>
     </header>
 
-    <section class="stand" aria-label="Standings">
-      <h2 class="label">Standings</h2>
-      <div class="tiles" id="standings"></div>
-    </section>
-
     <main class="entry">
       <div class="entry-head">
         <h2 class="label" id="roundLabel">Round 1 — cards left</h2>
@@ -487,7 +516,14 @@
       <div class="seats" id="playerList"></div>
     </main>
 
-    <section class="sheet" aria-label="Score sheet">
+    <!-- On iPad, standings + score sheet scroll together as one column; on phones the wrapper is invisible to the layout. -->
+    <div class="side" id="sidePanel">
+      <section class="stand" aria-label="Standings">
+        <h2 class="label">Standings</h2>
+        <div class="tiles" id="standings"></div>
+      </section>
+
+      <section class="sheet" aria-label="Score sheet">
       <h2 class="label">Score sheet</h2>
       <div class="sheet-scroll">
         <table>
@@ -497,7 +533,11 @@
         </table>
         <p class="empty" id="emptySheet">No rounds yet.</p>
       </div>
-    </section>
+      </section>
+    </div>
+
+    <div class="resizer" id="resizer" role="separator" aria-orientation="vertical" tabindex="0"
+         aria-label="Drag left or right to resize the score panel. Double-tap to reset." title="Drag to resize · double-tap to reset"></div>
 
     <footer class="ctrl">
       <div class="level" role="group" aria-label="Level multiplier">
@@ -948,6 +988,10 @@
           el("b", { text: "SETTLED" })
         ]);
         document.body.appendChild(stamp);
+        var entryBox = document.querySelector(".entry").getBoundingClientRect();
+        if (window.matchMedia("(min-width: 900px) and (min-height: 560px)").matches) {
+          stamp.style.left = (entryBox.left + entryBox.width / 2) + "px";
+        }
         var canAnimate = typeof stamp.animate === "function";
 
         var best = Math.max.apply(null, roundResult);
@@ -1093,6 +1137,8 @@
         };
 
         document.documentElement.style.setProperty("--n", numOfPlayers);
+        byId("play-view").setAttribute("data-n", numOfPlayers);
+        document.body.classList.toggle("n4", numOfPlayers === 4);
         byId("numPlay").textContent = numOfPlayers + " players";
 
         for (var i = 0; i < numOfPlayers; i++) {
@@ -1364,6 +1410,69 @@
         printTable();
       }
 
+      // ---- drag handle: players choose how wide the score panel is (remembered on this device) ----
+      (function () {
+        var play = byId("play-view"), handle = byId("resizer"), KEY = "bigtwo-side";
+        var wide = window.matchMedia("(min-width: 900px) and (min-height: 560px)");
+        var MIN_SIDE = 240;
+        function limits() {
+          var w = play.getBoundingClientRect().width;
+          var n = parseInt(play.getAttribute("data-n"), 10) || 4;
+          var MIN_CARDS = n * 100 + 10 * (n - 1) + 40;
+          return { min: MIN_SIDE, max: Math.max(MIN_SIDE, w - MIN_CARDS) };
+        }
+        function apply(px) {
+          if (px == null) { play.style.removeProperty("--side"); return; }
+          var l = limits();
+          px = Math.round(Math.min(l.max, Math.max(l.min, px)));
+          play.style.setProperty("--side", px + "px", "important");
+          handle.setAttribute("aria-valuenow", String(px));
+          return px;
+        }
+        function saved() { try { var v = parseInt(localStorage.getItem(KEY), 10); return v > 0 ? v : null; } catch (e) { return null; } }
+        function save(px) { try { if (px == null) localStorage.removeItem(KEY); else localStorage.setItem(KEY, String(px)); } catch (e) {} }
+        function placeTop() { var bar = play.querySelector(".bar"); if (bar) handle.style.top = bar.offsetHeight + "px"; }
+        function refresh() {
+          if (play.hidden || !play.getBoundingClientRect().width) return; // only once the game screen is showing
+          placeTop();
+          if (wide.matches && saved() != null) apply(saved());
+        }
+
+        var dragging = false, lastTap = 0;
+        handle.addEventListener("pointerdown", function (e) {
+          var now = Date.now();
+          if (now - lastTap < 350) { save(null); apply(null); lastTap = 0; return; } // double-tap: back to default
+          lastTap = now;
+          dragging = true;
+          try { handle.setPointerCapture(e.pointerId); } catch (err) {}
+          handle.classList.add("dragging"); play.classList.add("resizing");
+          e.preventDefault();
+        });
+        handle.addEventListener("pointermove", function (e) {
+          if (!dragging) return;
+          apply(play.getBoundingClientRect().right - e.clientX);
+        });
+        function stop() {
+          if (!dragging) return;
+          dragging = false;
+          handle.classList.remove("dragging"); play.classList.remove("resizing");
+          var v = parseInt(play.style.getPropertyValue("--side"), 10);
+          if (v > 0) save(v);
+        }
+        handle.addEventListener("pointerup", stop);
+        handle.addEventListener("pointercancel", stop);
+        handle.addEventListener("keydown", function (e) {
+          if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+          var cur = byId("play-view").querySelector(".stand").getBoundingClientRect().width;
+          save(apply(cur + (e.key === "ArrowLeft" ? 24 : -24)));
+          e.preventDefault();
+        });
+        window.addEventListener("resize", refresh);
+        window.addEventListener("orientationchange", refresh);
+        window.__refreshSide = refresh;
+        refresh();
+      })();
+
       // ---- level multiplier (custom value allowed) ----
       var boost = byId("boost");
       function syncLevel() {
@@ -1388,6 +1497,7 @@
         document.title = "Big Two";
         window.onbeforeunload = function () { return "Sure you want to leave?"; };
         startGame(num, names);
+        if (window.__refreshSide) window.__refreshSide();
       }
 
       function openGame(num, players) {
