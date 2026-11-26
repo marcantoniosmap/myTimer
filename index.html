@@ -217,7 +217,6 @@
     .stamp small { font-family: var(--sans); font-size: 16px; font-weight: 600; letter-spacing: 6px; color: var(--muted); }
     .stamp b { font-family: var(--serif); font-size: 40px; font-weight: 800; letter-spacing: 6px; color: var(--gold-text); }
     .crown { position: absolute; left: 50%; top: -20px; width: 40px; height: 40px; margin-left: -20px; z-index: 3; pointer-events: none; filter: drop-shadow(0 2px 2px rgba(0, 0, 0, 0.4)); }
-    @media (min-width: 900px) and (min-height: 560px) { .stamp { left: calc(50% - 165px); } }
 
     .stand { grid-area: stand; background: var(--felt-dark); border-bottom: 1px solid var(--line); }
     .stand .label { display: none; }
@@ -232,7 +231,7 @@
     .entry-hint { font-family: var(--sans); font-size: 16px; color: var(--muted); }
     .seats { display: grid; grid-template-columns: repeat(auto-fit, minmax(290px, 1fr)); gap: 12px; }
 
-    .seat { background: var(--cream); color: var(--ink); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 3px 0 #08241C; min-width: 0; }
+    .seat { container-type: inline-size; background: var(--cream); color: var(--ink); border-radius: 12px; padding: 14px; display: flex; flex-direction: column; gap: 12px; box-shadow: 0 3px 0 #08241C; min-width: 0; }
     .seat.is-winner { outline: 3px solid var(--gold); }
     .seat-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
     .seat-name { font-size: 22px; font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; min-width: 0; }
@@ -241,9 +240,34 @@
     .lose, .win { display: flex; flex-direction: column; gap: 12px; }
     .stepper { display: flex; align-items: stretch; border: 1px solid var(--cream-line); border-radius: 10px; overflow: hidden; background: #FFFFFF; }
     .stepper button { width: 60px; border: 0; background: var(--cream-2); font-size: 28px; color: var(--ink); }
-    .stepper input { flex: 1; min-width: 0; height: 60px; border: 0; background: #FFFFFF; text-align: center; font-family: var(--serif); font-size: 34px; font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; -moz-appearance: textfield; }
+    .stepper input { flex: 1; min-width: 0; height: 60px; border: 0; background: #FFFFFF; text-align: center; font-family: var(--serif); font-size: 34px; font-weight: 700; color: var(--ink); font-variant-numeric: tabular-nums; -moz-appearance: textfield; padding: 0; margin: 0; }
     .stepper input::-webkit-outer-spin-button, .stepper input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
     .stepper input::placeholder { color: #B5AE9C; }
+    .stepper button { flex-shrink: 0; }
+    /* narrow cards (3-4 players on an iPad, or a wide score panel): smaller - / + so two digits always fit */
+    @container (max-width: 190px) {
+      .stepper button { width: 36px !important; font-size: 22px; }
+      .stepper input { font-size: 28px; }
+      .chip.finish span { flex-direction: column !important; justify-content: center !important; text-align: center !important; gap: 4px !important; padding: 8px 4px !important; }
+      .chip.finish .fin-cards { width: 54px !important; height: 40px !important; }
+      .chip.finish b { font-size: 14px; }
+    }
+    @container (max-width: 150px) {
+      .stepper button { width: 30px !important; font-size: 20px; }
+      .stepper input { font-size: 24px; }
+      .win-toggle { font-size: 14px !important; padding: 0 6px; white-space: nowrap; }
+      .mini { font-size: 12px; letter-spacing: 0.3px; }
+      .seat-name { font-size: 20px !important; }
+    }
+    /* very narrow: number on its own row, - and + underneath */
+    @container (max-width: 125px) {
+      .stepper { flex-wrap: wrap; }
+      .stepper input { order: -1; flex: 1 0 100%; height: 48px; font-size: 28px; border-bottom: 1px solid var(--cream-line); }
+      .stepper button { flex: 1 1 50%; width: auto !important; height: 40px; }
+      .stepper button:first-of-type { border-right: 1px solid var(--cream-line); }
+    }
+    /* older iPads (iOS 15 and earlier) skip the rules above: compact stepper on every iPad-width layout */
+    @supports not (container-type: inline-size) { @media (min-width: 900px) { .stepper button { width: 32px !important; font-size: 20px; } .stepper input { font-size: 24px; } } }
     .mini { font-family: var(--sans); font-size: 14px; letter-spacing: 1px; color: var(--ink-soft); text-transform: uppercase; margin: 0; }
     .chips { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
     .chips.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -283,6 +307,16 @@
     .custom input::-webkit-outer-spin-button, .custom input::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
     .actions { display: grid; grid-template-columns: 1fr 1fr 1fr 2fr; gap: 8px; }
     .actions .btn-ghost, .actions .btn-gold { padding: 0 6px; }
+
+    /* ---------- drag handle between the cards and the score panel (iPad layout only) ---------- */
+    .resizer { display: none; }
+    @media (min-width: 900px) and (min-height: 560px) {
+      .resizer { display: block; position: absolute; top: 70px; bottom: 0; left: calc(100% - var(--side) - 15px); width: 30px; z-index: 6; cursor: col-resize; touch-action: none; -webkit-tap-highlight-color: transparent; }
+      .resizer::after { content: ""; position: absolute; left: 50%; top: 50%; width: 10px; height: 72px; margin: -36px 0 0 -5px; border-radius: 6px; background: var(--gold-line); box-shadow: 0 0 0 3px rgba(10, 46, 36, 0.9); background-image: radial-gradient(circle, var(--felt-dark) 1.6px, transparent 2px); background-size: 10px 12px; background-position: center; transition: background-color 0.15s; }
+      .resizer:hover::after, .resizer.dragging::after, .resizer:focus-visible::after { background-color: var(--gold); }
+      .resizer:focus-visible { outline: none; }
+      .play.resizing { cursor: col-resize; user-select: none; -webkit-user-select: none; }
+    }
 
     /* ---------- intro: players face off, then the calculator ---------- */
     .ix { position: fixed; inset: 0; z-index: 50; overflow: hidden; cursor: pointer; -webkit-tap-highlight-color: transparent; }
@@ -376,7 +410,7 @@
 
     /* ---------- tablet / desktop landscape ---------- */
     @media (min-width: 900px) and (min-height: 560px) {
-      .play { height: 100vh; height: 100dvh; grid-template-columns: minmax(0, 1fr) 330px; grid-template-rows: auto auto minmax(0, 1fr) auto; grid-template-areas: "head head" "main stand" "main sheet" "ctrl sheet"; }
+      .play { --side: 330px; position: relative; height: 100vh; height: 100dvh; grid-template-columns: minmax(0, 1fr) var(--side); grid-template-rows: auto auto minmax(0, 1fr) auto; grid-template-areas: "head head" "main stand" "main sheet" "ctrl sheet"; }
       .bar { padding: 14px 28px; }
       .bar-title { flex-direction: row; align-items: baseline; gap: 18px; }
       .bar-mark { font-size: 26px; letter-spacing: 5px; }
@@ -498,6 +532,9 @@
         <p class="empty" id="emptySheet">No rounds yet.</p>
       </div>
     </section>
+
+    <div class="resizer" id="resizer" role="separator" aria-orientation="vertical" tabindex="0"
+         aria-label="Drag left or right to resize the score panel. Double-tap to reset." title="Drag to resize, double-tap to reset"></div>
 
     <footer class="ctrl">
       <div class="level" role="group" aria-label="Level multiplier">
@@ -948,6 +985,10 @@
           el("b", { text: "SETTLED" })
         ]);
         document.body.appendChild(stamp);
+        if (window.matchMedia("(min-width: 900px) and (min-height: 560px)").matches) {
+          var entryBox = document.querySelector(".entry").getBoundingClientRect();
+          stamp.style.left = (entryBox.left + entryBox.width / 2) + "px";
+        }
         var canAnimate = typeof stamp.animate === "function";
 
         var best = Math.max.apply(null, roundResult);
@@ -1093,6 +1134,7 @@
         };
 
         document.documentElement.style.setProperty("--n", numOfPlayers);
+        byId("play-view").setAttribute("data-n", numOfPlayers);
         byId("numPlay").textContent = numOfPlayers + " players";
 
         for (var i = 0; i < numOfPlayers; i++) {
@@ -1364,6 +1406,67 @@
         printTable();
       }
 
+      // ---- drag handle: players choose how wide the score panel is (remembered on this device) ----
+      (function () {
+        var play = byId("play-view"), handle = byId("resizer"), KEY = "bigtwo-side";
+        var wide = window.matchMedia("(min-width: 900px) and (min-height: 560px)");
+        function limits() {
+          var w = play.getBoundingClientRect().width;
+          var n = parseInt(play.getAttribute("data-n"), 10) || 4;
+          var minSide = 180 + 30 * n;                    // score sheet keeps room for every player's column
+          var minCards = n * 100 + 10 * (n - 1) + 50;   // every card keeps at least ~100 px
+          return { min: minSide, max: Math.max(minSide, w - minCards) };
+        }
+        function apply(px) {
+          if (px == null) { play.style.removeProperty("--side"); return null; }
+          var l = limits();
+          px = Math.round(Math.min(l.max, Math.max(l.min, px)));
+          play.style.setProperty("--side", px + "px");
+          handle.setAttribute("aria-valuenow", String(px));
+          return px;
+        }
+        function saved() { try { var v = parseInt(localStorage.getItem(KEY), 10); return v > 0 ? v : null; } catch (e) { return null; } }
+        function save(px) { try { if (px == null) localStorage.removeItem(KEY); else localStorage.setItem(KEY, String(px)); } catch (e) {} }
+        function refresh() {
+          if (play.hidden || !play.getBoundingClientRect().width) return; // only once the game screen is showing
+          var bar = play.querySelector(".bar");
+          if (bar) handle.style.top = bar.offsetHeight + "px";
+          if (wide.matches && saved() != null) apply(saved());
+        }
+
+        var dragging = false, lastTap = 0;
+        handle.addEventListener("pointerdown", function (e) {
+          var now = Date.now();
+          if (now - lastTap < 350) { save(null); apply(null); lastTap = 0; return; } // double-tap: back to default
+          lastTap = now;
+          dragging = true;
+          try { handle.setPointerCapture(e.pointerId); } catch (err) {}
+          handle.classList.add("dragging"); play.classList.add("resizing");
+          e.preventDefault();
+        });
+        handle.addEventListener("pointermove", function (e) {
+          if (dragging) apply(play.getBoundingClientRect().right - e.clientX);
+        });
+        function stop() {
+          if (!dragging) return;
+          dragging = false;
+          handle.classList.remove("dragging"); play.classList.remove("resizing");
+          var v = parseInt(play.style.getPropertyValue("--side"), 10);
+          if (v > 0) save(v);
+        }
+        handle.addEventListener("pointerup", stop);
+        handle.addEventListener("pointercancel", stop);
+        handle.addEventListener("keydown", function (e) {
+          if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+          var cur = play.querySelector(".stand").getBoundingClientRect().width;
+          save(apply(cur + (e.key === "ArrowLeft" ? 24 : -24)));
+          e.preventDefault();
+        });
+        window.addEventListener("resize", refresh);
+        window.addEventListener("orientationchange", refresh);
+        window.__refreshSide = refresh;
+      })();
+
       // ---- level multiplier (custom value allowed) ----
       var boost = byId("boost");
       function syncLevel() {
@@ -1388,6 +1491,7 @@
         document.title = "Big Two";
         window.onbeforeunload = function () { return "Sure you want to leave?"; };
         startGame(num, names);
+        if (window.__refreshSide) window.__refreshSide();
       }
 
       function openGame(num, players) {
