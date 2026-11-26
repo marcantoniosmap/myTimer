@@ -8,7 +8,10 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="icon" href="img/icon2.ico" sizes="any">
   <link rel="icon" href="img/logo.svg" type="image/svg+xml">
-  <link rel="apple-touch-icon" href="img/logo.svg">
+  <link rel="apple-touch-icon" href="img/apple-touch-icon.png">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="apple-mobile-web-app-title" content="Big Two">
+  <meta name="mobile-web-app-capable" content="yes">
   <link rel="preload" href="fonts/roboto-slab.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="fonts/roboto.woff2" as="font" type="font/woff2" crossorigin>
   <title>Capsah Banting</title>
@@ -1748,6 +1751,14 @@
         ["p1-name", "p2-name", "p3-name", "p4-name"].forEach(function (id) { byId(id).value = ""; });
       });
     })();
+  </script>
+  <script>
+    // Save the app on this device so it opens and works with no internet (see sw.js).
+    if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
+      window.addEventListener("load", function () {
+        navigator.serviceWorker.register("sw.js").catch(function () {});
+      });
+    }
   </script>
 </body>
 </html>
