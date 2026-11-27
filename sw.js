@@ -3,7 +3,7 @@
 // from this saved copy straight away, with or without signal. When there is signal, it quietly
 // fetches the newest version in the background, which is used the next time the app is opened.
 
-var CACHE = "bigtwo-v1";
+var CACHE = "bigtwo-v2";
 var APP_FILES = [
   "./",
   "index.html",
@@ -14,7 +14,12 @@ var APP_FILES = [
   "img/icon2.ico",
   "img/apple-touch-icon.png",
   "img/icon-192.png",
-  "img/icon-512.png"
+  "img/icon-512.png",
+  "coach/",
+  "coach/index.html",
+  "coach/engine.js",
+  "coach/app.js",
+  "coach/sim-worker.js"
 ];
 
 self.addEventListener("install", function (event) {
@@ -39,11 +44,12 @@ self.addEventListener("fetch", function (event) {
   var req = event.request;
   if (req.method !== "GET") return;
   var url = new URL(req.url);
-  if (url.origin !== self.location.origin) return; // e.g. the Instagram link: leave alone
+  if (url.origin !== self.location.origin) return; // e.g. outside links: leave alone
 
-  // Opening the app (with or without ?num=...&player1=...) always uses the saved page.
+  // A page (the calculator, or the coach) is looked up by its address without the ?… part,
+  // so ?num=4&player1=… still opens the saved page.
   var isPage = req.mode === "navigate";
-  var key = isPage ? new Request(new URL("./", self.location).href) : req;
+  var key = isPage ? new Request(url.origin + url.pathname) : req;
 
   event.respondWith(
     caches.open(CACHE).then(function (cache) {
@@ -61,7 +67,10 @@ self.addEventListener("fetch", function (event) {
           return saved;
         }
         return fresh.then(function (res) {
-          return res || (isPage ? cache.match(new URL("index.html", self.location).href) : Response.error());
+          if (res) return res;
+          if (!isPage) return Response.error();
+          var inCoach = url.pathname.indexOf("/coach/") >= 0;
+          return cache.match(new URL(inCoach ? "coach/index.html" : "index.html", self.location).href);
         });
       });
     })

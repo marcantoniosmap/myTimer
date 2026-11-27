@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0A2E24">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Big Two">
+  <link rel="icon" href="../img/logo.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../img/apple-touch-icon.png">
+  <link rel="manifest" href="../manifest.webmanifest">
+  <title>Big Two Coach</title>
+  <style>
+    :root {
+      --felt: #0E3B2E; --felt-dark: #0A2E24; --felt-deep: #061F18; --felt-tile: #134A3A;
+      --line: #2E5E4C; --line-soft: #1F5242; --line-btn: #4B7564;
+      --cream: #F4EFE3; --cream-2: #E7E0CF; --cream-line: #B9B09A; --ink: #1E2A24; --ink-soft: #5B6A62;
+      --text: #F1EBDD; --text-soft: #DCE6DF; --muted: #B9C9BF;
+      --gold: #C9A24B; --gold-text: #E2C98A; --gold-line: #8C7A4A; --gold-dark: #B8902F; --on-gold: #1A1406;
+      --red-suit: #A3262A; --up: #9FE0B8; --down: #F2A08F;
+      --serif: "Roboto Slab", Georgia, "Times New Roman", serif;
+      --sans: "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    @font-face { font-family: "Roboto Slab"; src: url("../fonts/roboto-slab.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+    @font-face { font-family: "Roboto"; src: url("../fonts/roboto.woff2") format("woff2"); font-weight: 100 900; font-display: swap; }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: var(--felt); color: var(--text); font-family: var(--sans); -webkit-text-size-adjust: 100%; }
+    body { min-height: 100vh; min-height: 100dvh; }
+    button, input, select { font: inherit; color: inherit; }
+    button { cursor: pointer; touch-action: manipulation; }
+    [hidden] { display: none !important; }
+    a { color: var(--gold-text); }
+    .label { font-size: 14px; letter-spacing: 2px; color: var(--muted); font-weight: 600; margin: 0; text-transform: uppercase; }
+    .btn { height: 52px; padding: 0 18px; border-radius: 10px; border: 1px solid var(--line-btn); background: transparent; color: var(--text); font-size: 16px; }
+    .btn:disabled { opacity: 0.4; cursor: default; }
+    .btn-gold { height: 56px; padding: 0 22px; border: 0; border-radius: 10px; background: var(--gold); color: var(--on-gold); font-family: var(--serif); font-size: 19px; font-weight: 700; letter-spacing: 1px; }
+    .btn-gold:disabled { opacity: 0.45; cursor: default; }
+    .btn:active, .btn-gold:active { transform: translateY(1px); }
+    :focus-visible { outline: 3px solid var(--gold-text); outline-offset: 2px; }
+
+    /* header */
+    .bar { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 12px 16px; padding-top: max(12px, env(safe-area-inset-top)); background: var(--felt-dark); border-bottom: 1px solid var(--line); position: sticky; top: 0; z-index: 10; }
+    .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .brand svg { width: 36px; height: 36px; flex-shrink: 0; }
+    .brand b { font-family: var(--serif); font-size: 20px; letter-spacing: 3px; color: var(--gold-text); white-space: nowrap; }
+    .brand span { font-size: 14px; color: var(--muted); white-space: nowrap; }
+    .bar-actions { display: flex; gap: 8px; flex-shrink: 0; }
+    .bar-actions .btn { height: 44px; padding: 0 12px; font-size: 15px; }
+
+    main { padding: 16px; max-width: 1280px; margin: 0 auto; }
+
+    /* home / setup */
+    .modes { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+    .mode { text-align: left; padding: 18px; border-radius: 14px; border: 2px solid var(--line); background: var(--felt-tile); display: flex; flex-direction: column; gap: 6px; }
+    .mode b { font-family: var(--serif); font-size: 22px; color: var(--gold-text); }
+    .mode span { font-size: 16px; color: var(--text-soft); line-height: 1.4; }
+    .mode[aria-pressed="true"] { border-color: var(--gold); box-shadow: inset 0 0 0 1px var(--gold); }
+    .panel { margin-top: 16px; background: var(--felt-dark); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; gap: 14px; }
+    .seg { display: flex; gap: 8px; flex-wrap: wrap; }
+    .seg button { min-width: 64px; height: 50px; border-radius: 10px; border: 1px solid var(--gold-line); background: transparent; color: var(--gold-text); font-size: 18px; font-weight: 700; }
+    .seg button[aria-pressed="true"] { background: var(--gold); border-color: var(--gold); color: var(--on-gold); }
+    .names { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; }
+    .name-row { display: flex; align-items: center; gap: 10px; background: var(--felt-tile); border: 1px solid var(--line); border-radius: 10px; padding: 8px 10px; }
+    .name-row input[type=text] { flex: 1; min-width: 0; height: 44px; border-radius: 8px; border: 1px solid var(--cream-line); background: var(--cream); color: var(--ink); padding: 0 10px; font-size: 18px; }
+    .name-row label { display: flex; align-items: center; gap: 6px; font-size: 15px; color: var(--text-soft); white-space: nowrap; }
+    .name-row input[type=radio] { width: 22px; height: 22px; accent-color: var(--gold); }
+    .seat-no { font-size: 13px; color: var(--muted); width: 18px; }
+    .toggles { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 8px; }
+    .toggle { display: flex; align-items: center; gap: 12px; min-height: 48px; padding: 6px 10px; border-radius: 10px; background: var(--felt-tile); border: 1px solid var(--line); font-size: 16px; }
+    .toggle input { width: 24px; height: 24px; accent-color: var(--gold); flex-shrink: 0; }
+    details summary { cursor: pointer; font-size: 16px; color: var(--gold-text); padding: 6px 0; }
+    .row-end { display: flex; justify-content: flex-end; gap: 10px; flex-wrap: wrap; }
+    .hint { font-size: 15px; color: var(--muted); margin: 0; line-height: 1.45; }
+
+    /* playing cards */
+    .pc { position: relative; width: 52px; height: 74px; border-radius: 8px; border: 1px solid var(--cream-line); background: #FFFDF6; color: var(--ink); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0; font-family: var(--serif); font-weight: 800; line-height: 1; padding: 0; box-shadow: 0 2px 0 rgba(0, 0, 0, 0.25); flex-shrink: 0; }
+    .pc .r { font-size: 22px; }
+    .pc .s { font-size: 22px; }
+    .pc.red { color: var(--red-suit); }
+    .pc.sel { transform: translateY(-12px); border-color: var(--gold); box-shadow: 0 0 0 3px var(--gold), 0 8px 12px rgba(0, 0, 0, 0.35); }
+    .pc.hint { box-shadow: 0 0 0 3px #7FD6A0, 0 2px 0 rgba(0, 0, 0, 0.25); }
+    .pc.sel.hint { box-shadow: 0 0 0 3px var(--gold), 0 0 0 6px #7FD6A0; }
+    .pc.small { width: 38px; height: 54px; border-radius: 6px; }
+    .pc.small .r, .pc.small .s { font-size: 16px; }
+    .pc.gone { opacity: 0.22; }
+    .pc.mine { background: #E9F3EC; border-color: #7FB596; }
+    .pc:disabled { cursor: default; }
+
+    /* card grid (4 × 13) */
+    .grid { display: grid; grid-template-columns: repeat(13, minmax(0, 1fr)); gap: 5px; }
+    .grid .pc { width: 100%; height: auto; aspect-ratio: 5 / 7; }
+    .grid .pc .r { font-size: clamp(13px, 2vw, 22px); }
+    .grid .pc .s { font-size: clamp(13px, 2vw, 20px); }
+
+    /* play screen */
+    .play { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 14px; align-items: start; }
+    .seats { display: flex; gap: 10px; flex-wrap: wrap; }
+    .seat { flex: 1 1 150px; min-width: 0; padding: 10px 12px; border-radius: 12px; background: var(--felt-tile); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 4px; }
+    .seat.turn { border-color: var(--gold); box-shadow: inset 0 0 0 1px var(--gold); }
+    .seat .nm { font-size: 17px; font-weight: 600; color: var(--text-soft); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .seat .ct { font-family: var(--serif); font-size: 28px; font-weight: 800; }
+    .seat .ct small { font-family: var(--sans); font-size: 13px; color: var(--muted); font-weight: 400; }
+    .seat .last { font-size: 14px; color: var(--muted); min-height: 18px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .seat.warn .ct { color: var(--down); }
+    .table { margin-top: 12px; min-height: 150px; border-radius: 16px; border: 2px dashed var(--line); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 14px; background: radial-gradient(ellipse at 50% 40%, rgba(255, 255, 255, 0.04), transparent 70%); }
+    .table .who { font-size: 16px; color: var(--muted); text-align: center; }
+    .table .who b { color: var(--gold-text); }
+    .table .cards { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+    .turnbar { margin-top: 12px; font-family: var(--serif); font-size: 20px; color: var(--gold-text); text-align: center; }
+    .msg { min-height: 22px; text-align: center; font-size: 16px; color: var(--down); margin: 6px 0 0; }
+    .entry-box { margin-top: 12px; background: var(--felt-dark); border: 1px solid var(--line); border-radius: 14px; padding: 12px; display: flex; flex-direction: column; gap: 10px; }
+    .myhand { margin-top: 14px; background: var(--felt-dark); border: 1px solid var(--line); border-radius: 14px; padding: 14px 12px 12px; }
+    .hand { display: flex; flex-wrap: wrap; gap: 6px; padding-top: 12px; min-height: 90px; }
+    .actions { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .actions .btn-gold { flex: 1 1 160px; }
+    .coach { background: var(--felt-dark); border: 1px solid var(--gold-line); border-radius: 14px; padding: 14px; display: flex; flex-direction: column; gap: 10px; position: sticky; top: 80px; }
+    .coach h2 { margin: 0; font-family: var(--serif); font-size: 18px; letter-spacing: 2px; color: var(--gold-text); }
+    .coach .sugg { font-family: var(--serif); font-size: 22px; font-weight: 800; color: var(--cream); }
+    .coach .why { font-size: 16px; color: var(--text-soft); line-height: 1.45; margin: 0; }
+    .coach .alts { display: flex; flex-direction: column; gap: 6px; }
+    .alt { display: grid; grid-template-columns: minmax(0, 1fr) auto auto; gap: 10px; align-items: center; padding: 8px 10px; border-radius: 8px; background: var(--felt-tile); border: 1px solid var(--line); font-size: 15px; text-align: left; color: var(--text); }
+    .alt .mv { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .alt .w { color: var(--muted); font-size: 14px; }
+    .alt .a { font-family: var(--serif); font-weight: 800; }
+    .alt.best { border-color: var(--gold); }
+    .thinking { font-size: 15px; color: var(--muted); }
+    .tracker { font-size: 15px; color: var(--text-soft); line-height: 1.5; margin: 0; }
+    .tracker b { color: var(--gold-text); }
+    .up { color: var(--up); } .down { color: var(--down); }
+
+    /* log + results */
+    .log { max-height: 50vh; overflow-y: auto; display: flex; flex-direction: column; gap: 4px; font-size: 15px; }
+    .log div { padding: 6px 8px; border-bottom: 1px solid var(--line-soft); }
+    table.res { width: 100%; border-collapse: collapse; font-size: 17px; font-variant-numeric: tabular-nums; }
+    table.res th { text-align: right; font-size: 14px; color: var(--muted); font-weight: 600; padding: 8px 6px; border-bottom: 1px solid var(--line); }
+    table.res td { text-align: right; padding: 10px 6px; border-bottom: 1px solid var(--line-soft); }
+    table.res th:first-child, table.res td:first-child { text-align: left; }
+    .review { display: flex; flex-direction: column; gap: 8px; }
+    .review div { padding: 10px 12px; border-radius: 10px; background: var(--felt-tile); border: 1px solid var(--line); font-size: 15px; line-height: 1.45; }
+    .challenge { display: flex; flex-direction: column; gap: 10px; padding: 14px; border-radius: 14px; border: 1px solid var(--gold-line); background: var(--felt-deep); }
+    .vs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+    .vs-card { padding: 14px; border-radius: 12px; background: var(--felt-tile); border: 1px solid var(--line); display: flex; flex-direction: column; gap: 4px; }
+    .vs-card.lead { border-color: var(--gold); box-shadow: inset 0 0 0 1px var(--gold); }
+    .vs-card .who { font-size: 15px; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; font-weight: 600; }
+    .vs-card .pts { font-family: var(--serif); font-size: 40px; font-weight: 800; line-height: 1.1; }
+    .vs-card .det { font-size: 15px; color: var(--text-soft); }
+    .verdict { margin: 0; font-family: var(--serif); font-size: 20px; color: var(--gold-text); }
+    .cplays { margin: 6px 0 0; padding-left: 22px; font-size: 15px; color: var(--text-soft); line-height: 1.6; }
+    .hist-sum { margin: 0; font-size: 17px; color: var(--text-soft); line-height: 1.5; }
+    .hist-sum b { color: var(--gold-text); }
+    .hist { display: flex; flex-direction: column; gap: 4px; max-height: 260px; overflow-y: auto; }
+    .hist-row { display: grid; grid-template-columns: 110px 1fr 1fr minmax(0, 1.4fr); gap: 8px; padding: 8px 10px; border-radius: 8px; background: var(--felt-tile); font-size: 15px; font-variant-numeric: tabular-nums; }
+    .hist-row .d { color: var(--muted); }
+    .ana { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+    .ana-row { display: grid; grid-template-columns: 70px minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1fr) 84px; gap: 8px; align-items: center; padding: 8px 10px; border-radius: 8px;
+      background: var(--felt-tile); border: 1px solid var(--line); font-size: 15px; }
+    .ana-row.same { opacity: .7; }
+    .ana-row .sit { color: var(--muted); font-size: 14px; }
+    .ana-row .g { font-family: var(--serif); font-weight: 800; text-align: right; }
+    .ana-row .flag { grid-column: 2 / -1; font-size: 13px; color: var(--gold-text); }
+    @media (max-width: 640px) { .ana-row { grid-template-columns: 1fr 1fr; } .ana-row .g { text-align: left; } .hist-row { grid-template-columns: 1fr 1fr; } }
+    .sheet-bg { position: fixed; inset: 0; z-index: 30; background: rgba(3, 15, 11, 0.7); display: flex; align-items: center; justify-content: center; padding: 16px; }
+    .sheet { width: 100%; max-width: 640px; max-height: 90vh; overflow-y: auto; background: var(--felt); border: 1px solid var(--line); border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 12px; }
+
+    .brand { overflow: hidden; }
+    .brand b { overflow: hidden; text-overflow: ellipsis; }
+    @media (max-width: 560px) {
+      .bar { padding-left: 10px; padding-right: 10px; }
+      .brand b { display: none; }
+      .bar-actions { gap: 5px; }
+      .bar-actions .btn { height: 42px; padding: 0 9px; font-size: 14px; }
+    }
+    /* =================== the card table =================== */
+    .t-arena { display: grid; grid-template-columns: minmax(0, 1fr) 300px; gap: 14px; align-items: start; }
+    .t-stage { position: relative; height: clamp(380px, 56vh, 560px); border-radius: 22px; overflow: hidden;
+      background: radial-gradient(ellipse at 50% 45%, #1A4A3B, #0B2C23 70%); }
+    .t-table { position: absolute; left: 50%; top: 52%; width: 62%; height: 58%; transform: translate(-50%, -50%); border-radius: 50% / 46%;
+      background: radial-gradient(ellipse at 50% 40%, #1E6B50 0%, #14503C 55%, #0E3B2E 100%);
+      border: 14px solid #5B3A22; box-shadow: inset 0 0 0 3px #8A6236, inset 0 10px 30px rgba(0,0,0,.45), 0 14px 30px rgba(0,0,0,.45);
+      display: flex; align-items: center; justify-content: center; }
+    .t-table::before { content: ""; position: absolute; inset: 12px; border-radius: 50% / 46%; border: 1px dashed rgba(226, 201, 138, .25); pointer-events: none; }
+    .t-pile { position: relative; width: 100%; height: 100%; }
+    .t-play { position: absolute; left: 50%; top: 48%; display: flex; transform: translate(-50%, -50%) translate(var(--dx, 0px), var(--dy, 0px)) rotate(var(--rot, 0deg));
+      transition: filter .35s ease, opacity .35s ease; }
+    .t-play .pc { margin-left: -14px; width: 54px; height: 76px; box-shadow: 0 3px 8px rgba(0,0,0,.45); }
+    .t-play .pc:first-child { margin-left: 0; }
+    .t-play.old { filter: brightness(.42) saturate(.55); }
+    .t-play.top .pc { box-shadow: 0 0 0 2px rgba(226,201,138,.85), 0 6px 14px rgba(0,0,0,.5); }
+    .t-msg { position: absolute; left: 50%; bottom: 12%; transform: translateX(-50%); font-size: 15px; color: var(--text-soft); text-align: center; white-space: nowrap;
+      background: rgba(6, 31, 24, .75); padding: 6px 14px; border-radius: 999px; max-width: 92%; overflow: hidden; text-overflow: ellipsis; }
+    .t-msg b { color: var(--gold-text); }
+    .t-sweep { animation: tSweep .5s ease-in forwards; }
+    @keyframes tSweep { to { opacity: 0; transform: translateY(40px) scale(.92); } }
+
+    /* opponents: an arm reaching in, holding a fan of face-down cards */
+    .t-seat { position: absolute; width: 170px; display: flex; flex-direction: column; align-items: center; gap: 4px; pointer-events: none; }
+    /* name plates sit beside the arm, outside the table, so the middle stays clear for the cards */
+    .t-seat.pos-top { left: 50%; top: -18px; transform: translateX(-50%); flex-direction: row; align-items: flex-start; width: auto; }
+    .t-seat.pos-top .t-plate { margin-top: 26px; }
+    .t-seat.pos-left { left: -6px; top: 50%; transform: translateY(-50%); flex-direction: column; align-items: flex-start; width: 160px; }
+    .t-seat.pos-right { right: -6px; top: 50%; transform: translateY(-50%); flex-direction: column; align-items: flex-end; width: 160px; }
+    .t-seat.pos-left .t-plate, .t-seat.pos-right .t-plate { margin-top: -18px; }
+    .t-holder { position: relative; width: 150px; height: 150px; flex-shrink: 0; }
+    .pos-left .t-holder { transform: rotate(-90deg); }
+    .pos-right .t-holder { transform: rotate(90deg); }
+    .t-arm { position: absolute; left: 0; top: 0; width: 150px; height: 150px; }
+    .t-fan { position: absolute; left: 75px; top: 112px; width: 0; height: 0; }
+    .t-back { position: absolute; left: -17px; bottom: 0; width: 34px; height: 50px; border-radius: 4px; transform-origin: 50% 100%;
+      background: #7A1F24; border: 2px solid #F4EFE3; box-shadow: 0 1px 2px rgba(0,0,0,.45);
+      background-image: repeating-linear-gradient(45deg, rgba(226,201,138,.35) 0 2px, transparent 2px 7px), repeating-linear-gradient(-45deg, rgba(226,201,138,.35) 0 2px, transparent 2px 7px); }
+    .t-hand-front { position: absolute; left: 0; top: 0; width: 150px; height: 150px; }
+    .t-plate { pointer-events: auto; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 6px 12px; border-radius: 12px;
+      background: rgba(6, 31, 24, .88); border: 1px solid var(--line); min-width: 96px; text-align: center; }
+    .t-plate .nm { font-size: 16px; font-weight: 700; color: var(--text); max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .t-plate .ct { font-family: var(--serif); font-size: 15px; color: var(--muted); }
+    .t-plate .ct b { font-size: 20px; color: var(--cream); }
+    .t-plate .st { font-size: 12px; font-weight: 800; letter-spacing: 1px; border-radius: 6px; padding: 2px 8px; }
+    .t-plate .st.pass { background: #5B2A26; color: #F6D7D1; }
+    .t-plate .st.think { background: var(--gold); color: var(--on-gold); }
+    .t-seat.turn .t-plate { border-color: var(--gold); box-shadow: 0 0 0 2px var(--gold), 0 0 18px rgba(201,162,75,.5); }
+    .t-seat.out .t-holder { opacity: .45; filter: grayscale(.6); }
+    .t-seat.warn .t-plate .ct b { color: var(--down); }
+    .t-bubble { position: absolute; left: 50%; top: 40%; transform: translate(-50%, -50%); font-family: var(--serif); font-weight: 800; font-size: 18px;
+      color: #F6D7D1; background: #5B2A26; border: 2px solid #F6D7D1; padding: 4px 12px; border-radius: 10px; pointer-events: none; z-index: 5; }
+
+    /* my side of the table */
+    .t-mine { margin-top: 12px; background: var(--felt-dark); border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px; }
+    .t-mine.myturn { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold), 0 0 24px rgba(201,162,75,.25); }
+    .t-mine-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+    .t-me { display: flex; align-items: baseline; gap: 12px; }
+    .t-me b { font-family: var(--serif); font-size: 18px; color: var(--gold-text); }
+    .t-turn { font-size: 15px; color: var(--muted); }
+    .t-mine.myturn .t-turn { color: var(--gold-text); font-weight: 700; }
+    .t-tools { display: flex; gap: 6px; flex-wrap: wrap; }
+    .tool { height: 38px; padding: 0 12px; border-radius: 8px; border: 1px solid var(--line-btn); background: transparent; color: var(--text-soft); font-size: 14px; }
+    .tool:disabled { opacity: .4; }
+    .t-hand { position: relative; height: 128px; margin-top: 14px; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+    .t-hand .pc { position: absolute; top: 18px; width: 70px; height: 98px; transition: left .18s ease, top .15s ease, box-shadow .15s; cursor: grab; }
+    .t-hand .pc { align-items: flex-start; justify-content: flex-start; padding: 7px 0 0 8px; }
+    .t-hand .pc .r { font-size: 23px; } .t-hand .pc .s { font-size: 21px; margin-top: 2px; }
+    .t-hand .pc.sel { top: 0; transform: none; }
+    .t-hand .pc.dragging { transition: none; z-index: 50; cursor: grabbing; box-shadow: 0 10px 22px rgba(0,0,0,.5); }
+    .t-grp { position: absolute; bottom: 2px; height: 6px; border-radius: 4px; background: var(--gold); opacity: .85; }
+    .t-foot { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; margin-top: 6px; }
+    .t-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .t-actions .btn-gold { min-width: 170px; }
+    .t-sheet { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; max-height: 62vh; overflow-y: auto; background: var(--felt-dark);
+      border-top: 2px solid var(--gold-line); padding: 12px 16px; padding-bottom: max(12px, env(safe-area-inset-bottom)); display: flex; flex-direction: column; gap: 10px;
+      box-shadow: 0 -10px 30px rgba(0,0,0,.5); }
+    .t-sheet > * { width: 100%; max-width: 660px; margin-left: auto; margin-right: auto; }
+    .t-sheet .grid .pc .r { font-size: clamp(12px, 1.6vw, 17px); }
+    .t-sheet .grid .pc .s { font-size: clamp(12px, 1.5vw, 16px); }
+
+    @media (max-width: 1000px) {
+      /* smaller screens: table, then your hand, then the coach */
+      #vPlay { display: flex; flex-direction: column; }
+      .t-arena { display: contents; }
+      #stage { order: 1; }
+      #myBox { order: 2; }
+      #coach { order: 3; margin-top: 12px; }
+    }
+    @media (max-width: 640px) {
+      .t-stage { height: 360px; }
+      .t-table { width: 74%; height: 50%; border-width: 9px; }
+      .t-seat { transform-origin: center; }
+      .t-seat.pos-top { transform: translateX(-50%) scale(.72); top: -12px; transform-origin: top center; }
+      .t-seat.pos-left { transform: translateY(-50%) scale(.68); transform-origin: left center; left: 2px; }
+      .t-seat.pos-right { transform: translateY(-50%) scale(.68); transform-origin: right center; right: 2px; }
+      .t-seat.pos-left .t-holder { margin-left: -40px; }
+      .t-seat.pos-right .t-holder { margin-right: -40px; }
+      .t-play .pc { width: 40px; height: 56px; margin-left: -12px; }
+      .t-hand { height: 100px; }
+      .t-hand .pc { width: 50px; height: 70px; }
+      .t-hand .pc { padding: 4px 0 0 4px; }
+      .t-hand .pc .r { font-size: 16px; } .t-hand .pc .s { font-size: 15px; margin-top: 1px; }
+      .t-msg { font-size: 13px; }
+    }
+    @media (max-width: 900px) {
+      .play { grid-template-columns: minmax(0, 1fr); }
+      .coach { position: static; }
+      .brand span { display: none; }
+      .pc { width: 46px; height: 66px; }
+      .pc .r, .pc .s { font-size: 19px; }
+      .grid { gap: 3px; }
+    }
+  </style>
+</head>
+<body>
+  <svg width="0" height="0" style="position: absolute" aria-hidden="true">
+    <symbol id="logo" viewBox="0 0 64 64">
+      <rect x="2" y="2" width="60" height="60" rx="11" fill="#F4EFE3" stroke="#C9A24B" stroke-width="3"/>
+      <g transform="translate(9 9) scale(.875)" fill="#1E2A24"><path d="M12 1.5C9 5.6 2.8 9.2 2.8 14c0 2.9 2.3 4.8 4.8 4.8 1.6 0 3-.7 3.8-1.9-.2 2-1 3.6-2.6 5.1h6.4c-1.6-1.5-2.4-3.1-2.6-5.1.8 1.2 2.2 1.9 3.8 1.9 2.5 0 4.8-1.9 4.8-4.8 0-4.8-6.2-8.4-9.2-12.5z"/></g>
+      <g transform="translate(34 9) scale(.875)" fill="#A3262A"><path d="M12 21.5S2.6 15.6 1.6 9.6C.9 5.7 3.5 2.5 7 2.5c2.2 0 3.9 1.2 5 3 1.1-1.8 2.8-3 5-3 3.5 0 6.1 3.2 5.4 7.1-1 6-10.4 11.9-10.4 11.9z"/></g>
+      <g transform="translate(9 34) scale(.875)" fill="#A3262A"><path d="M12 1.5 20.5 12 12 22.5 3.5 12z"/></g>
+      <g transform="translate(34 34) scale(.875)" fill="#1E2A24"><circle cx="12" cy="6.6" r="4.6"/><circle cx="6.2" cy="13.4" r="4.6"/><circle cx="17.8" cy="13.4" r="4.6"/><path d="M11 11.5h2c0 4.4.9 7.4 3.2 10H7.8c2.3-2.6 3.2-5.6 3.2-10z"/></g>
+    </symbol>
+  </svg>
+
+  <header class="bar">
+    <div class="brand">
+      <svg aria-hidden="true"><use href="#logo"></use></svg>
+      <b>BIG TWO COACH</b>
+      <span id="modeLabel"></span>
+    </div>
+    <div class="bar-actions">
+      <button type="button" class="btn" id="btnUndo" hidden>Undo</button>
+      <button type="button" class="btn" id="btnLog" hidden>Log</button>
+      <button type="button" class="btn" id="btnHome">Menu</button>
+      <a class="btn" href="../" id="btnCalc" style="display:flex;align-items:center;text-decoration:none">Calculator</a>
+    </div>
+  </header>
+
+  <main>
+    <!-- 1. setup -->
+    <section id="vHome">
+      <div id="resumeBox" class="panel" hidden>
+        <p class="hint" id="resumeText"></p>
+        <div class="row-end">
+          <button type="button" class="btn" id="btnDiscard">Start fresh</button>
+          <button type="button" class="btn-gold" id="btnResume">CONTINUE GAME</button>
+        </div>
+      </div>
+      <div id="histBox" class="panel" hidden>
+        <p class="label">Challenge history — you vs the Coach (saved on this device)</p>
+        <p class="hist-sum" id="histSummary"></p>
+        <div class="hist" id="histList"></div>
+        <div class="row-end">
+          <button type="button" class="btn" id="btnHistClear">Clear history</button>
+          <button type="button" class="btn-gold" id="btnHistExport">EXPORT FOR ANALYSIS</button>
+        </div>
+      </div>
+      <div class="modes" style="margin-top: 16px">
+        <button type="button" class="mode" data-mode="practice" aria-pressed="true">
+          <b>Practice against bots</b>
+          <span>Random deal against 1–3 computer players. The coach suggests your moves; afterwards you see where you played differently.</span>
+        </button>
+        <button type="button" class="mode" data-mode="track" aria-pressed="false">
+          <b>Track a real game</b>
+          <span>Tap in your 13 cards, then each play around the table. The coach counts every card and suggests your move.</span>
+        </button>
+      </div>
+      <div class="panel">
+        <p class="label">Players</p>
+        <div class="seg" id="segPlayers">
+          <button type="button" data-n="2" aria-pressed="false">2</button>
+          <button type="button" data-n="3" aria-pressed="false">3</button>
+          <button type="button" data-n="4" aria-pressed="true">4</button>
+        </div>
+        <p class="hint" id="seatHint">In seating order, going round the table. Mark which seat is you.</p>
+        <div class="names" id="names"></div>
+        <label class="toggle" id="challengeRow"><input type="checkbox" id="optChallenge"> Challenge the coach: hide its suggestions — it plays the same hand in the background, and you compare points at the end</label>
+        <label class="toggle" id="coachRow"><input type="checkbox" id="optCoach" checked> Show the coach's suggestions</label>
+        <details>
+          <summary>House rules</summary>
+          <div class="toggles" style="margin-top: 8px">
+            <label class="toggle"><input type="checkbox" data-rule="allow26"> 2-3-4-5-6 is a straight (the lowest)</label>
+            <label class="toggle"><input type="checkbox" data-rule="allowJ2"> J-Q-K-A-2 is a straight (the highest)</label>
+            <label class="toggle"><input type="checkbox" data-rule="allowA5"> A-2-3-4-5 is a straight</label>
+            <label class="toggle"><input type="checkbox" data-rule="flushSuitFirst"> Flush vs flush: suit decides first</label>
+            <label class="toggle"><input type="checkbox" data-rule="bombs"> Bombs: four of a kind / straight flush beat singles, pairs, triples</label>
+            <label class="toggle"><input type="checkbox" data-rule="firstMustInclude"> First play must include the 3♦ (or the lowest card)</label>
+            <label class="toggle"><input type="checkbox" data-rule="passLocksOut"> Once you pass, you sit out the rest of that trick</label>
+          </div>
+        </details>
+        <div class="row-end"><button type="button" class="btn-gold" id="btnStart">START</button></div>
+      </div>
+    </section>
+
+    <!-- 2. enter my hand (real game) -->
+    <section id="vEntry" hidden>
+      <div class="panel">
+        <div style="display:flex;justify-content:space-between;align-items:baseline;gap:10px;flex-wrap:wrap">
+          <p class="label">Tap your 13 cards</p>
+          <span id="entryCount" class="hint"></span>
+        </div>
+        <div class="grid" id="entryGrid"></div>
+        <div id="leadPick" hidden>
+          <p class="hint" style="margin-bottom:8px">You don't have the 3♦. Who leads first?</p>
+          <div class="seg" id="segLead"></div>
+        </div>
+        <p class="msg" id="entryMsg"></p>
+        <div class="row-end">
+          <button type="button" class="btn" id="btnEntryBack">Back</button>
+          <button type="button" class="btn-gold" id="btnEntryOk" disabled>CONFIRM HAND</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. play: a card table -->
+    <section id="vPlay" hidden>
+      <div class="t-arena">
+        <div class="t-stage" id="stage">
+          <div class="t-table" id="feltTable">
+            <div class="t-pile" id="pile"></div>
+            <div class="t-msg" id="tableMsg"></div>
+          </div>
+          <div class="t-seat pos-top" id="seatTop" hidden></div>
+          <div class="t-seat pos-left" id="seatLeft" hidden></div>
+          <div class="t-seat pos-right" id="seatRight" hidden></div>
+        </div>
+        <aside class="coach" id="coach">
+          <h2>COACH</h2>
+          <div id="coachBody"><p class="thinking">Waiting for your turn…</p></div>
+          <p class="label" style="margin-top:6px">Card count</p>
+          <p class="tracker" id="tracker"></p>
+        </aside>
+      </div>
+
+      <div class="t-mine" id="myBox">
+        <div class="t-mine-head">
+          <div class="t-me">
+            <b id="myName"></b>
+            <span class="t-turn" id="turnbar"></span>
+          </div>
+          <div class="t-tools">
+            <button type="button" class="tool" id="btnSortRank">Sort: rank</button>
+            <button type="button" class="tool" id="btnSortSuit">Sort: suit</button>
+            <button type="button" class="tool" id="btnGroup" disabled>Group</button>
+            <button type="button" class="tool" id="btnUngroup" disabled>Ungroup</button>
+            <button type="button" class="tool" id="btnAutoGroup">Coach groups</button>
+          </div>
+        </div>
+        <div class="t-hand" id="hand" aria-label="Your hand"></div>
+        <div class="t-foot">
+          <span class="hint" id="handInfo"></span>
+          <div class="t-actions">
+            <button type="button" class="btn" id="btnPass">PASS</button>
+            <button type="button" class="btn" id="btnUseHint">Use suggestion</button>
+            <button type="button" class="btn-gold" id="btnPlay" disabled>PLAY</button>
+          </div>
+        </div>
+        <p class="msg" id="playMsg"></p>
+      </div>
+
+      <!-- real table: enter an opponent's play -->
+      <div class="t-sheet" id="oppBox" hidden>
+        <p class="label" id="oppLabel"></p>
+        <div class="grid" id="oppGrid"></div>
+        <div class="t-actions">
+          <button type="button" class="btn" id="btnOppPass">PASS</button>
+          <button type="button" class="btn-gold" id="btnOppPlay" disabled>RECORD PLAY</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. round end -->
+    <section id="vEnd" hidden>
+      <div class="panel">
+        <p class="label">Round over</p>
+        <h2 id="endTitle" style="margin:0;font-family:var(--serif);font-size:28px;color:var(--gold-text)"></h2>
+        <div class="challenge" id="challengeBox" hidden>
+          <p class="label">Challenge: you vs the Coach on the same hand</p>
+          <div class="vs" id="vsRow"></div>
+          <p class="verdict" id="verdict"></p>
+          <div id="anaBox" hidden>
+            <p class="label">Your decisions vs the Coach's — expected points from 300 simulated deals each</p>
+            <p class="hint" id="anaSummary"></p>
+            <div class="ana" id="anaList"></div>
+          </div>
+          <details id="coachPlays" hidden>
+            <summary>How the Coach played this hand</summary>
+            <ol class="cplays" id="coachPlayList"></ol>
+          </details>
+        </div>
+        <p class="label" style="margin-top:4px">Your table</p>
+        <table class="res" id="endTable"></table>
+        <p class="hint" id="endNote"></p>
+        <div id="reviewBox" hidden>
+          <p class="label" style="margin-bottom:8px">Review: where you played differently from the coach</p>
+          <div class="review" id="review"></div>
+        </div>
+        <div class="row-end">
+          <button type="button" class="btn" id="btnCopy">Copy summary</button>
+          <a class="btn" id="btnOpenCalc" href="../" style="display:flex;align-items:center;text-decoration:none">Open in calculator</a>
+          <button type="button" class="btn" id="btnEndMenu">Menu</button>
+          <button type="button" class="btn-gold" id="btnAgain">PLAY AGAIN</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div class="sheet-bg" id="logSheet" hidden>
+    <div class="sheet">
+      <p class="label">Every play so far</p>
+      <div class="log" id="log"></div>
+      <div class="row-end"><button type="button" class="btn" id="btnLogClose">Close</button></div>
+    </div>
+  </div>
+
+  <script src="engine.js"></script>
+  <script src="app.js"></script>
+  <script>
+    if ("serviceWorker" in navigator && /^https?:$/.test(location.protocol)) {
+      window.addEventListener("load", function () { navigator.serviceWorker.register("../sw.js", { scope: "../" }).catch(function () {}); });
+    }
+  </script>
+</body>
+</html>
